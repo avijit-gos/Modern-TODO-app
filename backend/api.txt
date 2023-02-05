@@ -1,0 +1,109 @@
+1. // *** Upload profile picture *** //
+var myHeaders = new Headers();
+myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Q5ZjU2YjAxNzY4NjQ5YTk5ZGUzNzYiLCJlbWFpbCI6ImFjY291bnRfMTBAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImFjY291bnRfMTAiLCJpYXQiOjE2NzUyMjg1MjQsImV4cCI6MTY3NTQ4NzcyNH0.2K-lV-9lI9TIffUjvovSmPSDf5TyWWX7Os9Y58x_nMQ");
+
+var formdata = new FormData();
+formdata.append("image", fileInput.files[0], "/C:/Users/Avijit/Downloads/man.png");
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:5001/api/user/update/profile/image", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+
+2. // *** Update profile name *** //
+var myHeaders = new Headers();
+myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Q5ZjU2YjAxNzY4NjQ5YTk5ZGUzNzYiLCJlbWFpbCI6ImFjY291bnRfMTBAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImFjY291bnRfMTAiLCJpYXQiOjE2NzUyMjg1MjQsImV4cCI6MTY3NTQ4NzcyNH0.2K-lV-9lI9TIffUjvovSmPSDf5TyWWX7Os9Y58x_nMQ");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "name": "Change name"
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:5001/api/user/update/profile/name", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  
+
+
+3. // *** Search User profile *** //
+var myHeaders = new Headers();
+myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Q5ZjU2YjAxNzY4NjQ5YTk5ZGUzNzYiLCJlbWFpbCI6ImFjY291bnRfMTBAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImFjY291bnRfMTAiLCJpYXQiOjE2NzUyMjg1MjQsImV4cCI6MTY3NTQ4NzcyNH0.2K-lV-9lI9TIffUjvovSmPSDf5TyWWX7Os9Y58x_nMQ");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "name": "Change name"
+});
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:5001/api/user/find/user?key=account_10", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+4. // *** Fetch user profile *** //
+var myHeaders = new Headers();
+myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Q5ZjU2YjAxNzY4NjQ5YTk5ZGUzNzYiLCJlbWFpbCI6ImFjY291bnRfMTBAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImFjY291bnRfMTAiLCJpYXQiOjE2NzUyMjg1MjQsImV4cCI6MTY3NTQ4NzcyNH0.2K-lV-9lI9TIffUjvovSmPSDf5TyWWX7Os9Y58x_nMQ");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "name": "Change name"
+});
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:5001/api/user/fetch/user/63d4a65a0bc14d1e6368780b", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+
+  5. // *** User password change *** //
+  var myHeaders = new Headers();
+myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Q5ZjU2YjAxNzY4NjQ5YTk5ZGUzNzYiLCJlbWFpbCI6ImFjY291bnRfMTBAdGVzdC5jb20iLCJ1c2VybmFtZSI6ImFjY291bnRfMTAiLCJpYXQiOjE2NzUyMjg1MjQsImV4cCI6MTY3NTQ4NzcyNH0.2K-lV-9lI9TIffUjvovSmPSDf5TyWWX7Os9Y58x_nMQ");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "password": "123",
+  "newPassword": "111"
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:5001/api/user/reset/password", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

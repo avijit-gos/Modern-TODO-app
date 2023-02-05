@@ -1,0 +1,135 @@
+/** @format */
+
+.action_button_section {
+  position: absolute !important;
+  bottom: 55px !important;
+  right: 5px !important;
+  z-index: 1 !important;
+}
+.action_button {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  background-color: royalblue !important;
+  color: aliceblue !important;
+  font-size: 1rem !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: all 0.2s linear;
+  position: absolute !important;
+  right: 0px !important;
+}
+.action_button:hover {
+  transform: translateY(-1px);
+}
+.action_menu_container {
+  /* border: 1px solid red; */
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  padding: 7px;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  margin-bottom: 10px;
+  background-color: transparent !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: all 0.2s linear;
+}
+.action_menu_item {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  cursor: pointer;
+}
+.menu_text {
+  font-size: 0.8rem;
+  font-weight: 400;
+  width: 100%;
+  margin-right: 5px;
+}
+.active_menu {
+  transform: scale(1);
+}
+.task_form_header_section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.task_header_title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.create_task_btn {
+  background-color: royalblue !important;
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
+  width: 90px !important;
+  height: 35px !important;
+  color: aliceblue !important;
+}
+.disable_create_task_btn {
+  cursor: no-drop !important;
+  background-color: rgb(134, 163, 248) !important;
+}
+.success_task_form_body_section {
+  width: fit-content;
+  height: fit-content;
+  margin: 7px auto;
+}
+.success_gif {
+  width: 70px;
+  height: 70px;
+  margin: 0px auto;
+}
+.success_text {
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.2px;
+}
+.type_task_container {
+  margin: 5px 0;
+}
+.type_task_btn,
+.task_type {
+  border: 1px solid royalblue !important;
+  padding: 5px 12px !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  border-radius: 20px !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  color: royalblue !important;
+  background-color: rgba(65, 105, 225, 0.279) !important;
+  margin: 0px 3px !important;
+}
+.task_type {
+  margin: 0px 5px !important;
+}
+.add_task_type_icon {
+  font-size: 1.02rem !important;
+}
+.task_type_label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 0px !important;
+}
+.High {
+  color: rgba(235, 77, 75, 1) !important;
+  background-color: rgba(235, 77, 75, 0.3) !important;
+  border: 1px solid rgba(235, 77, 75, 1) !important;
+  margin-top: 5px !important;
+}
+.Low {
+  color: rgba(106, 176, 76, 1) !important;
+  background-color: rgba(106, 176, 76, 0.3) !important;
+  border: 1px solid rgba(106, 176, 76, 1) !important;
+  margin-top: 5px !important;
+}
+.Medium {
+  color: rgb(225, 179, 15) !important;
+  background-color: rgba(249, 202, 36, 0.3) !important;
+  border: 1px solid rgb(225, 179, 15) !important;
+  margin-top: 5px !important;
+}
