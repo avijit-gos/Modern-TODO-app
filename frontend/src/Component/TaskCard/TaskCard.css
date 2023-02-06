@@ -1,0 +1,71 @@
+/** @format */
+
+.task_card {
+  padding: 7px;
+  border-radius: 5px;
+  margin: 5px;
+  max-width: 320px;
+  height: 120px;
+  width: 100%;
+  border: 1px solid rgb(218, 218, 218);
+}
+/* .high {
+  background-color: rgba(220, 20, 60, 0.118);
+}
+.medium {
+  background-color: #f9cb2439;
+}
+.low {
+  background-color: rgba(106, 176, 76, 0.3);
+} */
+.task_card_header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.task_header_box {
+  width: 100%;
+}
+.task_card_title {
+  font-size: 1.02rem;
+  font-weight: 500;
+}
+.task_card_status {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #2ed573;
+}
+.task_card_type {
+  margin: 0 5px;
+  font-size: 0.6rem;
+  font-weight: 400;
+  padding: 3px 10px;
+  border-radius: 12px;
+  color: royalblue;
+  background-color: rgba(65, 105, 225, 0.179);
+}
+.task_card_priority {
+  font-size: 0.6rem;
+  font-weight: 400;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: none;
+}
+/* .divider {
+  border-top: 1px solid rgb(218, 218, 218);
+  max-width: 300px;
+  width: 100%;
+  margin: 7px 0;
+} */
+.task_card_menu_btn {
+  background-color: transparent !important;
+}
+.task_card_body {
+  margin-top: 7px;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.task_card_menu_item {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
