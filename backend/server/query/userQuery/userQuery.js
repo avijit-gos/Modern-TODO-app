@@ -115,6 +115,19 @@ class UserQuery {
       return false;
     }
   }
+
+  async updateTaskInUser(taskId, userId) {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { tasks: taskId } },
+      { new: true }
+    );
+    try {
+      return user;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 module.exports = new UserQuery();

@@ -9,6 +9,7 @@ import FormModal from "../ModalComp/FormModal";
 import SuccessGif from "../../Assests/Images/success.gif";
 import InputComp from "../InputComp/InputComp";
 import { IoIosAdd } from "react-icons/io";
+import axios from "axios";
 
 const PostForm = () => {
   const [onActive, setOnActive] = React.useState(false);
@@ -39,8 +40,40 @@ const PostForm = () => {
   };
 
   const submitTask = () => {
-    setOpenTaskForm(false);
-    setSuccess(true);
+    setIsLoading(true);
+    setIsDisable(false);
+    var data = JSON.stringify({
+      title: taskTitle,
+      description: taskDetails,
+      priority: taskPriority,
+      type: taskType,
+    });
+
+    var config = {
+      method: "post",
+      url: `${process.env.REACT_APP_LINK}task/create`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setOpenTaskForm(false);
+        setSuccess(true);
+        setTaskTitle("");
+        setTaskDetails("");
+        setType("");
+        setTaskType("");
+        setTasPriority("");
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const addNewTask = () => {
@@ -61,12 +94,17 @@ const PostForm = () => {
   };
 
   React.useEffect(() => {
-    if (!taskTitle.trim() || !taskType.trim() || !taskPriority.trim()) {
+    if (
+      !taskTitle.trim() ||
+      !taskType.trim() ||
+      !taskPriority.trim() ||
+      !taskDetails.trim()
+    ) {
       setIsDisable(true);
     } else {
       setIsDisable(false);
     }
-  }, [taskTitle, taskType, taskPriority]);
+  }, [taskTitle, taskType, taskPriority, taskDetails]);
 
   return (
     <Box className='action_button_section'>

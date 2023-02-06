@@ -118,18 +118,46 @@
 .High {
   color: rgba(235, 77, 75, 1) !important;
   background-color: rgba(235, 77, 75, 0.3) !important;
-  border: 1px solid rgba(235, 77, 75, 1) !important;
+  /* border: 1px solid rgba(235, 77, 75, 1) !important; */
   margin-top: 5px !important;
 }
 .Low {
   color: rgba(106, 176, 76, 1) !important;
   background-color: rgba(106, 176, 76, 0.3) !important;
-  border: 1px solid rgba(106, 176, 76, 1) !important;
+  /* border: 1px solid rgba(106, 176, 76, 1) !important; */
   margin-top: 5px !important;
 }
 .Medium {
   color: rgb(225, 179, 15) !important;
   background-color: rgba(249, 202, 36, 0.3) !important;
-  border: 1px solid rgb(225, 179, 15) !important;
+  /* border: 1px solid rgb(225, 179, 15) !important; */
   margin-top: 5px !important;
+}
+
+.empty_task_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #34495e;
+}
+.filter_section {
+  font-size: 0.8rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  /* padding: 9px 5px; */
+}
+.fiter_btn {
+  background-color: transparent !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  display: flex !important;
+  padding: 0 !important;
+}
+.filter_value {
+  font-weight: 500;
+  margin: 0px 3px;
+  color: royalblue;
 }
