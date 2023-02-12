@@ -2,9 +2,8 @@
 
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import Login from "../Pages/Login/Login";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({ comp: Component, ...rest }) => {
   // console.log(Component());
   return (
     <Route

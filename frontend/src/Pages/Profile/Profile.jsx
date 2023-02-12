@@ -50,7 +50,7 @@ const Profile = () => {
           <Box className='nested_route_container'>
             {/* Notes */}
             <NavLink
-              to='/profile'
+              to={`/profile/${id}`}
               className='profile_navlink'
               activeClassName='active_profile_navlink_'>
               Notes
@@ -58,7 +58,7 @@ const Profile = () => {
 
             {/* Task */}
             <NavLink
-              to='task'
+              to={`/profile/${id}/task`}
               className='profile_navlink'
               activeClassName='active_profile_navlink'>
               Task
@@ -66,7 +66,7 @@ const Profile = () => {
 
             {/* Analytics */}
             <NavLink
-              to='analytics'
+              to={`/profile/${id}/analytics`}
               className='profile_navlink'
               activeClassName='active_profile_navlink'>
               Analytics

@@ -225,8 +225,8 @@
   color: crimson !important;
 }
 .task_card_container {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   height: 93vh;
   width: 100%;
   overflow: scroll;
@@ -234,6 +234,17 @@
 ::-webkit-scrollbar {
   display: none;
   background-color: transparent;
+}
+.modal_button {
+  width: 90px !important;
+  height: 30px !important;
+  color: aliceblue !important;
+  background-color: royalblue !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+}
+.delete_btn {
+  background-color: crimson !important;
 }
 
 @media only screen and (max-width: 900px) and (min-width: 700px) {

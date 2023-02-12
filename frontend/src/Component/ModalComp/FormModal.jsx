@@ -11,7 +11,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-const ModalComp = ({ isOpen, onClose, title, body, footer }) => {
+const FormModal = ({ isOpen, onClose, title, body, footer }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} className='modal'>
       <ModalOverlay />
@@ -26,4 +26,4 @@ const ModalComp = ({ isOpen, onClose, title, body, footer }) => {
   );
 };
 
-export default ModalComp;
+export default FormModal;

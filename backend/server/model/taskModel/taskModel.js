@@ -11,6 +11,7 @@ const TaskSchema = mongoose.Schema(
     type: { type: String, trim: true },
     createdBy: { type: mongoose.Types.ObjectId, ref: "User" },
     status: { type: String, default: "active" },
+    pinn: { type: Boolean, default: false },
   },
   { timestamp: true }
 );
