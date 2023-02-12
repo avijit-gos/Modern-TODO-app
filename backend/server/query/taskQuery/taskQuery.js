@@ -37,6 +37,49 @@ class TaskQuery {
       return tasks;
     }
   }
+
+  async updatedTask(id, key, value) {
+    const task = await Task.findByIdAndUpdate(
+      id,
+      { $set: { [key]: value } },
+      { new: true }
+    );
+    try {
+      return task;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async updateFullTask(id, title, description, priority, status) {
+    const task = await Task.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          title: title,
+          description: description,
+          priority: priority,
+          status: status,
+        },
+      },
+      { new: true }
+    );
+
+    try {
+      return task;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async deleteTaskById(id) {
+    const task = await Task.findByIdAndDelete(id);
+    try {
+      return task;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 module.exports = new TaskQuery();

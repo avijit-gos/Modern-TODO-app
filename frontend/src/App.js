@@ -16,13 +16,13 @@ function App() {
     <Box className='App'>
       <Switch>
         {/* Public routes */}
-        <Route path='/register' exact component={() => <Register />} />
-        <Route path='/login' exact component={() => <Login />} />
+        <Route path='/register' exact comp={() => <Register />} />
+        <Route path='/login' exact comp={() => <Login />} />
 
         {/* Protected routes */}
-        <ProtectedRoute path='/' exact component={Home} />
-        <ProtectedRoute path='/profile/:id' exact component={Profile} />
-        <ProtectedRoute path='/search' exact component={Search} />
+        <ProtectedRoute path='/' exact comp={Home} />
+        <ProtectedRoute path='/profile/:id' comp={Profile} />
+        <ProtectedRoute path='/search' exact comp={Search} />
       </Switch>
     </Box>
   );

@@ -93,7 +93,6 @@
 }
 .type_task_btn,
 .task_type {
-  border: 1px solid royalblue !important;
   padding: 5px 12px !important;
   width: fit-content !important;
   height: fit-content !important;
@@ -103,6 +102,9 @@
   color: royalblue !important;
   background-color: rgba(65, 105, 225, 0.279) !important;
   margin: 0px 3px !important;
+}
+.type_task_btn {
+  border: none !important;
 }
 .task_type {
   margin: 0px 5px !important;

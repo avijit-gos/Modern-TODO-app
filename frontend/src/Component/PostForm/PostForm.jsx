@@ -61,7 +61,7 @@ const PostForm = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setOpenTaskForm(false);
         setSuccess(true);
         setTaskTitle("");
@@ -102,7 +102,15 @@ const PostForm = () => {
     ) {
       setIsDisable(true);
     } else {
-      setIsDisable(false);
+      const titleLen = taskTitle.split(" ");
+      const taskDetailsLen = taskDetails.split(" ");
+      if (titleLen.length < 2) {
+        setIsDisable(true);
+      } else if (taskDetailsLen.length < 2) {
+        setIsDisable(true);
+      } else {
+        setIsDisable(false);
+      }
     }
   }, [taskTitle, taskType, taskPriority, taskDetails]);
 

@@ -13,6 +13,7 @@ const UserSchema = mongoose.Schema(
     flwr: [{ type: mongoose.Types.ObjectId, ref: "User" }],
     flw: [{ type: mongoose.Types.ObjectId, ref: "User" }],
     tasks: [{ type: mongoose.Types.ObjectId, ref: "Task" }],
+    cmplt_tasks: [{ type: mongoose.Types.ObjectId, ref: "Task" }],
   },
   { timestamp: true }
 );

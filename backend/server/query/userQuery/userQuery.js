@@ -128,6 +128,19 @@ class UserQuery {
       return false;
     }
   }
+
+  async updateUserCompleteTask(taskId, userId) {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { cmplt_tasks: taskId } },
+      { new: true }
+    );
+    try {
+      return user;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 module.exports = new UserQuery();

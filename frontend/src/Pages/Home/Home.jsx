@@ -23,6 +23,7 @@ const Home = () => {
   const [tasks, setTasks] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [filter, setFilter] = React.useState("All");
+  const [deletedTaskId, setDeletedTaskId] = React.useState([]);
 
   React.useLayoutEffect(() => {
     setPageType("home");
@@ -107,7 +108,15 @@ const Home = () => {
               {(tasks || []).length > 0 ? (
                 <Box className='task_card_container'>
                   {tasks.map((task) => (
-                    <TaskCard key={task._id} taskData={task} />
+                    <React.Fragment key={task._id}>
+                      {deletedTaskId.includes(task._id) ? null : (
+                        <TaskCard
+                          taskData={task}
+                          setDeletedTaskId={setDeletedTaskId}
+                          deletedTaskId={deletedTaskId}
+                        />
+                      )}
+                    </React.Fragment>
                   ))}
                 </Box>
               ) : (
