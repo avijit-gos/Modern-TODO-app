@@ -9,7 +9,10 @@ function StateContextProvider({ children }) {
   const [token, setToken] = React.useState("");
   const [pageType, setPageType] = React.useState("home");
   const [mode, setMode] = React.useState("day");
-  const [updateProfile, setUpdateProfile] = React.useState(null)
+  const [updateProfile, setUpdateProfile] = React.useState(null);
+  const [selectType, setSelectType] = React.useState("all");
+  const [feedPosts, setFeedPosts] = React.useState([]);
+  const [selectNote, setSelectNote] = React.useState(null);
   return (
     <StateContext.Provider
       value={{
@@ -23,6 +26,12 @@ function StateContextProvider({ children }) {
         setMode,
         updateProfile,
         setUpdateProfile,
+        selectType,
+        setSelectType,
+        feedPosts,
+        setFeedPosts,
+        selectNote,
+        setSelectNote,
       }}>
       {children}
     </StateContext.Provider>

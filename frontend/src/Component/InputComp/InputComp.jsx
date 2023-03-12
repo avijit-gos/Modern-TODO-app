@@ -9,7 +9,6 @@ const InputComp = ({
   className,
   value,
   handleChange,
-  onKeyDown,
   id,
 }) => {
   return (
@@ -19,7 +18,6 @@ const InputComp = ({
       className={className}
       value={value}
       onChange={handleChange}
-      onKeyDown={(e) => onKeyDown(e)}
       id={id}
     />
   );

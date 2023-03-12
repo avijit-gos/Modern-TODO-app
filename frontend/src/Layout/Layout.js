@@ -7,10 +7,14 @@ import { GlobalContext } from "../Context/Context";
 import HomeHeader from "../Component/Headers/HomeHeaders/HomeHeader";
 import LeftNavbar from "../Component/LeftNavbar/LeftNavbar";
 import DefaultHeader from "../Component/Headers/DefaultHeader/DefaultHeader";
+import MessageHeader from "../Component/Headers/MessageHeader/MessageHeader";
 
 const Header = ({ pageType, title }) => {
   if (pageType === "home") {
     return <HomeHeader />;
+  } else if (pageType === "chat") {
+    console.log("Message page");
+    return <MessageHeader title={title} />;
   } else {
     return <DefaultHeader title={title} />;
   }

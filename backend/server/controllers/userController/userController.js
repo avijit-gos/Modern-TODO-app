@@ -19,6 +19,8 @@ const {
   FetchUserById,
   UpdatePassword,
   followedUser,
+  updateUserInfo,
+  updateUserPrivacy,
 } = require("../../query/userQuery/userQuery");
 
 var createError = require("http-errors");
@@ -117,14 +119,40 @@ class UserController {
   async updateProfileName(req, res, next) {
     try {
       const { name } = req.body;
-      if (!name) {
-        throw createError.NotAcceptable("Invalid input");
+      if (!name.trim()) {
+        throw createError.Conflict("You cannot set profile name as an empty");
       } else {
-        const user = await updateUserName(req.user._id, name);
-        try {
-          return res.status(200).json({ msg: "Profile updated", user });
-        } catch (error) {
-          throw createError.InternalServerError();
+        const user = await updateUserInfo(req.user._id, "name", name);
+        if (!user) {
+          throw createError.InternalServerError("Something sent wrong");
+        } else {
+          return res.status(200).json({ msg: "Name updated", user });
+        }
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // *** Update profile email
+  async updateProfileEmail(req, res, next) {
+    try {
+      const { email } = req.body;
+      if (!email.trim()) {
+        throw createError.Conflict("Cannot set an invalid username");
+      } else {
+        const user = await findUserByEmailorUsername(email);
+        if (user) {
+          throw createError.Conflict("Email has already been taken");
+        } else {
+          const user = await updateUserInfo(req.user._id, "email", email);
+          if (!user) {
+            throw createError.InternalServerError("Something sent wrong");
+          } else {
+            return res
+              .status(200)
+              .json({ msg: "Email has been updated", user });
+          }
         }
       }
     } catch (error) {
@@ -217,6 +245,28 @@ class UserController {
             .status(200)
             .json({ msg: "You followed this user", result });
         }
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateProfilePrivacy(req, res, next) {
+    try {
+      console.log(req.body);
+      const { profilePrivacy, postPrivacy, msgPrivacy } = req.body;
+      const user = await updateUserPrivacy(
+        req.user._id,
+        profilePrivacy,
+        postPrivacy,
+        msgPrivacy
+      );
+      if (!user) {
+        throw createError.InternalServerError("Something went wrong");
+      } else {
+        return res
+          .status(200)
+          .json({ msg: "Profile privacy has been updated", user });
       }
     } catch (error) {
       next(error);

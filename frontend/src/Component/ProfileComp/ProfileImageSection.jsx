@@ -18,11 +18,12 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GlobalContext } from "../../Context/Context";
 import { BiUserCheck, BiUserPlus } from "react-icons/bi";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProfileImageSection = ({ profileData }) => {
   const toast = useToast();
   const { id } = useParams();
+  const navigate = useNavigate();
   const { setUpdateProfile } = GlobalContext();
   const [openProfileModal, setOpenProfileModal] = React.useState(false);
   const [image, setImage] = React.useState("");
@@ -203,7 +204,9 @@ const ProfileImageSection = ({ profileData }) => {
             <span className='username'>@{profileData.username}</span>
           </Box>
           {id === JSON.parse(localStorage.getItem("user"))._id ? (
-            <Button className='edit_btn'>
+            <Button
+              className='edit_btn'
+              onClick={() => navigate(`/settings/${profileData._id}`)}>
               <AiOutlineEdit />
             </Button>
           ) : (

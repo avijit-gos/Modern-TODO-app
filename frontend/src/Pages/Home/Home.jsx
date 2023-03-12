@@ -14,9 +14,9 @@ import { GlobalContext } from "../../Context/Context";
 import PostForm from "../../Component/PostForm/PostForm";
 import axios from "axios";
 import "./Home.css";
-import TaskSkeleton from "../../Component/SkeletonLoader/TaskSkeleton";
 import TaskCard from "../../Component/TaskCard/TaskCard";
 import { BiFilterAlt } from "react-icons/bi";
+import TaskCardLoader from "../../Component/SkeletonLoader/TaskCardLoader";
 
 const Home = () => {
   const { setPageType } = GlobalContext();
@@ -101,7 +101,7 @@ const Home = () => {
         <Box className='tasks_section'>
           {isLoading ? (
             <>
-              <TaskSkeleton />
+              <TaskCardLoader />
             </>
           ) : (
             <>

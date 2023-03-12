@@ -1,0 +1,451 @@
+/** @format */
+
+.note_tags_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5vh;
+  background-color: rgba(255, 255, 255, 0.786);
+  z-index: 1;
+}
+.note_tag {
+  background-color: transparent !important;
+  font-size: 0.65rem !important;
+  font-weight: 400 !important;
+  color: royalblue !important;
+  border-radius: 10px !important;
+  border: 1px solid royalblue !important;
+  padding: 3px 12px !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  margin: 0px 5px !important;
+}
+.active_note_tag {
+  color: aliceblue !important;
+  background-color: royalblue !important;
+}
+.notes_nested_tab_container {
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.786);
+  z-index: 1;
+}
+.nested_navlink {
+  font-size: 0.825rem;
+  font-weight: 500;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  line-height: 4.5vh;
+  letter-spacing: 0.2px;
+}
+.active_nested_navlink {
+  color: royalblue !important;
+  border-bottom: 2px solid royalblue !important;
+}
+.notes_form_button {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  background-color: royalblue !important;
+  color: aliceblue !important;
+  font-size: 1rem !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: all 0.2s linear;
+  position: absolute !important;
+  bottom: 10px !important;
+  right: 10px !important;
+}
+.note_form_body {
+  height: 63vh;
+  overflow: scroll;
+}
+.note_image_uploader {
+  border: 1px dotted #bdc3c7;
+  margin: 5px auto;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+.note_upload_icon {
+  font-size: 2.85rem;
+  color: #34495e;
+}
+.tag_btn {
+  margin: 0px 3px !important;
+  padding: 0 !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  border: 1px solid royalblue !important;
+  color: royalblue !important;
+  padding: 3px 12px !important;
+  border-radius: 10px !important;
+  background-color: transparent !important;
+  transition: all 0.2s linear;
+}
+.tag_title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.active_tag_btn {
+  background-color: royalblue !important;
+  color: aliceblue !important;
+}
+.err_auth_input {
+  border: 1.5px solid crimson !important;
+}
+.preview_image_container {
+  margin: 15px auto;
+  max-width: 300px;
+  width: 100%;
+  height: 170px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+.preview_image {
+  max-width: 300px;
+  width: 100%;
+  height: 130px;
+  border-radius: 5px;
+}
+.close_prev_btn {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  border-radius: 5px;
+  color: aliceblue !important;
+  background-color: rgba(65, 105, 225, 0.604) !important;
+}
+.note_form_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.not_modal_title {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.note_modal_header_close_btn,
+.note_modal_header_btn {
+  width: 80px !important;
+  height: 30px !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  border-radius: 5px !important;
+  color: aliceblue !important;
+  background-color: #34495eb6 !important;
+}
+.note_modal_header_btn {
+  background-color: royalblue !important;
+}
+.feed_container {
+  width: 100%;
+  height: 88.5vh;
+  overflow: scroll;
+}
+.empty_feed {
+  width: 100%;
+  height: 81.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #57606f;
+}
+.feed_post_container {
+  border: 1px solid #a4b0be;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  margin-top: 7px;
+  padding: 7px;
+  border-radius: 5px;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+.pin_note {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: #1e90ff;
+  font-size: 0.8rem;
+}
+.bookmark_icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: #2ed573;
+  font-size: 0.8rem;
+}
+.post_card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post_card_profilePic {
+  width: 30px !important;
+  height: 30px !important;
+  margin-right: 5px !important;
+  border-radius: 50% !important;
+}
+.post_card_user_info_section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.post_card_name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-right: 3px;
+}
+.post_card_username {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #a4b0be;
+  margin-right: 5px;
+}
+.timestamp {
+  color: black;
+}
+.card_menu_btn {
+  background-color: transparent !important;
+}
+.card_menu_list {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.post_card_body_section {
+  margin: 7px 0;
+}
+.card_title {
+  font-size: 1.01rem;
+  font-weight: 600;
+}
+.post_card_image {
+  border-radius: 5px;
+  height: 190px;
+  width: 100%;
+}
+.card_description {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.card_link {
+  font-weight: 500;
+}
+.post_card_footer_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post_card_footer_btn {
+  width: 25%;
+  margin: 0px 5px;
+  display: flex !important;
+  align-items: center !important;
+  background-color: transparent !important;
+  transition: all 0.2s linear;
+}
+.like_count {
+  margin-left: 2px;
+  font-weight: 400;
+}
+.like_btn:hover {
+  background-color: rgba(220, 20, 60, 0.162) !important;
+  color: crimson;
+}
+.like_fill {
+  color: crimson !important;
+}
+.dislike_btn:hover {
+  background-color: rgba(47, 53, 66, 0.162) !important;
+  color: rgba(47, 53, 66, 1);
+}
+.dislike_fill {
+  color: rgba(47, 53, 66, 1) !important;
+}
+/* rgba(46, 213, 115,1.0) */
+.cmnt_btn:hover {
+  background-color: rgba(46, 213, 115, 0.162) !important;
+  color: rgba(46, 213, 115, 1);
+}
+.modal_footer_btn {
+  background-color: royalblue !important;
+  color: aliceblue !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  width: 100px !important;
+  height: 30px !important;
+}
+.delete_btn {
+  background-color: crimson !important;
+}
+.pagination_btn_container {
+  display: flex !important;
+  justify-content: center;
+}
+.pagination_btn {
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  padding: 0px !important;
+  width: 90px !important;
+  height: 30px !important;
+  background-color: transparent !important;
+}
+.comment_section_container {
+  max-width: 500px;
+  padding: 7px;
+}
+.comment_form_container {
+  display: flex;
+  align-items: center;
+}
+.image_icon {
+  margin-left: 5px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  color: rgba(47, 53, 66, 1);
+}
+.comment_input {
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  color: rgba(47, 53, 66, 1) !important;
+}
+.comment_input:focus {
+  border: 1px solid royalblue !important;
+  box-shadow: none !important;
+}
+.commnet_sent {
+  width: 80px !important;
+  height: 35px !important;
+  border-radius: 5px !important;
+  background-color: royalblue !important;
+  font-size: 0.75rem !important;
+  font-weight: 400 !important;
+  margin: 0px 5px !important;
+  color: aliceblue !important;
+}
+.disable_comment_btn {
+  background-color: rgb(141, 168, 250) !important;
+  cursor: no-drop;
+}
+.comment_card {
+  max-width: 300px;
+  width: 100%;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #686ce023;
+  padding: 5px;
+}
+.comment_card_header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment_user_section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.cmnt_user_avatar {
+  width: 25px !important;
+  height: 25px !important;
+  margin-right: 5px !important;
+}
+.cmnt_user_name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 5px !important;
+}
+.cmnt_user_username {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #a4b0be;
+}
+.cmnt_card_more_btn {
+  padding: 0 !important;
+  background-color: transparent !important;
+  margin-right: 7px;
+}
+.cmnt_card_more_icon {
+  font-size: 0.95rem;
+}
+.cmnt_card_body {
+  margin: 5px 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.cmnt_card_footer {
+  width: 100%;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+.cmnt_card_footer_btn {
+  background-color: transparent !important;
+  width: 50% !important;
+  padding: 0 !important;
+  margin: 0px 5px;
+  height: 23px !important;
+  transition: all 0.2s linear;
+}
+.cmnt_like:hover {
+  color: crimson !important;
+}
+.cmnt_menu_item {
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+}
+.cmnt_textarea {
+  resize: none !important;
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
+}
+.cmnt_textarea:focus {
+  border: 1.5px solid #2f3542 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.edit_modal_btn {
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  color: aliceblue !important;
+  background-color: royalblue !important;
+  height: 30px !important;
+  width: 70px !important;
+}
+.disable_edit_modal_btn {
+  background-color: rgb(141, 168, 250) !important;
+  cursor: no-drop;
+}
+.empty_comment {
+  margin: 7px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #57606f;
+}
+.comments_link {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+@media only screen and (max-width: 699px) {
+  .feed_container {
+    width: 100%;
+    height: 82.2vh;
+    overflow: scroll;
+  }
+}

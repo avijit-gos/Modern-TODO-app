@@ -41,6 +41,20 @@ app.use(
   require("./server/routes/taskRoutes/taskRoutes")
 );
 
+// importing notes route
+app.use(
+  "/api/note",
+  authentication,
+  require("./server/routes/notesRoutes/notesRoutes")
+);
+
+// importing notes comment route
+app.use(
+  "/api/note/comment",
+  authentication,
+  require("./server/routes/notesRoutes/notesCommentRoutes")
+);
+
 // If route not found
 app.use(async (req, res, next) => {
   next(createError.NotFound("Page not found"));

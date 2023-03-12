@@ -3,7 +3,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ comp: Component, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
   // console.log(Component());
   return (
     <Route

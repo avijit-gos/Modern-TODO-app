@@ -32,20 +32,14 @@ const SideDrawer = ({ isOpen, onClose }) => {
           <DrawerBody>
             {/* Home */}
             <Box className='nav_link'>
-              <NavLink
-                to='/'
-                className='nav_item'
-                activeClassName='active_nav_item'>
+              <NavLink to='/' className='nav_item'>
                 <BiHome />
               </NavLink>
             </Box>
 
             {/* Notes */}
             <Box className='nav_link'>
-              <NavLink
-                to='/notes'
-                className='nav_item'
-                activeClassName='active_nav_item'>
+              <NavLink to='/notes' className='nav_item'>
                 <TbNotes />
               </NavLink>
             </Box>
@@ -54,38 +48,28 @@ const SideDrawer = ({ isOpen, onClose }) => {
             <Box className='nav_link'>
               <NavLink
                 to={`/profile/${JSON.parse(localStorage.getItem("user"))._id}`}
-                className='nav_item'
-                activeClassName='active_nav_item'>
+                className='nav_item'>
                 <AiOutlineUser />
               </NavLink>
             </Box>
 
             {/* Message */}
             <Box className='nav_link'>
-              <NavLink
-                to='/message'
-                className='nav_item'
-                activeClassName='active_nav_item'>
+              <NavLink to='/message' className='nav_item active_nav_item'>
                 <TbMessages />
               </NavLink>
             </Box>
 
             {/* Settings */}
             <Box className='nav_link'>
-              <NavLink
-                to='/settings'
-                className='nav_item'
-                activeClassName='active_nav_item'>
+              <NavLink to='/settings' className='nav_item'>
                 <AiOutlineSetting />
               </NavLink>
             </Box>
 
             {/* Logout */}
             <Box className='nav_link'>
-              <NavLink
-                to='/logout'
-                className='nav_item'
-                activeClassName='active_nav_item'>
+              <NavLink to='/logout' className='nav_item'>
                 <FiLogOut />
               </NavLink>
             </Box>

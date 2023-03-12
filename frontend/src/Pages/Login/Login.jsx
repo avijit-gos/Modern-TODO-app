@@ -2,13 +2,15 @@
 
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonComp from "../../Component/ButtonComp/ButtonComp";
 import InputComp from "../../Component/InputComp/InputComp";
 import axios from "axios";
+import { GlobalContext } from "../../Context/Context";
 
 const Login = () => {
-  const history = useHistory();
+  const { setUser, setToken } = GlobalContext();
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -57,7 +59,9 @@ const Login = () => {
           setIsDisable(false);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           localStorage.setItem("token", JSON.stringify(response.data.token));
-          history.push("/");
+          setToken(response.data.token);
+          setUser(response.data.user);
+          navigate("/");
         })
         .catch(function (error) {
           console.log(error);
@@ -83,7 +87,7 @@ const Login = () => {
           setIsDisable(false);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           localStorage.setItem("token", response.data.token);
-          history.push("/");
+          navigate("/");
         })
         .catch(function (error) {
           console.log(error);

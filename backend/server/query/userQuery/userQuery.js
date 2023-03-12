@@ -141,6 +141,38 @@ class UserQuery {
       return false;
     }
   }
+
+  async updateUserInfo(id, key, value) {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $set: { [key]: value } },
+      { new: true }
+    );
+    try {
+      return user;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async updateUserPrivacy(id, profilePrivacy, postPrivacy, msgPrivacy) {
+    const user = await User.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          profilePrivacy: profilePrivacy,
+          postPrivacy: postPrivacy,
+          msgPrivacy: msgPrivacy,
+        },
+      },
+      { new: true }
+    );
+    try {
+      return user;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 module.exports = new UserQuery();
