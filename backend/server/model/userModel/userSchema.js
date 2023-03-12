@@ -14,6 +14,10 @@ const UserSchema = mongoose.Schema(
     flw: [{ type: mongoose.Types.ObjectId, ref: "User" }],
     tasks: [{ type: mongoose.Types.ObjectId, ref: "Task" }],
     cmplt_tasks: [{ type: mongoose.Types.ObjectId, ref: "Task" }],
+    profilePrivacy: { type: String, default: "all" },
+    postPrivacy: { type: String, default: "all" },
+    msgPrivacy: { type: String, default: "all" },
+    notes: [{ type: mongoose.Types.ObjectId, ref: "Notes" }],
   },
   { timestamp: true }
 );

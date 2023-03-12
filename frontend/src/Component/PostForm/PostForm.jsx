@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Button, Box, Spinner, Img, Textarea } from "@chakra-ui/react";
+import { Button, Box, Spinner, Img, Textarea, Input } from "@chakra-ui/react";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { FaTasks } from "react-icons/fa";
 import { MdNotes } from "react-icons/md";
@@ -191,12 +191,12 @@ const PostForm = () => {
                 </Button>
               </Box>
               {addTaaskType && (
-                <InputComp
+                <Input
                   type='text'
                   placaeholder='Enter task title (require)'
                   className='auth_input'
                   value={type}
-                  handleChange={(e) => handleAddTask(e)}
+                  onChange={(e) => handleAddTask(e)}
                   onKeyDown={handleKeyPress}
                 />
               )}
@@ -231,29 +231,9 @@ const PostForm = () => {
           }
         />
       )}
-
-      {onActive && (
-        <Box
-          className={
-            onActive
-              ? "action_menu_container active_menu"
-              : "action_menu_container deactive_menu"
-          }>
-          <Box
-            className='action_menu_item'
-            onClick={() => setOpenTaskForm(true)}>
-            <span className='menu_text'>Create task</span>
-            <FaTasks />
-          </Box>
-          <Box className='action_menu_item'>
-            <span className='menu_text'>Create notes</span>
-            <MdNotes />
-          </Box>
-        </Box>
-      )}
       <Button
         className='action_button'
-        onClick={() => setOnActive((prev) => !prev)}>
+        onClick={() => setOpenTaskForm((prev) => !prev)}>
         <HiOutlinePencilAlt className='post_icon' />
       </Button>
     </Box>

@@ -3,13 +3,13 @@
 import { Box, Button } from "@chakra-ui/react";
 import { IoArrowBack } from "react-icons/io5";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const DefaultHeader = ({ title }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const backToPrevPage = () => {
-    history.goBack();
+    navigate(-1);
   };
   return (
     <Box className='header_navbar_container'>

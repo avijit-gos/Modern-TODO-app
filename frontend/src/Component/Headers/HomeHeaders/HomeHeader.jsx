@@ -3,7 +3,7 @@
 import { Avatar, Box, Button, Img } from "@chakra-ui/react";
 import Logo from "../../../Assests/Images/writing.png";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 import { GlobalContext } from "../../../Context/Context";
 import { BiMenuAltRight, BiSearch } from "react-icons/bi";
@@ -15,7 +15,7 @@ const HomeHeader = () => {
   const { mode, setMode } = GlobalContext();
   const [openSearch, setOpenSearch] = React.useState(false);
   const [openDrawer, setOpenDrawer] = React.useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleDayMode = () => {
     localStorage.setItem("mode", "day");
@@ -68,9 +68,7 @@ const HomeHeader = () => {
           src=''
           className='user_avatar'
           onClick={() =>
-            history.push(
-              `/profile/${JSON.parse(localStorage.getItem("user"))._id}`
-            )
+            navigate(`/profile/${JSON.parse(localStorage.getItem("user"))._id}`)
           }
         />
         {/* /profile/${JSON.parse(localStorage.getItem("user"))._id */}

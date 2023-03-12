@@ -2,13 +2,13 @@
 
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonComp from "../../Component/ButtonComp/ButtonComp";
 import InputComp from "../../Component/InputComp/InputComp";
 import axios from "axios";
 
 const Register = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [username, setUsername] = React.useState("");
@@ -70,7 +70,7 @@ const Register = () => {
         console.log(response.data);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("token", response.data.token);
-        history.push("/");
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);

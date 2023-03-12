@@ -5,6 +5,13 @@
   width: 100%;
   margin: 15px auto;
 }
+.image_settings {
+  padding: 7px;
+}
+.image_settings_header {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
 .image_container {
   width: 150px;
   height: 150px;
@@ -148,4 +155,125 @@
 .disable_upload_btn {
   background-color: rgb(131, 158, 237) !important;
   cursor: no-drop !important;
+}
+.task_route_container {
+  width: 100%;
+  height: 92vh;
+}
+.empty_profile_task_container {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #34495e;
+}
+.scroll_task_route_container {
+  width: 100%;
+  height: 87vh;
+  overflow: scroll;
+}
+/** @format */
+.settings_image_container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 10px auto;
+}
+.account_settings_container {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-top: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.settings_header_title {
+  font-size: 1rem;
+  font-weight: 500;
+  padding-left: 5px;
+}
+.settings_header_button {
+  background-color: transparent !important;
+  transition: all 0.2s linear;
+}
+.settings_header_close_btn_icon {
+  color: crimson !important;
+}
+.account_settings_section {
+  margin-top: 10px;
+  padding: 7px;
+}
+.settings_sub_header {
+  font-size: 1.02;
+  font-weight: 500;
+  color: #070707;
+  margin-right: 10px;
+}
+.settings_profile {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #2f3542;
+}
+.setting_edit_btn {
+  background-color: transparent !important;
+  padding: 0 !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  font-size: 1rem !important;
+  color: royalblue !important;
+}
+
+.accordion_section {
+  margin-top: 10px;
+}
+.update_btn {
+  width: 90px !important;
+  height: 30px !important;
+  background-color: royalblue !important;
+  color: aliceblue !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  border-radius: 5px !important;
+  margin: 7px 0 !important;
+}
+.cancel_btn {
+  background-color: crimson !important;
+  margin: 0 5px !important;
+}
+.details_section {
+  width: 100%;
+  padding: 10px;
+}
+.details_section_header {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.profile_details_info {
+  margin-top: 5px;
+}
+.settings_name_section {
+  display: flex;
+  align-items: center;
+}
+.settings_profile_privacy_header {
+  font-size: 0.975rem;
+  font-weight: 500;
+}
+.settings_profile_privacy {
+  line-height: 18px;
+  margin: 12px 0;
+}
+.settings_profile_privacy_subheader {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #34495e;
+}
+.radion_input_section {
+  margin: 7px 0;
+}
+.radio_input {
+  font-size: 12px !important;
+  font-weight: 500 !important;
 }
