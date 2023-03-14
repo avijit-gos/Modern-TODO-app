@@ -55,6 +55,13 @@ app.use(
   require("./server/routes/notesRoutes/notesCommentRoutes")
 );
 
+// importing chat route
+app.use(
+  "/api/chat",
+  authentication,
+  require("./server/routes/chatRoute/chatRoute")
+);
+
 // If route not found
 app.use(async (req, res, next) => {
   next(createError.NotFound("Page not found"));
