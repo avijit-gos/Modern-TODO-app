@@ -362,4 +362,7 @@
   .search_form_container {
     height: 92.5vh;
   }
+  .message_floating_btn {
+    display: none !important;
+  }
 }

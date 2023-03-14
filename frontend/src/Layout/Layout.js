@@ -13,7 +13,6 @@ const Header = ({ pageType, title }) => {
   if (pageType === "home") {
     return <HomeHeader />;
   } else if (pageType === "chat") {
-    console.log("Message page");
     return <MessageHeader title={title} />;
   } else {
     return <DefaultHeader title={title} />;

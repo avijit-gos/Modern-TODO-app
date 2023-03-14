@@ -3,6 +3,7 @@
 import React from "react";
 import { Avatar, Box, Button } from "@chakra-ui/react";
 import { BiUserCheck, BiUserPlus } from "react-icons/bi";
+import { MdMarkEmailRead } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./UserCard.css";
@@ -36,6 +37,11 @@ const UserList = ({ userData }) => {
       });
   };
 
+  // *** Handle create a single message
+  const handleCreateSingleMessage = (id) => {
+    alert(id);
+  };
+
   return (
     <Box className='user_card'>
       <Box className='user_info_section'>
@@ -49,6 +55,12 @@ const UserList = ({ userData }) => {
         className='user_card_flw_btn'
         onClick={() => handleFollowUser(userData._id)}>
         {followed ? <BiUserCheck className='flwed' /> : <BiUserPlus />}
+      </Button>
+
+      <Button
+        className='user_card_flw_btn'
+        onClick={() => handleCreateSingleMessage(userData._id)}>
+        <MdMarkEmailRead className='message_icon' />
       </Button>
     </Box>
   );
