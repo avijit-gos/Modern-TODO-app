@@ -1,41 +1,42 @@
 /** @format */
 
 .user_card {
-  border: 1px solid rgb(215, 215, 215);
-  padding: 10px;
+  border: 1px solid rgb(237, 234, 234);
   border-radius: 5px;
-  margin-bottom: 5px;
-  max-width: 400px;
-  width: 100%;
+  padding: 3px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  margin: 5px 0;
 }
 .user_info_section {
-  width: 100%;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .user_card_avatar {
-  width: 35px !important;
-  height: 35px !important;
-  margin-right: 7px !important;
+  width: 27px !important;
+  height: 27px !important;
+  margin-right: 3px;
 }
 .user_card_name {
-  font-size: 0.82rem;
+  font-size: 0.785rem;
   font-weight: 500;
-  margin-right: 5px;
 }
 .user_card_username {
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: rgb(138, 139, 145);
+  font-weight: 500;
+  font-size: 0.5rem;
+  margin-left: 2px;
+  color: rgb(171, 169, 167);
 }
 .user_card_flw_btn {
+  margin: 0px 3px !important;
+  font-size: 1rem !important;
+  padding: 0 !important;
   background-color: transparent !important;
-  color: royalblue !important;
-  font-size: 1.2rem !important;
 }
 .flwed {
   color: #2ed573 !important;
+}
+.message_icon {
+  color: #1e90ff;
 }
