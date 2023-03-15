@@ -56,12 +56,6 @@ const UserList = ({ userData }) => {
         onClick={() => handleFollowUser(userData._id)}>
         {followed ? <BiUserCheck className='flwed' /> : <BiUserPlus />}
       </Button>
-
-      <Button
-        className='user_card_flw_btn'
-        onClick={() => handleCreateSingleMessage(userData._id)}>
-        <MdMarkEmailRead className='message_icon' />
-      </Button>
     </Box>
   );
 };

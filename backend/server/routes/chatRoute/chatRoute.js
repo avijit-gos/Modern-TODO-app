@@ -51,6 +51,6 @@ router.put("/group/bookmark/:id", bookmarkGroup);
 router.get("/single/:id", fetchOneSingleChat);
 
 // 12. Block chat
-router.get("/block/:id", blockChat);
+router.put("/block/:id", blockChat);
 
 module.exports = router;

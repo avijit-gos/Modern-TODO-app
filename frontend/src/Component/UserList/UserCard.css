@@ -3,10 +3,10 @@
 .user_card {
   border: 1px solid rgb(237, 234, 234);
   border-radius: 5px;
-  padding: 3px;
+  padding: 7px;
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  margin: 7px 0;
 }
 .user_info_section {
   display: flex;

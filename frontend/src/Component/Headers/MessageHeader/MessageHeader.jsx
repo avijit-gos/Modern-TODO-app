@@ -16,8 +16,10 @@ import { CgMoreO } from "react-icons/cg";
 import ModalComp from "../../ModalComp/ModalComp";
 import { TbUserSearch } from "react-icons/tb";
 import InputComp from "../../InputComp/InputComp";
-import UserList from "../../UserList/UserList";
+import ChatUserList from "../../UserList/ChatUser";
 import UserListLoader from "../../SkeletonLoader/UserListLoader";
+import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
 
 const MessageHeader = ({ title }) => {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ const MessageHeader = ({ title }) => {
   const [searchText, setSearchText] = React.useState("");
   const [groupName, setGroupName] = React.useState("");
   const [members, setMembers] = React.useState([]);
+  const [membersId, setMembersId] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [userList, setUserList] = React.useState([]);
   const [msg, setMsg] = React.useState("");
@@ -84,8 +87,65 @@ const MessageHeader = ({ title }) => {
     }
   }, [searchText]);
 
+  // handle create single chat
+  const handleCreateChat = () => {
+    var data = {
+      members: membersId,
+    };
+
+    var config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}chat`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        // *** From here redirect to message page
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // Handle create group chat
+  const handleCreateGroupChat = () => {
+    var data = {
+      members: membersId,
+      name: groupName,
+    };
+
+    var config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}chat/group`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        onClose();
+        // *** From here redirect to message page
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <Box className='header_navbar_container'>
+      {/* Single chat modal */}
       {openSingleChatModal && (
         <ModalComp
           isOpen={openSingleChatModal}
@@ -93,6 +153,16 @@ const MessageHeader = ({ title }) => {
           title={"Create a new chat"}
           body={
             <Box className='single_create_chat_modal'>
+              {(members || []).length > 0 && (
+                <Box className='user_tags_section'>
+                  {members.map((data) => (
+                    <Button className='user_tag_btn' key={data._id}>
+                      <span className='user_name'>{data.name}</span>
+                      <AiOutlineClose className='btn_close_icon' />
+                    </Button>
+                  ))}
+                </Box>
+              )}
               <Box className='user_search_section'>
                 <TbUserSearch className='user_search_icon' />
                 <InputComp
@@ -115,7 +185,13 @@ const MessageHeader = ({ title }) => {
                         {(userList || []).length > 0 ? (
                           <React.Fragment>
                             {userList.map((user) => (
-                              <UserList key={user._id} userData={user} />
+                              <ChatUserList
+                                key={user._id}
+                                userData={user}
+                                members={members}
+                                setMembers={setMembers}
+                                setMembersId={setMembersId}
+                              />
                             ))}
                           </React.Fragment>
                         ) : (
@@ -130,6 +206,83 @@ const MessageHeader = ({ title }) => {
               </Box>
             </Box>
           }
+          condition={members.length > 0 && true}
+          handleCreateChat={handleCreateChat}
+        />
+      )}
+
+      {/* Group chat modal */}
+      {openGroupChatModal && (
+        <ModalComp
+          isOpen={openGroupChatModal}
+          onClose={onClose}
+          title={"Create a new group"}
+          body={
+            <Box className='single_create_chat_modal'>
+              {(members || []).length > 0 && (
+                <Box className='user_tags_section'>
+                  {members.map((data) => (
+                    <Button className='user_tag_btn' key={data._id}>
+                      <span className='user_name'>{data.name}</span>
+                      <AiOutlineClose className='btn_close_icon' />
+                    </Button>
+                  ))}
+                </Box>
+              )}
+              <Box className='group_name_section'>
+                <InputComp
+                  type='text'
+                  placaeholder='Enter group name'
+                  className='search_input'
+                  value={groupName}
+                  handleChange={(e) => setGroupName(e.target.value)}
+                />
+              </Box>
+              <Box className='user_search_section'>
+                <TbUserSearch className='user_search_icon' />
+                <InputComp
+                  type='search'
+                  placaeholder='Search user to start chatting...'
+                  className='search_input'
+                  value={searchText}
+                  handleChange={(e) => setSearchText(e.target.value)}
+                />
+              </Box>
+              <Box className='modal_user_search_result_section'>
+                {disable ? (
+                  <Box className='empty_modal_user_list'>Start searching</Box>
+                ) : (
+                  <Box className='modal_user_list'>
+                    {isLoading ? (
+                      <UserListLoader />
+                    ) : (
+                      <React.Fragment>
+                        {(userList || []).length > 0 ? (
+                          <React.Fragment>
+                            {userList.map((user) => (
+                              <ChatUserList
+                                key={user._id}
+                                userData={user}
+                                members={members}
+                                setMembers={setMembers}
+                                setMembersId={setMembersId}
+                              />
+                            ))}
+                          </React.Fragment>
+                        ) : (
+                          <Box className='empty_search_result'>
+                            No user found
+                          </Box>
+                        )}
+                      </React.Fragment>
+                    )}
+                  </Box>
+                )}
+              </Box>
+            </Box>
+          }
+          condition={members.length > 0 && true}
+          handleCreateChat={handleCreateGroupChat}
         />
       )}
       <Box className='header_box'>

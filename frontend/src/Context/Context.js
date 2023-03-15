@@ -13,6 +13,7 @@ function StateContextProvider({ children }) {
   const [selectType, setSelectType] = React.useState("all");
   const [feedPosts, setFeedPosts] = React.useState([]);
   const [selectNote, setSelectNote] = React.useState(null);
+  const [chats, setChats] = React.useState([]);
   return (
     <StateContext.Provider
       value={{
@@ -32,6 +33,8 @@ function StateContextProvider({ children }) {
         setFeedPosts,
         selectNote,
         setSelectNote,
+        chats,
+        setChats,
       }}>
       {children}
     </StateContext.Provider>
