@@ -178,9 +178,25 @@
 .file_input {
   display: none;
 }
+.modal_title_section {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
 .modal_title {
   font-size: 0.8rem !important;
   font-weight: 500 !important;
+}
+.create_chat,
+.close_modal_chat {
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  color: aliceblue !important;
+  background-color: royalblue !important;
+  margin: 0 3px !important;
+}
+.close_modal_chat {
+  background-color: crimson !important;
 }
 .back_btn {
   background-color: transparent !important;
@@ -294,10 +310,10 @@
   font-weight: 400;
 }
 .message_conatiner {
-  border: 1px solid red;
   width: 100%;
   height: 99.5vh;
   position: relative;
+  overflow: scroll;
 }
 @media only screen and (max-width: 900px) and (min-width: 700px) {
   .container {

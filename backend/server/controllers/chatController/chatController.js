@@ -9,6 +9,7 @@ const {
   uploadGroupImage,
   updateGroupMember,
   deleteChat,
+  updateBlockUser,
 } = require("../../query/chatQuery/chatQuery");
 
 class ChatController {
@@ -18,8 +19,8 @@ class ChatController {
   // 1. Create single chat
   async createSingleChat(req, res, next) {
     try {
-      const members = JSON.parse(req.body.members);
-      console.log(members.length);
+      const members = req.body.members;
+      members.push(req.user._id);
       if (members.length <= 1) {
         throw createError.Conflict(
           "Please! select atleast one user to start chatting"
@@ -56,7 +57,8 @@ class ChatController {
   async createGroupChat(req, res, next) {
     try {
       const { name, members } = req.body;
-      const mem = JSON.parse(members);
+      const mem = req.body.members;
+      mem.push(req.user._id);
       if (!name.trim()) {
         throw createError.NotAcceptable("Please provide group name");
       } else {
@@ -65,7 +67,7 @@ class ChatController {
             "Atleast 2 members required to create a group"
           );
         } else {
-          const data = await saveGroupData(name, mem);
+          const data = await saveGroupData(name, mem, req.user._id);
           try {
             return res
               .status(201)
@@ -250,7 +252,17 @@ class ChatController {
   // 12. Block chat by user
   async blockChat(req, res, next) {
     try {
-      //
+      const id = req.params.id;
+      if (!id) {
+        throw createError.Conflict("Request params is not present");
+      } else {
+        const userId = req.body.userId;
+        if (!userId) {
+          throw createError.Conflict("User id is not present");
+        } else {
+          const result = await updateBlockUser(id, userId, req.user._id);
+        }
+      }
     } catch (error) {
       next(error);
     }

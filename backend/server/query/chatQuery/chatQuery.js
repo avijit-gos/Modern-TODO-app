@@ -75,11 +75,13 @@ class ChatQuery {
   }
 
   // Save newly created group in DB
-  async saveGroupData(name, members) {
+  async saveGroupData(name, members, userId) {
     const newGoup = Chat({
       _id: new mongoose.Types.ObjectId(),
       name: name,
       members: members,
+      admin: userId,
+      isGroup: true,
     });
     const data = await newGoup.save();
     try {
@@ -135,12 +137,16 @@ class ChatQuery {
   }
 
   async deleteChat(id) {
-    const data = await Chat.findById(id);
+    const data = await Chat.findByIdAndDelete(id);
     try {
       return data;
     } catch (error) {
       return false;
     }
+  }
+
+  async updateBlockUser(id, userId, profileId) {
+    console.log(profileId);
   }
 }
 

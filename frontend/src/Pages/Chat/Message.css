@@ -48,3 +48,85 @@
   width: 100%;
   height: 56vh;
 }
+.user_tags_section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.user_tag_btn {
+  border: 1px solid royalblue !important;
+  padding: 0 !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  background-color: royalblue !important;
+  color: aliceblue !important;
+  border-radius: 10px !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  padding: 3px 10px !important;
+  margin: 3px !important;
+}
+.btn_close_icon {
+  margin-left: 12px !important;
+}
+.empty_chat_list {
+  width: 100%;
+  height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat_image {
+  width: 150px;
+  height: 150px;
+}
+.empty_chat_text {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: #34495e;
+}
+.chat_card_container {
+  border: 1px solid rgb(220, 220, 220);
+  margin: 3px 0;
+  max-width: 350px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+}
+.chat_card_info_section {
+  margin-left: 5px;
+  width: 100%;
+}
+.chat_card_info_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat_card_avatar {
+  width: 40px !important;
+  height: 40px !important;
+}
+.chat_name {
+  font-size: 0.825rem;
+  font-weight: 500;
+}
+.chat_card_admin_tag {
+  font-weight: 400;
+  color: royalblue;
+  font-size: 0.6rem;
+  padding-left: 5px;
+}
+.latest_msg_container {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #34495e;
+}
+.menu_item {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
