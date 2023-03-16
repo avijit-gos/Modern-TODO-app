@@ -15,16 +15,25 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FiMoreVertical } from "react-icons/fi";
+import { selectChatName } from "../../Utils/selectChatName";
 
 const ChatCard = ({ chatData }) => {
-  console.log(chatData);
   return (
     <Box className='chat_card_container'>
       <Avatar src={chatData.image} className='chat_card_avatar' />
       <Box className='chat_card_info_section'>
         <Box className='chat_card_info_box'>
           <Box className='card_chat_details'>
-            <span className='chat_name'>{chatData.name}</span>
+            {chatData.isGroup ? (
+              <span className='chat_name'>{chatData.name}</span>
+            ) : (
+              <span className='chat_name'>
+                {selectChatName(
+                  chatData.members,
+                  JSON.parse(localStorage.getItem("user"))._id
+                )}
+              </span>
+            )}
             {chatData.admin === JSON.parse(localStorage.getItem("user"))._id ? (
               <span className='chat_card_admin_tag'>Admin</span>
             ) : null}

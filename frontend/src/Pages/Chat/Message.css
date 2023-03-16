@@ -130,3 +130,132 @@
   font-weight: 400;
   font-size: 0.8rem;
 }
+.chat_box_app_header {
+  padding: 7px;
+}
+.chat_box_app_header_text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.chat_box_app_header_search_section {
+  margin: 5px 0;
+  position: relative;
+  max-width: 450px;
+  width: 100%;
+}
+.chat_search_input {
+  border: 1px solid #657586 !important;
+  outline: none;
+  border-radius: 15px !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  padding-left: 22px !important;
+}
+.search_chat_icon {
+  position: absolute;
+  left: 5px;
+  top: 12px;
+}
+.chat_card_section {
+  width: 100%;
+  height: 87vh;
+  overflow: scroll;
+  padding: 5px;
+}
+.chat_modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat_modal_header_title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #34495e;
+}
+.chat_modal_close_btn {
+  background-color: transparent !important;
+}
+.create_chat_modal_body {
+  width: 100%;
+  height: 60vh !important;
+}
+.modal_chat_user_search_section {
+  position: relative;
+  margin-top: 5px;
+}
+.modal_seach_input {
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
+  padding-left: 22px !important;
+}
+.modal_seach_input:focus {
+  box-shadow: none !important;
+  border: 1px solid #34495e !important;
+}
+.search_modal_icon {
+  position: absolute;
+  top: 12px;
+  left: 5px;
+}
+.empty_user_section {
+  font-size: 0.8rem;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 59vh;
+  overflow: scroll;
+}
+.select_user_section {
+  display: flex;
+  flex-wrap: wrap;
+}
+.select_user_tag {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 12px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: aliceblue;
+  background-color: royalblue;
+  margin: 3px;
+}
+.close_icon {
+  margin-left: 7px;
+}
+.chat_modal_group_create_btn {
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
+  background-color: royalblue !important;
+  color: aliceblue;
+  letter-spacing: 0.2px !important;
+}
+
+@media only screen and (max-width: 699px) {
+  .chat_card_section {
+    width: 100%;
+    height: 85vh;
+    overflow: scroll;
+    padding: 5px;
+    border: 1px solid red;
+    overflow: scroll;
+  }
+  .chat_box_app_header {
+    padding: 12px;
+    position: relative;
+  }
+  .chat_box_app_header_text {
+    display: none;
+  }
+  .chat_box_app_header_search_section {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

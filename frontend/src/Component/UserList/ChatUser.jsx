@@ -8,16 +8,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./UserCard.css";
 
-const ChatUserList = ({ userData, members, setMembers, setMembersId }) => {
-  // *** Handle create a single message
-  const handleCreateSingleMessage = (id, data) => {
-    const arr = members;
-    if (!arr.includes(id)) {
-      setMembers((prev) => [...prev, data]);
-      setMembersId((prev) => [...prev, data._id]);
-    }
-  };
-
+const ChatUserList = ({
+  userData,
+  members,
+  setMembers,
+  setMembersId,
+  handleCreateSingleMessage,
+}) => {
   return (
     <Box className='user_card'>
       <Box
