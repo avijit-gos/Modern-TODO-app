@@ -1,0 +1,126 @@
+/** @format */
+.message_page_container {
+  border: 1px solid red;
+  width: 100%;
+  height: 99.5vh;
+}
+
+.message_header_avatar {
+  width: 33px !important;
+  height: 33px !important;
+  margin-right: 5px;
+}
+.message_header_name {
+  font-size: 0.87rem;
+  font-weight: 500;
+}
+.message_info_section {
+  height: 7vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.message_page_header {
+  border-bottom: 1px solid rgb(236, 236, 236);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7vh;
+}
+
+.message_header_box_one {
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+}
+.message_body {
+  border: 1px solid red;
+  width: 100%;
+  height: 84vh;
+  overflow: scroll;
+  padding: 5px;
+}
+.message_footer {
+  width: 100%;
+  height: 7vh;
+  padding: 5px;
+}
+.message_footer_box {
+  width: 100%;
+  position: relative;
+}
+.msg_preview_image_section {
+  border-radius: 5px;
+  width: 200px;
+  height: 130px;
+  position: absolute;
+  top: -135px;
+  left: 0;
+  z-index: 10;
+}
+.msg_preview_image {
+  border-radius: 5px;
+  width: 200px;
+  height: 130px;
+  position: relative;
+}
+.msg_prev_image_close_btn {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 12 !important;
+  background-color: #63717e4c !important;
+  color: aliceblue !important;
+}
+.message_input {
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  border: 1px solid #63717e !important;
+}
+.input_group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.message_input:focus {
+  border: 1px solid #2c3e50 !important;
+  box-shadow: none !important;
+}
+.emoji_btn {
+  width: fit-content !important;
+  height: fit-content !important;
+  padding: 0 !important;
+}
+.message_footer_icon {
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+.send_btn {
+  color: royalblue !important;
+  font-size: 1.1rem !important;
+}
+.msg_footer_menu_btn {
+  display: none !important;
+}
+@media only screen and (max-width: 900px) and (min-width: 700px) {
+  .message_page_container {
+    height: 99.5vh;
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  .message_page_container {
+    height: 92vh;
+  }
+  .message_page_header {
+    display: none;
+  }
+  .file_input_container {
+    /* display: none; */
+  }
+  .msg_footer_menu_btn {
+    display: block !important;
+  }
+}

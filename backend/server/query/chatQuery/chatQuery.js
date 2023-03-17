@@ -53,7 +53,8 @@ class ChatQuery {
       .populate({
         path: "members",
         select: { _id: 1, name: 1, profilePic: 1, username: 1 },
-      });
+      })
+      .sort({ createdAt: -1 });
     try {
       return data;
     } catch (error) {

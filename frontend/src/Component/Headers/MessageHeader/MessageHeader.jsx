@@ -108,6 +108,7 @@ const MessageHeader = ({ title }) => {
         console.log(response.data);
         onClose();
         // *** From here redirect to message page
+        navigate(`/message/${response.data._id}`);
       })
       .catch(function (error) {
         console.log(error);
@@ -141,6 +142,7 @@ const MessageHeader = ({ title }) => {
         setMembersId([]);
         setDisableGroupCreateBtn(true);
         // *** From here redirect to message page
+        navigate(`/message/${response.data.group._id}`);
       })
       .catch(function (error) {
         console.log(error);
