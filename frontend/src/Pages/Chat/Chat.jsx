@@ -59,7 +59,7 @@ const Chat = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setChats(response.data);
       })
       .catch(function (error) {
@@ -137,9 +137,10 @@ const Chat = () => {
     };
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        setChats(response.data);
         onClose();
         // *** From here redirect to message page
+        navigate(`/message/${response.data._id}`);
       })
       .catch(function (error) {
         console.log(error);

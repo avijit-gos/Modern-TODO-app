@@ -16,14 +16,22 @@ import {
 import React from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { selectChatName } from "../../Utils/selectChatName";
+import { useNavigate } from "react-router-dom";
 
 const ChatCard = ({ chatData }) => {
+  const navigate = useNavigate();
   return (
     <Box className='chat_card_container'>
-      <Avatar src={chatData.image} className='chat_card_avatar' />
+      <Avatar
+        src={chatData.image}
+        className='chat_card_avatar'
+        onClick={() => navigate(`/message/${chatData._id}`)}
+      />
       <Box className='chat_card_info_section'>
         <Box className='chat_card_info_box'>
-          <Box className='card_chat_details'>
+          <Box
+            className='card_chat_details'
+            onClick={() => navigate(`/message/${chatData._id}`)}>
             {chatData.isGroup ? (
               <span className='chat_name'>{chatData.name}</span>
             ) : (
@@ -52,7 +60,11 @@ const ChatCard = ({ chatData }) => {
             </Menu>
           )}
         </Box>
-        <Box className='latest_msg_container'>Latest message</Box>
+        <Box
+          className='latest_msg_container'
+          onClick={() => navigate(`/message/${chatData._id}`)}>
+          Latest message
+        </Box>
       </Box>
     </Box>
   );
