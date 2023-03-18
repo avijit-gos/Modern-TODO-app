@@ -26,20 +26,8 @@ const ModalComp = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader className='modal_title_section'>
-          <span className='modal_title'>{title}</span>
-          {!condition ? (
-            <ModalCloseButton />
-          ) : (
-            <Box className='modal_header_btn_section'>
-              <Button className='create_chat' onClick={handleCreateChat}>
-                Create
-              </Button>
-              <Button className='close_modal_chat' onClick={onClose}>
-                Close
-              </Button>
-            </Box>
-          )}
+        <ModalHeader>
+          <ModalCloseButton />
         </ModalHeader>
 
         <ModalBody>{body}</ModalBody>

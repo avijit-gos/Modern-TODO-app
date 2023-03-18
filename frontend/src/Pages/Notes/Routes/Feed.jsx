@@ -7,7 +7,7 @@ import NoteSkeletonLoader from "../../../Component/SkeletonLoader/NoteSkeletonLo
 import { GlobalContext } from "../../../Context/Context";
 
 const Feed = () => {
-  const { selectType, setFeedPosts, feedPosts } = GlobalContext();
+  const { selectType, setFeedPosts, feedPosts, updateNote } = GlobalContext();
   const [notes, setNotes] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [prevPage, setPrevPage] = React.useState(0);
@@ -28,6 +28,7 @@ const Feed = () => {
     setIsBtnLoading(true);
   };
 
+  // Fetch user notes feed
   React.useEffect(() => {
     setIsBtnLoading(false);
     if (prevPage === page) {
@@ -53,7 +54,7 @@ const Feed = () => {
         setFeedPosts((prev) => [...prev, ...result]);
       })
       .catch((error) => console.log("error", error));
-  }, [page, selectType]);
+  }, [page, selectType, updateNote]);
 
   return (
     <Box className='feed_container'>

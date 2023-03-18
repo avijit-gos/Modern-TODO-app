@@ -20,13 +20,17 @@ import {
 } from "react-icons/ai";
 import { GrSend } from "react-icons/gr";
 import { FiMoreVertical } from "react-icons/fi";
+import EmojiPicker from "emoji-picker-react";
 
 const MessageFooter = () => {
   const [isFocus, setIsFocus] = React.useState(false);
-  const [image, setImage] = React.useState("");
+  const [image, setImage] = React.useState(null);
   const [prevImage, setPrevImage] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [isDisable, setIsDisable] = React.useState(true);
+  const [openEmoji, setOpenEmoji] = React.useState(false);
+  const [text, setText] = React.useState("");
+  const [openMenu, setOpenMenu] = React.useState(false);
 
   // *** Handle image file change
   const handleImageChange = (e) => {
@@ -40,6 +44,42 @@ const MessageFooter = () => {
     setImage("");
   };
 
+  const onEmojiClick = (event, emojiObject) => {
+    setText((prev) => prev + event.emoji);
+  };
+
+  const mobileMenuRef = React.useRef();
+
+  const closeOpenMenus = React.useCallback(
+    (e) => {
+      if (
+        mobileMenuRef.current &&
+        openMenu &&
+        !mobileMenuRef.current.contains(e.target)
+      ) {
+        setOpenMenu(false);
+        setOpenEmoji(false);
+      }
+    },
+    [openMenu]
+  );
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", closeOpenMenus);
+  }, [closeOpenMenus]);
+
+  React.useEffect(() => {
+    if (text.trim()) {
+      setIsDisable(false);
+    } else {
+      if (image) {
+        setIsDisable(false);
+      } else {
+        setIsDisable(true);
+      }
+    }
+  }, [text, image]);
+
   return (
     <Box className='message_footer_box'>
       {prevImage && (
@@ -50,68 +90,105 @@ const MessageFooter = () => {
           </Button>
         </Box>
       )}
+
+      {/* Emoji */}
+      {openEmoji && (
+        <Box className='emoji_container'>
+          <EmojiPicker
+            height={400}
+            width={400}
+            onEmojiClick={onEmojiClick}
+            // disableAutoFocus={true}
+            ref={mobileMenuRef}
+          />
+        </Box>
+      )}
+
+      {openMenu && (
+        <Box className='msg_footer_menu' ref={mobileMenuRef}>
+          <Box className='msg_menu_item'>
+            <label htmlFor='msg_img' className='file_input_container'>
+              Image
+              <Input
+                type='file'
+                className='file_input'
+                id='msg_img'
+                onChange={(e) => handleImageChange(e)}
+                accept='image/png, image/gif, image/jpeg'
+              />
+            </label>
+          </Box>
+          <Box className='msg_menu_item'>
+            <label htmlFor='msg_file' className='file_input_container'>
+              File
+              <Input
+                type='file'
+                className='file_input'
+                id='msg_file'
+                onChange={(e) => handleImageChange(e)}
+                accept='application/pdf,application/vnd.ms-excel'
+              />
+            </label>
+          </Box>
+        </Box>
+      )}
+
       {isFocus ? (
         <Box className='input_group'>
-          <InputComp
-            type='text'
-            placeholder='Message...'
-            className='message_input'
-          />
+          <Box className='msg_form'>
+            <InputComp
+              type='text'
+              placeholder='Message...'
+              className='message_input'
+              value={text}
+              handleChange={(e) => setText(e.target.value)}
+            />
+          </Box>
           {/* Emoji */}
-          <Button className='emoji_btn'>
+          <Button
+            className='emoji_btn'
+            onClick={() => setOpenEmoji((prev) => !prev)}>
             <BsEmojiSmile className='message_footer_icon' />
           </Button>
 
-          {/* file */}
-          <label htmlFor='msg_file' className='file_input_container'>
-            <AiOutlinePaperClip className='message_footer_icon' />
-            <Input
-              type='file'
-              className='file_input'
-              id='msg_file'
-              onChange={(e) => handleImageChange(e)}
-              accept='application/pdf,application/vnd.ms-excel'
-            />
-          </label>
+          <Box className='input_file_sections'>
+            {/* file */}
+            <label htmlFor='msg_file' className='file_input_container'>
+              <AiOutlinePaperClip className='message_footer_icon' />
+              <Input
+                type='file'
+                className='file_input'
+                id='msg_file'
+                onChange={(e) => handleImageChange(e)}
+                accept='application/pdf,application/vnd.ms-excel'
+              />
+            </label>
 
-          {/* Image */}
-          <label htmlFor='msg_img' className='file_input_container'>
-            <AiOutlineFileImage className='message_footer_icon' />
-            <Input
-              type='file'
-              className='file_input'
-              id='msg_img'
-              onChange={(e) => handleImageChange(e)}
-              accept='image/png, image/gif, image/jpeg'
-            />
-          </label>
+            {/* Image */}
+            <label htmlFor='msg_img' className='file_input_container'>
+              <AiOutlineFileImage className='message_footer_icon' />
+              <Input
+                type='file'
+                className='file_input'
+                id='msg_img'
+                onChange={(e) => handleImageChange(e)}
+                accept='image/png, image/gif, image/jpeg'
+              />
+            </label>
+          </Box>
+
+          <button className='msg_menu_btn' onClick={() => setOpenMenu(true)}>
+            <FiMoreVertical />
+          </button>
 
           {/* Menu button will visible smalll screen */}
-          <Menu className='msg_footer_menu'>
-            <MenuButton as={Button} className='emoji_btn msg_footer_menu_btn'>
-              <FiMoreVertical className='message_footer_icon' />
-            </MenuButton>
-            <MenuList>
-              <MenuItem htmlFor='msg_img'>
-                Image
-                {/* <label className='file_input_container'>
-                  <AiOutlineFileImage className='message_footer_icon' /> */}
-                <Input
-                  type='file'
-                  className='file_input'
-                  id='msg_img'
-                  onChange={(e) => handleImageChange(e)}
-                />
-                {/* </label> */}
-              </MenuItem>
-              <MenuItem>File</MenuItem>
-            </MenuList>
-          </Menu>
 
           {/* send button */}
-          <Button className='emoji_btn send_btn'>
-            <GrSend className='message_footer_send_icon' />
-          </Button>
+          {isDisable ? null : (
+            <Button className='emoji_btn send_btn'>
+              <GrSend className='message_footer_send_icon' />
+            </Button>
+          )}
         </Box>
       ) : (
         <Input
