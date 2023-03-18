@@ -15,10 +15,12 @@ import FormModal from "../ModalComp/FormModal";
 import SuccessGif from "../../Assests/Images/success.gif";
 import InputComp from "../InputComp/InputComp";
 import { AiOutlineCloudUpload, AiOutlineClose } from "react-icons/ai";
+import { GlobalContext } from "../../Context/Context";
 
 const tags = ["Educations", "Financial", "Medical", "Technology", "Others"];
 
 const NotesForm = () => {
+  const { setUpdateNote } = GlobalContext();
   const toast = useToast();
   const [openNoteForm, setOpenNoteForm] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -125,7 +127,7 @@ const NotesForm = () => {
     }
   }, [title, description, link1Err, link2Err, link3Err]);
 
-  // *** Handle create note
+  // *** Handle create new note
   const createNote = () => {
     setIsLoading(true);
     var myHeaders = new Headers();
@@ -150,7 +152,7 @@ const NotesForm = () => {
     fetch(`${process.env.REACT_APP_LINK}note/create`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        setUpdateNote(result);
         closeModal();
         setIsDisable(true);
         setTitle("");

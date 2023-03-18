@@ -3,8 +3,7 @@
 import React from "react";
 import { Button, Box, Spinner, Img, Textarea, Input } from "@chakra-ui/react";
 import { HiOutlinePencilAlt } from "react-icons/hi";
-import { FaTasks } from "react-icons/fa";
-import { MdNotes } from "react-icons/md";
+import { GlobalContext } from "../../Context/Context";
 import FormModal from "../ModalComp/FormModal";
 import SuccessGif from "../../Assests/Images/success.gif";
 import InputComp from "../InputComp/InputComp";
@@ -12,6 +11,7 @@ import { IoIosAdd } from "react-icons/io";
 import axios from "axios";
 
 const PostForm = () => {
+  const { setUpdateTask } = GlobalContext();
   const [onActive, setOnActive] = React.useState(false);
   const [openTaskForm, setOpenTaskForm] = React.useState(false);
   const [openNoteForm, setOpenNoteForm] = React.useState(false);
@@ -39,6 +39,7 @@ const PostForm = () => {
     setSuccess(false);
   };
 
+  // *** Create new task
   const submitTask = () => {
     setIsLoading(true);
     setIsDisable(false);
@@ -61,7 +62,7 @@ const PostForm = () => {
 
     axios(config)
       .then(function (response) {
-        // console.log(response.data);
+        setUpdateTask(response.data);
         setOpenTaskForm(false);
         setSuccess(true);
         setTaskTitle("");

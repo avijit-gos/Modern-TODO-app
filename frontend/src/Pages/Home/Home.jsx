@@ -19,7 +19,7 @@ import { BiFilterAlt } from "react-icons/bi";
 import TaskCardLoader from "../../Component/SkeletonLoader/TaskCardLoader";
 
 const Home = () => {
-  const { setPageType } = GlobalContext();
+  const { setPageType, updateTask } = GlobalContext();
   const [tasks, setTasks] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [filter, setFilter] = React.useState("All");
@@ -29,6 +29,7 @@ const Home = () => {
     setPageType("home");
   }, []);
 
+  // *** Fetch all user related task
   React.useEffect(() => {
     var config = {
       method: "get",
@@ -46,7 +47,7 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [filter]);
+  }, [filter, updateTask]);
 
   React.useEffect(() => {
     setIsLoading(true);
