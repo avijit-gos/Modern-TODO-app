@@ -26,10 +26,8 @@ const ModalComp = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>
-          <ModalCloseButton />
-        </ModalHeader>
-
+        <ModalHeader>{title}</ModalHeader>
+        <ModalCloseButton />
         <ModalBody>{body}</ModalBody>
 
         <ModalFooter>{footer}</ModalFooter>

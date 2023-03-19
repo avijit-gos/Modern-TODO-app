@@ -19,9 +19,11 @@ import UserListLoader from "../../SkeletonLoader/UserListLoader";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import ChatCreateModal from "../../ModalComp/ChatCreateModal";
+import { GlobalContext } from "../../../Context/Context";
 
 const MessageHeader = ({ title }) => {
   const navigate = useNavigate();
+  const { setSelectChat } = GlobalContext();
   const [openSingleChatModal, setOpenSingleChatModal] = React.useState(false);
   const [openGroupChatModal, setOpenGroupChatModal] = React.useState(false);
   const [searchText, setSearchText] = React.useState("");
@@ -37,6 +39,7 @@ const MessageHeader = ({ title }) => {
 
   const backToPrevPage = () => {
     navigate(-1);
+    setSelectChat(null);
   };
 
   // *** Close modal
@@ -218,6 +221,7 @@ const MessageHeader = ({ title }) => {
                             setMembers={setMembers}
                             setMembersId={setMembersId}
                             handleCreateSingleMessage={handleCreateChat}
+                            onlyUser={true}
                           />
                         ))}
                       </Box>
@@ -305,6 +309,7 @@ const MessageHeader = ({ title }) => {
                             setMembers={setMembers}
                             setMembersId={setMembersId}
                             handleCreateSingleMessage={handleMembers}
+                            onlyUser={true}
                           />
                         ))}
                       </Box>

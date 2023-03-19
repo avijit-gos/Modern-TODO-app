@@ -18,6 +18,7 @@ const UserSchema = mongoose.Schema(
     postPrivacy: { type: String, default: "all" },
     msgPrivacy: { type: String, default: "all" },
     notes: [{ type: mongoose.Types.ObjectId, ref: "Notes" }],
+    group: [{ type: mongoose.Types.ObjectId, ref: "Chat" }],
   },
   { timestamp: true }
 );

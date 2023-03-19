@@ -10,6 +10,7 @@ const {
   updateGroupMember,
   deleteChat,
   updateBlockUser,
+  updateGroupInfo,
 } = require("../../query/chatQuery/chatQuery");
 
 class ChatController {
@@ -119,11 +120,16 @@ class ChatController {
         if (!req.body.name.trim()) {
           throw createError.NotAcceptable("You cannot set empty group name");
         } else {
-          const result = await uploadGroupImage(id, "name", req.body.name);
+          const result = await updateGroupInfo(
+            id,
+            req.body.name,
+            req.body.description,
+            req.body.privacy
+          );
           try {
             return res
               .status(200)
-              .json({ msg: "Group name has been updated", result });
+              .json({ msg: "Group info has been updated", result });
           } catch (error) {
             throw createError.InternalServerError("Something went wrong");
           }
