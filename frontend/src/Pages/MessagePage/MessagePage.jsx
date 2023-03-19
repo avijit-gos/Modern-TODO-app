@@ -12,7 +12,8 @@ import MessageFooter from "./MessageFooter";
 
 const MessagePage = () => {
   const { id } = useParams();
-  const { setPageType, setSelectChat, selectChat } = GlobalContext();
+  const { setPageType, setSelectChat, selectChat, updateChat } =
+    GlobalContext();
 
   React.useLayoutEffect(() => {
     setPageType("message");
@@ -37,7 +38,7 @@ const MessagePage = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [id]);
+  }, [id, updateChat]);
 
   return (
     <React.Fragment>
