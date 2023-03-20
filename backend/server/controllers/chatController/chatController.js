@@ -11,6 +11,7 @@ const {
   deleteChat,
   updateBlockUser,
   updateGroupInfo,
+  handleSearchChat,
 } = require("../../query/chatQuery/chatQuery");
 
 class ChatController {
@@ -269,6 +270,16 @@ class ChatController {
           const result = await updateBlockUser(id, userId, req.user._id);
         }
       }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // 13. Search chat
+  async searchChat(req, res, next) {
+    try {
+      const result = await handleSearchChat(req.query.key, req.user._id);
+      return res.status(200).json(result);
     } catch (error) {
       next(error);
     }

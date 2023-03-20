@@ -63,7 +63,6 @@ class UserQuery {
   }
 
   async handleSearchUser(value, user) {
-    console.log(user);
     const key = value
       ? {
           $or: [

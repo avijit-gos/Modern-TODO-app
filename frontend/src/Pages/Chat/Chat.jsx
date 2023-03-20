@@ -8,6 +8,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Input,
 } from "@chakra-ui/react";
 import Layout from "../../Layout/Layout";
 import { GlobalContext } from "../../Context/Context";
@@ -22,8 +23,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import UserListLoader from "../../Component/SkeletonLoader/UserListLoader";
 import ChatUserList from "../../Component/UserList/ChatUser";
 import { useNavigate } from "react-router-dom";
-import { CgMoreO } from "react-icons/cg";
-import { IoArrowBack } from "react-icons/io5";
 
 const Chat = () => {
   const { setPageType, chats, setChats } = GlobalContext();
@@ -137,7 +136,7 @@ const Chat = () => {
     };
     axios(config)
       .then(function (response) {
-        setChats(response.data);
+        console.log(response.data);
         onClose();
         // *** From here redirect to message page
         navigate(`/message/${response.data._id}`);
@@ -174,6 +173,7 @@ const Chat = () => {
         setMembersId([]);
         setDisableGroupCreateBtn(true);
         // *** From here redirect to message page
+        navigate(`/message/${response.data.group._id}`);
       })
       .catch(function (error) {
         console.log(error);
@@ -199,6 +199,15 @@ const Chat = () => {
       setMembersId((prev) => [...prev, id]);
       setMembers((prev) => [...prev, userData]);
     }
+  };
+
+  // *** Element group members
+  const elementMember = (id) => {
+    alert("This functionality should be added");
+  };
+
+  const handleRedirect = () => {
+    navigate(`/chat/search`);
   };
 
   return (
@@ -245,6 +254,7 @@ const Chat = () => {
                             setMembers={setMembers}
                             setMembersId={setMembersId}
                             handleCreateSingleMessage={handleCreateChat}
+                            onlyUser={true}
                           />
                         ))}
                       </Box>
@@ -285,7 +295,10 @@ const Chat = () => {
               {(members || []).length > 0 && (
                 <Box className='select_user_section'>
                   {members.map((data) => (
-                    <Box className='select_user_tag' key={data._id}>
+                    <Box
+                      className='select_user_tag'
+                      key={data._id}
+                      onClick={() => elementMember(data._id)}>
                       <span className='select_user_name'>{data.name}</span>
                       <AiOutlineClose className='close_icon' />
                     </Box>
@@ -330,6 +343,7 @@ const Chat = () => {
                             setMembers={setMembers}
                             setMembersId={setMembersId}
                             handleCreateSingleMessage={handleMembers}
+                            onlyUser={true}
                           />
                         ))}
                       </Box>
@@ -343,6 +357,7 @@ const Chat = () => {
           }
         />
       )}
+
       <Box className='message_conatiner'>
         <Menu>
           <MenuButton as={Button} className='message_floating_btn'>
@@ -366,7 +381,9 @@ const Chat = () => {
         <Box className='chat_box_app_header'>
           <span className='chat_box_app_header_text'>Chats</span>
           <br />
-          <Box className='chat_box_app_header_search_section'>
+          <Box
+            className='chat_box_app_header_search_section'
+            onClick={handleRedirect}>
             <TbUserSearch className='search_chat_icon' />
             <InputComp
               type='search'
