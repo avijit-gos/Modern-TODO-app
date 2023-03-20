@@ -189,6 +189,29 @@ class ChatQuery {
       return false;
     }
   }
+
+  async handleSearchChat(name, id) {
+    console.log(name);
+    const key = name
+      ? {
+          $or: [{ name: { $regex: name, $options: "i" } }],
+        }
+      : {};
+
+    const result = await Chat.find(key)
+      .find({ isGroup: { $eq: true } })
+      .populate({
+        path: "members",
+        select: {
+          _id: 1,
+          name: 1,
+          profilePic: 1,
+          username: 1,
+          group: 1,
+        },
+      });
+    return result;
+  }
 }
 
 module.exports = new ChatQuery();

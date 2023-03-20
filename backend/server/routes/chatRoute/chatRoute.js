@@ -13,6 +13,7 @@ const {
   bookmarkGroup,
   fetchOneSingleChat,
   blockChat,
+  searchChat,
 } = require("../../controllers/chatController/chatController");
 
 const router = require("express").Router();
@@ -52,5 +53,8 @@ router.get("/single/:id", fetchOneSingleChat);
 
 // 12. Block chat
 router.put("/block/:id", blockChat);
+
+// 13. Search user chat
+router.get("/search_chat", searchChat);
 
 module.exports = router;
