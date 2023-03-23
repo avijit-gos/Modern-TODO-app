@@ -631,10 +631,14 @@ const FullNote = ({ data }) => {
         />
       )}
 
-      {pin ? <AiTwotonePushpin className='pin_note' /> : null}
-      {bookmark.includes(JSON.parse(localStorage.getItem("user"))._id) ? (
-        <BsFillBookmarkStarFill className='bookmark_icon' />
-      ) : null}
+      {JSON.parse(localStorage.getItem("user")) && (
+        <>
+          {pin ? <AiTwotonePushpin className='pin_note' /> : null}
+          {bookmark.includes(JSON.parse(localStorage.getItem("user"))._id) ? (
+            <BsFillBookmarkStarFill className='bookmark_icon' />
+          ) : null}
+        </>
+      )}
 
       {/* Note header */}
       <Box className='full_note_header'>
@@ -661,70 +665,78 @@ const FullNote = ({ data }) => {
           </Box>
         </Box>
 
-        <Menu>
-          <MenuButton
-            className='card_menu_btn'
-            as={Button}
-            rightIcon={<FiMoreHorizontal />}></MenuButton>
-          <MenuList>
-            {/* Pinn menu item */}
-            {JSON.parse(localStorage.getItem("user"))._id === data.user._id && (
-              <MenuItem
-                className='card_menu_list'
-                onClick={() => handlePinModal(data._id)}>
-                Pin
-              </MenuItem>
-            )}
+        {JSON.parse(localStorage.getItem("user")) && (
+          <Menu>
+            <MenuButton
+              className='card_menu_btn'
+              as={Button}
+              rightIcon={<FiMoreHorizontal />}></MenuButton>
+            <MenuList>
+              {/* Pinn menu item */}
+              {JSON.parse(localStorage.getItem("user"))._id ===
+                data.user._id && (
+                <MenuItem
+                  className='card_menu_list'
+                  onClick={() => handlePinModal(data._id)}>
+                  Pin
+                </MenuItem>
+              )}
 
-            {/* Edit menu item */}
-            {JSON.parse(localStorage.getItem("user"))._id === data.user._id && (
-              <MenuItem
-                className='card_menu_list'
-                onClick={() => handleEditModal(data._id)}>
-                Edit
-              </MenuItem>
-            )}
+              {/* Edit menu item */}
+              {JSON.parse(localStorage.getItem("user"))._id ===
+                data.user._id && (
+                <MenuItem
+                  className='card_menu_list'
+                  onClick={() => handleEditModal(data._id)}>
+                  Edit
+                </MenuItem>
+              )}
 
-            {/* Bookmark menu item */}
-            {JSON.parse(localStorage.getItem("user"))._id === data.user._id && (
-              <MenuItem
-                className='card_menu_list'
-                onClick={() => handleBookmarkModal(data._id)}>
-                Bookmark
-              </MenuItem>
-            )}
+              {/* Bookmark menu item */}
+              {JSON.parse(localStorage.getItem("user"))._id ===
+                data.user._id && (
+                <MenuItem
+                  className='card_menu_list'
+                  onClick={() => handleBookmarkModal(data._id)}>
+                  Bookmark
+                </MenuItem>
+              )}
 
-            {/* Download pdf menu item */}
-            <MenuItem className='card_menu_list'>Download as pdf</MenuItem>
+              {/* Download pdf menu item */}
+              <MenuItem className='card_menu_list'>Download as pdf</MenuItem>
 
-            {/* Analytics menu item */}
-            {JSON.parse(localStorage.getItem("user"))._id === data.user._id && (
-              <MenuItem
-                className='card_menu_list'
-                onClick={() => handleRedirectToAdmin(data)}>
-                Analytics
-              </MenuItem>
-            )}
+              {/* Analytics menu item */}
+              {JSON.parse(localStorage.getItem("user"))._id ===
+                data.user._id && (
+                <MenuItem
+                  className='card_menu_list'
+                  onClick={() => handleRedirectToAdmin(data)}>
+                  Analytics
+                </MenuItem>
+              )}
 
-            {/* Privacy menu item */}
-            {JSON.parse(localStorage.getItem("user"))._id === data.user._id && (
-              <MenuItem
-                className='card_menu_list'
-                onClick={() => handlePrivacyModal(data._id)}>
-                Privacy
-              </MenuItem>
-            )}
+              {/* Privacy menu item */}
+              {JSON.parse(localStorage.getItem("user"))._id ===
+                data.user._id && (
+                <MenuItem
+                  className='card_menu_list'
+                  onClick={() => handlePrivacyModal(data._id)}>
+                  Privacy
+                </MenuItem>
+              )}
 
-            {/* Delete menu item */}
-            {JSON.parse(localStorage.getItem("user"))._id === data.user._id && (
-              <MenuItem
-                className='card_menu_list delete'
-                onClick={() => handleDeleteModal(data._id)}>
-                Delete
-              </MenuItem>
-            )}
-          </MenuList>
-        </Menu>
+              {/* Delete menu item */}
+              {JSON.parse(localStorage.getItem("user"))._id ===
+                data.user._id && (
+                <MenuItem
+                  className='card_menu_list delete'
+                  onClick={() => handleDeleteModal(data._id)}>
+                  Delete
+                </MenuItem>
+              )}
+            </MenuList>
+          </Menu>
+        )}
       </Box>
 
       <Box className='translation_section'>
@@ -774,45 +786,90 @@ const FullNote = ({ data }) => {
       </Box>
 
       {/* Note footer */}
-      {isVisble && (
-        <Box className='full_note_footer'>
-          <Button
-            className='post_card_footer_btn like_btn'
-            onClick={() => handleLike(data._id)}>
-            {likes.includes(JSON.parse(localStorage.getItem("user"))._id) ? (
-              <AiFillLike className='like_fill' />
-            ) : (
-              <AiOutlineLike />
-            )}
-            <span className='like_count'>{likesCount}</span>
-          </Button>
+      {JSON.parse(localStorage.getItem("user")) ? (
+        <>
+          {isVisble && (
+            <Box className='full_note_footer'>
+              <Button
+                className='post_card_footer_btn like_btn'
+                onClick={() => handleLike(data._id)}>
+                {likes.includes(
+                  JSON.parse(localStorage.getItem("user"))._id
+                ) ? (
+                  <AiFillLike className='like_fill' />
+                ) : (
+                  <AiOutlineLike />
+                )}
+                <span className='like_count'>{likesCount}</span>
+              </Button>
 
-          {/* Dislike */}
-          <Button
-            className='post_card_footer_btn dislike_btn'
-            onClick={() => handleDislike(data._id)}>
-            {dislikes.includes(JSON.parse(localStorage.getItem("user"))._id) ? (
-              <AiFillDislike className='dislike_fill' />
-            ) : (
-              <AiOutlineDislike />
-            )}
-            <span className='like_count'>{dislikesCount}</span>
-          </Button>
+              {/* Dislike */}
+              <Button
+                className='post_card_footer_btn dislike_btn'
+                onClick={() => handleDislike(data._id)}>
+                {dislikes.includes(
+                  JSON.parse(localStorage.getItem("user"))._id
+                ) ? (
+                  <AiFillDislike className='dislike_fill' />
+                ) : (
+                  <AiOutlineDislike />
+                )}
+                <span className='like_count'>{dislikesCount}</span>
+              </Button>
 
-          {/* Comment */}
-          <Button
-            className='post_card_footer_btn cmnt_btn'
-            onClick={() => handleComment(data._id)}>
-            <GoComment />
-            <span className='like_count'>{commentsCount}</span>
-          </Button>
+              {/* Comment */}
+              <Button
+                className='post_card_footer_btn cmnt_btn'
+                onClick={() => handleComment(data._id)}>
+                <GoComment />
+                <span className='like_count'>{commentsCount}</span>
+              </Button>
 
-          {/* Share */}
-          <Button className='post_card_footer_btn'>
-            <IoIosShareAlt />
-            <span className='like_count'>{dislikesCount}</span>
-          </Button>
-        </Box>
+              {/* Share */}
+              <Button className='post_card_footer_btn'>
+                <IoIosShareAlt />
+                <span className='like_count'>{dislikesCount}</span>
+              </Button>
+            </Box>
+          )}
+        </>
+      ) : (
+        <>
+          {isVisble && (
+            <Box className='full_note_footer'>
+              <Button
+                className='post_card_footer_btn like_btn'
+                onClick={() => navigate("/login")}>
+                <AiOutlineLike />
+                <span className='like_count'>{likesCount}</span>
+              </Button>
+
+              {/* Dislike */}
+              <Button
+                className='post_card_footer_btn dislike_btn'
+                onClick={() => navigate("/login")}>
+                <AiOutlineDislike />
+                <span className='like_count'>{dislikesCount}</span>
+              </Button>
+
+              {/* Comment */}
+              <Button
+                className='post_card_footer_btn cmnt_btn'
+                onClick={() => navigate("/login")}>
+                <GoComment />
+                <span className='like_count'>{commentsCount}</span>
+              </Button>
+
+              {/* Share */}
+              <Button
+                className='post_card_footer_btn'
+                onClick={() => navigate("/login")}>
+                <IoIosShareAlt />
+                <span className='like_count'>{dislikesCount}</span>
+              </Button>
+            </Box>
+          )}
+        </>
       )}
     </Box>
   );

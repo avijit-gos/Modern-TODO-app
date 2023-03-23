@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 import "./FullPost.css";
 import FullNote from "../../Component/FullPostComponent/FullNote";
 import FullNoteLoading from "../../Component/SkeletonLoader/FullNoteLoading";
+import PublicFullNote from "../PublicPage/PublicFullNote/PublicFullNote";
 
 const ViewFullNote = () => {
   const { id } = useParams();
@@ -28,11 +29,11 @@ const ViewFullNote = () => {
 
     var requestOptions = {
       method: "GET",
-      headers: myHeaders,
+      // headers: myHeaders,
       redirect: "follow",
     };
 
-    fetch(`${process.env.REACT_APP_LINK}note/full/${id}`, requestOptions)
+    fetch(`${process.env.REACT_APP_LINK}public/full/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setPostLoading(false);
@@ -46,26 +47,46 @@ const ViewFullNote = () => {
   }, [id]);
 
   return (
-    <Layout title='Full view'>
-      <Box className='full_post_container'>
-        {/* Post */}
-        {postLoading ? (
-          <FullNoteLoading />
-        ) : (
-          <>
-            {post ? (
-              <Box className='full_post_card'>
-                <FullNote data={post} />
-              </Box>
+    <React.Fragment>
+      {JSON.parse(localStorage.getItem("user")) ? (
+        <Layout title='Full view'>
+          <Box className='full_post_container'>
+            {/* Post */}
+            {postLoading ? (
+              <FullNoteLoading />
             ) : (
-              <Box className='empty_post'>No post found</Box>
+              <>
+                {post ? (
+                  <Box className='full_post_card'>
+                    <FullNote data={post} />
+                  </Box>
+                ) : (
+                  <Box className='empty_post'>No post found</Box>
+                )}
+              </>
             )}
-          </>
-        )}
 
-        {/* Comment */}
-      </Box>
-    </Layout>
+            {/* Comment */}
+          </Box>
+        </Layout>
+      ) : (
+        <Box className=''>
+          {postLoading ? (
+            <FullNoteLoading />
+          ) : (
+            <>
+              {post ? (
+                <Box>
+                  <PublicFullNote post={post} />
+                </Box>
+              ) : (
+                <Box className='empty_post'>No post found</Box>
+              )}
+            </>
+          )}
+        </Box>
+      )}
+    </React.Fragment>
   );
 };
 

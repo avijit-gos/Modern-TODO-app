@@ -62,6 +62,9 @@ app.use(
   require("./server/routes/chatRoute/chatRoute")
 );
 
+// Public routes
+app.use("/api/public", require("./server/publicRoutes/publicRoutes"));
+
 // If route not found
 app.use(async (req, res, next) => {
   next(createError.NotFound("Page not found"));

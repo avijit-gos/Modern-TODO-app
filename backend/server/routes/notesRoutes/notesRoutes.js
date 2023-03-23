@@ -54,6 +54,6 @@ router.get("/:id", fetchSingleNote);
 router.get("/comment/:id", fetchComments);
 
 // 14. Fetch single note
-router.get("/full/:id", fetchNote);
+// router.get("/full/:id", fetchNote);
 
 module.exports = router;
