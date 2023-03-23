@@ -13,18 +13,100 @@
 }
 
 .auth_container {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
+.auth_box_one {
+  width: 40vw;
+  height: 100vh;
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+  position: relative;
+}
+.auth_box_two {
+  width: 50vw;
+  height: 100vh;
+  position: relative;
+}
+.box_two_header {
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  display: none;
+}
+.auth_logo {
+  width: 33px;
+  height: 33px;
+}
+.auth_text {
+  font-size: 0.825rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-left: 7px;
+  text-transform: uppercase;
+}
+.box_one_header {
+  font-size: 1.01rem;
+  font-weight: 400;
+  color: aliceblue;
+  padding: 3px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 5px;
+}
+.box_one_text {
+  font-size: 2.5rem;
+  font-weight: 400;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 40px;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.box_one_subtext {
+  color: rgba(240, 248, 255, 0.603);
+  font-size: 0.8rem;
+  font-weight: 400;
+  width: 300px;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px 0;
+  letter-spacing: 1px;
+}
+.box_one_subtext_register {
+  color: rgba(240, 248, 255, 0.603);
+  font-size: 0.8rem;
+  font-weight: 400;
+  width: 300px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-52%, -50%);
+  padding: 5px 0;
+  letter-spacing: 1px;
+  line-height: 18px;
+}
+
 .auth_box {
   max-width: 420px;
   width: 100%;
   padding: 10px;
   border-radius: 7px;
   border: 1px solid var(--border-colors);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .header_section {
   margin: 7px 0;
@@ -325,6 +407,12 @@
 }
 
 @media only screen and (max-width: 699px) {
+  .auth_box_one {
+    display: none;
+  }
+  .auth_box_two {
+    width: 100%;
+  }
   .app_container {
     height: 92vh;
   }
@@ -386,5 +474,14 @@
   }
   .message_floating_btn {
     display: none !important;
+  }
+  .box_two_header {
+    display: block;
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   }
 }

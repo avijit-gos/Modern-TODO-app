@@ -1,11 +1,12 @@
 /** @format */
 
-import { Box } from "@chakra-ui/react";
+import { Box, Img } from "@chakra-ui/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonComp from "../../Component/ButtonComp/ButtonComp";
 import InputComp from "../../Component/InputComp/InputComp";
 import axios from "axios";
+import Pencil from "../../Assests/Images/pencil.png";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -80,63 +81,77 @@ const Register = () => {
 
   return (
     <Box className='auth_container'>
-      <Box className='auth_box'>
-        {/* Header section */}
-        <Box className='header_section'>
-          <span className='auth_header_text'>SignUp</span>
-          <br />
-          {err && <span className='err_message'>{err}</span>}
+      <Box className='auth_box_one'>
+        <Box className='box_one_header'>Fizzo</Box>
+        <Box className='box_one_text'>Start your journey with us</Box>
+        <Box className='box_one_subtext_register'>
+          Discover the world's best community for readers and writers.
+        </Box>
+      </Box>
+      <Box className='auth_box_two'>
+        <Box className='box_two_header'>
+          <Img src={Pencil} className='auth_logo' />
+          <span className='auth_text'>Fizzo</span>
         </Box>
 
-        {/* Form section */}
-        <Box className='auth_form_section'>
-          <InputComp
-            type='text'
-            placaeholder='Enter your name'
-            className='auth_input'
-            value={name}
-            handleChange={handleNameChange}
-          />
-          <InputComp
-            type='email'
-            placaeholder='Enter your email address'
-            className='auth_input'
-            value={email}
-            handleChange={handleEmailChange}
-          />
-
-          <InputComp
-            type='text'
-            placaeholder='Enter your username'
-            className='auth_input'
-            value={username}
-            handleChange={handleUsernameChange}
-          />
-
-          <InputComp
-            type='password'
-            placaeholder='Enter password'
-            className='auth_input'
-            value={password}
-            handleChange={handlePasswordChange}
-          />
-
-          <Box className='auth_link_section'>
-            Already have an account?{" "}
-            <Link to='/' login className='auth_link'>
-              Login
-            </Link>
+        <Box className='auth_box'>
+          {/* Header section */}
+          <Box className='header_section'>
+            <span className='auth_header_text'>SignUp</span>
+            <br />
+            {err && <span className='err_message'>{err}</span>}
           </Box>
 
-          {/* Auth button */}
-          <ButtonComp
-            title='SignUp'
-            className='auth_btn'
-            disableClassName='disable_auth_btn'
-            isDisable={isDisable}
-            isLoading={isLoading}
-            clickHandle={handleRegister}
-          />
+          {/* Form section */}
+          <Box className='auth_form_section'>
+            <InputComp
+              type='text'
+              placaeholder='Enter your name'
+              className='auth_input'
+              value={name}
+              handleChange={handleNameChange}
+            />
+            <InputComp
+              type='email'
+              placaeholder='Enter your email address'
+              className='auth_input'
+              value={email}
+              handleChange={handleEmailChange}
+            />
+
+            <InputComp
+              type='text'
+              placaeholder='Enter your username'
+              className='auth_input'
+              value={username}
+              handleChange={handleUsernameChange}
+            />
+
+            <InputComp
+              type='password'
+              placaeholder='Enter password'
+              className='auth_input'
+              value={password}
+              handleChange={handlePasswordChange}
+            />
+
+            <Box className='auth_link_section'>
+              Already have an account?{" "}
+              <Link to='/login' login className='auth_link'>
+                Login
+              </Link>
+            </Box>
+
+            {/* Auth button */}
+            <ButtonComp
+              title='SignUp'
+              className='auth_btn'
+              disableClassName='disable_auth_btn'
+              isDisable={isDisable}
+              isLoading={isLoading}
+              clickHandle={handleRegister}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>
