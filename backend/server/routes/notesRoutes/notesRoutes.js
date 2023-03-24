@@ -12,7 +12,7 @@ const {
   dislikeNote,
   fetchSingleNote,
   fetchComments,
-  fetchNote,
+  fetchUserNote,
 } = require("../../controllers/noteController/noteController");
 
 const router = require("express").Router();
@@ -21,6 +21,7 @@ const router = require("express").Router();
 router.post("/create", createNote);
 
 // 2. Fetch all user related note
+router.get("/fetch/:id", fetchUserNote);
 
 // 3. fetch feed
 router.get("/feed", fetchFeed);

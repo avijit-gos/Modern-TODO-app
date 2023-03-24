@@ -4,13 +4,15 @@ import React from "react";
 import Layout from "../../Layout/Layout";
 import { Box, Button } from "@chakra-ui/react";
 import { GlobalContext } from "../../Context/Context";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import "./Notes.css";
 import NotesForm from "../../Component/PostForm/NotesForm";
 
 const NotesHome = () => {
+  const { pathname } = useLocation();
   const { setPageType, setFeedPosts, setSelectType, selectType } =
     GlobalContext();
+  const [isPath, setIsPath] = React.useState("notes");
 
   // *** Page layout
   React.useLayoutEffect(() => {
@@ -21,6 +23,15 @@ const NotesHome = () => {
     setFeedPosts([]);
     setSelectType(value);
   };
+
+  React.useEffect(() => {
+    console.log(pathname);
+    if (pathname.includes("notes_following")) {
+      setIsPath("notes_following");
+    } else {
+      setIsPath("notes");
+    }
+  });
 
   return (
     <Layout title={"Notes"}>
@@ -74,8 +85,8 @@ const NotesHome = () => {
         <Box className='notes_nested_tab_container'>
           <NavLink
             to=''
-            className={(navData) =>
-              navData.isActive
+            className={
+              isPath === "notes"
                 ? "nested_navlink active_nested_navlink"
                 : "nested_navlink"
             }>
@@ -83,8 +94,8 @@ const NotesHome = () => {
           </NavLink>
           <NavLink
             to='notes_following'
-            className={(navData) =>
-              navData.isActive
+            className={
+              isPath === "notes_following"
                 ? "nested_navlink active_nested_navlink"
                 : "nested_navlink"
             }>

@@ -12,8 +12,8 @@
   margin: 0px auto;
 }
 .left_navbar_logo {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
 }
 .nav_link {
   width: fit-content;
@@ -30,5 +30,5 @@
   color: #1e90ff;
 }
 .active_nav_item {
-  color: #1e90ff;
+  color: #1e90ff !important;
 }

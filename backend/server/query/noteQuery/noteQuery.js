@@ -388,6 +388,30 @@ class NoteQuery {
       false;
     }
   }
+
+  async fetchNotes(userId, page, limit) {
+    const notes = await Note.find({ user: { $eq: userId } })
+      .populate({
+        path: "user",
+        select: { _id: 1, name: 1, username: 1, profilePic: 1 },
+      })
+      .populate({
+        path: "comment",
+        populate: {
+          path: "user",
+          select: { _id: 1, name: 1, username: 1, profilePic: 1, flwr: 1 },
+        },
+        options: { limit: 1 },
+      })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(limit * page);
+    try {
+      return notes;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 module.exports = new NoteQuery();
