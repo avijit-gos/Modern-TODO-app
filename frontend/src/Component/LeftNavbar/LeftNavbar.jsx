@@ -8,7 +8,7 @@ import { TbNotes, TbMessages } from "react-icons/tb";
 import { FiLogOut } from "react-icons/fi";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "../../Assests/Images/writing.png";
+import Logo from "../../Assests/Images/pencil.png";
 import "./Navbar.css";
 
 const LeftNavbar = () => {
@@ -20,67 +20,79 @@ const LeftNavbar = () => {
       </Box>
       {/* Home */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Home' aria-label='A tooltip'>
-          <NavLink to='/' className='nav_item active_nav_item'>
-            <BiHome />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to='/'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <BiHome />
+        </NavLink>
       </Box>
 
       {/* Search */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Search' aria-label='A tooltip'>
-          <NavLink to='/search' className='nav_item'>
-            <BiSearchAlt2 />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to='/search'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <BiSearchAlt2 />
+        </NavLink>
       </Box>
 
       {/* Notes */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Notes' aria-label='A tooltip'>
-          <NavLink to='/notes' className='nav_item'>
-            <TbNotes />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to='/notes'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <TbNotes />
+        </NavLink>
       </Box>
 
       {/* Profile */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Profile' aria-label='A tooltip'>
-          <NavLink
-            to={`/profile/${JSON.parse(localStorage.getItem("user"))._id}`}
-            className='nav_item'>
-            <AiOutlineUser />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to={`/profile/${JSON.parse(localStorage.getItem("user"))._id}`}
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <AiOutlineUser />
+        </NavLink>
       </Box>
 
       {/* Message */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Message' aria-label='A tooltip'>
-          <NavLink to='/message' className='nav_item'>
-            <TbMessages />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to='/message'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <TbMessages />
+        </NavLink>
       </Box>
 
       {/* Settings */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Settings' aria-label='A tooltip'>
-          <NavLink to='/settings' className='nav_item'>
-            <AiOutlineSetting />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to='/settings'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <AiOutlineSetting />
+        </NavLink>
       </Box>
 
       {/* Logout */}
       <Box className='nav_link'>
-        <Tooltip hasArrow label='Logout' aria-label='A tooltip'>
-          <NavLink to='/logout' className='nav_item'>
-            <FiLogOut />
-          </NavLink>
-        </Tooltip>
+        <NavLink
+          to='/logout'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <FiLogOut />
+        </NavLink>
       </Box>
     </Box>
   );

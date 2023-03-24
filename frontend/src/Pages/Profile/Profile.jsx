@@ -6,16 +6,29 @@ import { Box } from "@chakra-ui/react";
 import { GlobalContext } from "../../Context/Context";
 import "./Profile.css";
 import ProfileImageSection from "../../Component/ProfileComp/ProfileImageSection";
-import { useParams, NavLink, Outlet } from "react-router-dom";
+import { useParams, NavLink, Outlet, useLocation } from "react-router-dom";
 import ProfileLoader from "../../Component/SkeletonLoader/ProfileLoader";
 
 const Profile = () => {
   const { id } = useParams();
+  const { pathname } = useLocation();
   const { setPageType, updateProfile, setUser } = GlobalContext();
   const [profile, setProfile] = React.useState(null);
   const [scroll, setScroll] = React.useState(0);
   const { token } = GlobalContext();
   const [windowSize, setWindowSize] = React.useState(window.innerWidth);
+  const [isPath, setIsPath] = React.useState("profile");
+
+  React.useEffect(() => {
+    console.log(pathname);
+    if (pathname.includes("task")) {
+      setIsPath("task");
+    } else if (pathname.includes("analytics")) {
+      setIsPath("analytics");
+    } else {
+      setIsPath("profile");
+    }
+  });
 
   React.useEffect(() => {
     const handleWindowResize = () => {
@@ -78,19 +91,35 @@ const Profile = () => {
               {/* Nested routes */}
               <Box className='nested_route_container'>
                 {/* Notes */}
-                <NavLink to={`/profile/${id}`} className='profile_navlink'>
+                <NavLink
+                  to={`/profile/${id}`}
+                  className={
+                    isPath === "profile"
+                      ? "profile_navlink active_profile_navlink"
+                      : "profile_navlink"
+                  }>
                   Notes
                 </NavLink>
 
                 {/* Task */}
-                <NavLink to={`/profile/${id}/task`} className='profile_navlink'>
+                <NavLink
+                  to={`/profile/${id}/task`}
+                  className={
+                    isPath === "task"
+                      ? "profile_navlink active_profile_navlink"
+                      : "profile_navlink"
+                  }>
                   Task
                 </NavLink>
 
                 {/* Analytics */}
                 <NavLink
                   to={`/profile/${id}/analytics`}
-                  className='profile_navlink'>
+                  className={
+                    isPath === "analytics"
+                      ? "profile_navlink active_profile_navlink"
+                      : "profile_navlink"
+                  }>
                   Analytics
                 </NavLink>
               </Box>

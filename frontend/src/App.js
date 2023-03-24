@@ -24,6 +24,7 @@ import ViewFullNote from "./Pages/ViewFullNote/ViewFullNote";
 import Chat from "./Pages/Chat/Chat";
 import MessagePage from "./Pages/MessagePage/MessagePage";
 import SearchChatPage from "./Pages/SearchChatPage/SearchChatPage";
+import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 
 function App() {
   const { user, setUser, setToken, token } = GlobalContext();
@@ -68,6 +69,8 @@ function App() {
         <Route path='/message/:id' exact element={<MessagePage />} />
         {/* Chat search page */}
         <Route path='/chat/search' exact element={<SearchChatPage />} />
+        {/* Settings page */}
+        <Route path='/settings' exact element={<SettingsPage />} />
         {/* Not found link page */}
         <Route path='/*' exact element={<NotFound />} />
       </Routes>

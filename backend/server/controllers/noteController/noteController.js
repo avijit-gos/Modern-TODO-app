@@ -11,6 +11,7 @@ const {
   findNoteById,
   getComments,
   fetchNotById,
+  fetchNotes,
 } = require("../../query/noteQuery/noteQuery");
 const { uploadImage } = require("../../helper/helper");
 
@@ -263,6 +264,26 @@ class NoteController {
           return res.status(200).json(result);
         } catch (error) {
           throw createError.InternalServerError(error.message);
+        }
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async fetchUserNote(req, res, next) {
+    try {
+      const userId = req.params.id;
+      const page = req.query.page || 0;
+      const limit = req.query.limit || 5;
+      if (!userId) {
+        throw createError.Conflict("Invalid user id");
+      } else {
+        const data = await fetchNotes(userId, page, limit);
+        try {
+          return res.status(200).json(data);
+        } catch (error) {
+          throw createError.InternalServerError("Something went wrong");
         }
       }
     } catch (error) {
