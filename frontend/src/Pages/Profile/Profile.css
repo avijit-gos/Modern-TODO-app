@@ -71,6 +71,10 @@
   margin-top: 6px;
   padding: 0 !important;
 }
+.message_btn {
+  margin-left: 5px !important;
+  color: crimson !important;
+}
 .email_icons {
   font-size: 1rem;
   color: rgb(130, 130, 130);
@@ -302,4 +306,10 @@
   border-radius: 0px;
   border-bottom: 2px solid royalblue;
   color: royalblue;
+}
+.private_account {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2f3542;
 }

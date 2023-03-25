@@ -1,70 +1,109 @@
 /** @format */
 
 import React from "react";
-import { Box, Collapse, useDisclosure } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { GlobalContext } from "../../Context/Context";
 import Layout from "../../Layout/Layout";
 import axios from "axios";
 import { BiUpArrow, BiDownArrow } from "react-icons/bi";
 import "./SettingsPage.css";
+import ProfileSettings from "../../Component/Settings/ProfileSettings";
+import SecuritySettings from "../../Component/Settings/SecuritySettings";
+import PrivacySettings from "../../Component/Settings/PrivacySettings";
 
 const SettingsPage = () => {
   const { setPageType } = GlobalContext();
-  const { isOpen, onToggle } = useDisclosure();
+  const [isLoading, setIsLoading] = React.useState(false);
   const [profile, setProfile] = React.useState(null);
-  const [openProfileBox, setOpenProfileBox] = React.useState(true);
-  const [openNoteBox, setOpenNoteBox] = React.useState(false);
-  const [openPrivacyBox, setOpenPrivacyBox] = React.useState(false);
+  // profile image state
+  const [image, setImage] = React.useState("");
+  const [prevImage, setPrevImage] = React.useState("");
+  const [profileImage, setProfileImage] = React.useState("");
+  const [isBox1Open, setIsBox1Open] = React.useState(false);
+  const [isBox2Open, setIsBox2Open] = React.useState(false);
 
   React.useLayoutEffect(() => {
     setPageType("settings");
   }, []);
+
+  React.useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  React.useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", localStorage.getItem("token"));
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      `${process.env.REACT_APP_LINK}user/fetch/user/${
+        JSON.parse(localStorage.getItem("user"))._id
+      }`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setProfile(result);
+        setProfileImage(result.profilePic);
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
+
   return (
     <Layout title={"settings"}>
-      <Box className='setting_page_contaiener'>
-        {/* Profile Settings */}
-        <Box className='profile_settings_section'>
-          <span className='collapse_section_btn_header'>Profile settings</span>
-          <span className='collapse_icons'>
-            {openProfileBox ? <BiUpArrow /> : <BiDownArrow />}
-          </span>
-        </Box>
-        {openProfileBox && (
-          <Box className='profile_settings_form_box'>
-            Profile settings form box
-          </Box>
-        )}
+      {isLoading ? (
+        <>Loading</>
+      ) : (
+        <>
+          {profile ? (
+            <Box className='setting_page_contaiener'>
+              {/* Profile settings */}
+              <Box className='settings_section'>
+                <Box className='settings_header'>Profile Settings</Box>
+                <ProfileSettings profile={profile} />
+              </Box>
 
-        {/* Notes settings */}
-        <Box
-          className='profile_settings_section'
-          onClick={() => setOpenNoteBox((prev) => !prev)}>
-          <span className='collapse_section_btn_header'>Notes settings</span>
-          <span className='collapse_icons'>
-            {openNoteBox ? <BiUpArrow /> : <BiDownArrow />}
-          </span>
-        </Box>
-        {openNoteBox && (
-          <Box className='profile_settings_form_box'>
-            Notes settings form box
-          </Box>
-        )}
+              {/* General settings */}
+              <Box className='settings_section'>
+                <Box
+                  className='settings_header settings_header_btn'
+                  onClick={() => setIsBox1Open((p) => !p)}>
+                  <span>Security Settings</span>
+                  <span className='setting_header_icon'>
+                    {!isBox1Open ? <BiDownArrow /> : <BiUpArrow />}
+                  </span>
+                </Box>
+                {isBox1Open ? <SecuritySettings /> : null}
+              </Box>
 
-        {/* Privacy settings settings */}
-        <Box
-          className='profile_settings_section'
-          onClick={() => setOpenPrivacyBox((prev) => !prev)}>
-          <span className='collapse_section_btn_header'>Notes settings</span>
-          <span className='collapse_icons'>
-            {openPrivacyBox ? <BiUpArrow /> : <BiDownArrow />}
-          </span>
-        </Box>
-        {openPrivacyBox && (
-          <Box className='profile_settings_form_box'>
-            Notes settings form box
-          </Box>
-        )}
-      </Box>
+              {/* Privacy Settings */}
+              <Box className='settings_section'>
+                <Box
+                  className='settings_header settings_header_btn'
+                  onClick={() => setIsBox2Open((p) => !p)}>
+                  <span>Privacy Settings</span>
+                  <span className='setting_header_icon'>
+                    {!isBox2Open ? <BiDownArrow /> : <BiUpArrow />}
+                  </span>
+                </Box>
+                {isBox2Open ? <PrivacySettings profile={profile} /> : null}
+              </Box>
+            </Box>
+          ) : (
+            <Box className='empty_setting_page_contaiener'>No user found</Box>
+          )}
+        </>
+      )}
     </Layout>
   );
 };

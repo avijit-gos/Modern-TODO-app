@@ -26,6 +26,8 @@ import ChatCreateModal from "../../Component/ModalComp/ChatCreateModal";
 import { TbUserSearch } from "react-icons/tb";
 import InputComp from "../../Component/InputComp/InputComp";
 import UserListLoader from "../../Component/SkeletonLoader/UserListLoader";
+
+import { selectChatName } from "../../Utils/selectChatName";
 import axios from "axios";
 
 const MessagePageHeader = () => {
@@ -64,7 +66,6 @@ const MessagePageHeader = () => {
 
   const backToPrevPage = () => {
     navigate(-1);
-    // setSelectChat(null);
   };
 
   // *** Close modal
@@ -300,10 +301,6 @@ const MessagePageHeader = () => {
   };
 
   const handleDeleteGroup = () => {
-    var data = JSON.stringify({
-      userId: "6407550dd8094f5578033168",
-    });
-
     var config = {
       method: "delete",
       maxBodyLength: Infinity,
@@ -312,7 +309,6 @@ const MessagePageHeader = () => {
         "x-access-token": localStorage.getItem("token"),
         "Content-Type": "application/json",
       },
-      data: data,
     };
 
     axios(config)
@@ -322,7 +318,7 @@ const MessagePageHeader = () => {
         navigate(-1);
         toast({
           title: "Delete.",
-          description: `Group has been deleted`,
+          description: `Chat has been deleted`,
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -331,6 +327,11 @@ const MessagePageHeader = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  // Handle redirect to profile
+  const handleRedirect = (id) => {
+    navigate(`/profile/${id}`);
   };
 
   return (
@@ -733,7 +734,29 @@ const MessagePageHeader = () => {
               <IoArrowBack />
             </Button>
             {!selectChat.isGroup ? (
-              <Box className='message_info_section'>Single</Box>
+              <Box
+                className='message_info_section'
+                onClick={handleOpenGroupModal}>
+                <Avatar
+                  src={
+                    selectChatName(
+                      selectChat.members,
+                      JSON.parse(localStorage.getItem("user"))._id
+                    ).profilePic
+                  }
+                  className='message_header_avatar'
+                />
+                <Box className='group_info_section'>
+                  <span className='message_header_name'>
+                    {
+                      selectChatName(
+                        selectChat.members,
+                        JSON.parse(localStorage.getItem("user"))._id
+                      ).name
+                    }
+                  </span>
+                </Box>
+              </Box>
             ) : (
               <Box
                 className='message_info_section'
@@ -831,9 +854,22 @@ const MessagePageHeader = () => {
                 <CgMoreO className='header_menu_icon' />
               </MenuButton>
               <MenuList>
-                <MenuItem className='header_menu_item'>View profile</MenuItem>
+                <MenuItem
+                  className='header_menu_item'
+                  onClick={() =>
+                    handleRedirect(
+                      selectChatName(
+                        selectChat.members,
+                        JSON.parse(localStorage.getItem("user"))._id
+                      )._id
+                    )
+                  }>
+                  View profile
+                </MenuItem>
                 <MenuItem className='header_menu_item'>Block user</MenuItem>
-                <MenuItem className='header_menu_item delete'>
+                <MenuItem
+                  className='header_menu_item delete'
+                  onClick={handleDeleteModal}>
                   Delete chat
                 </MenuItem>
               </MenuList>

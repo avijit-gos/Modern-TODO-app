@@ -9,7 +9,7 @@ import {
   Spinner,
   useToast,
 } from "@chakra-ui/react";
-import { MdOutlineAddAPhoto } from "react-icons/md";
+import { MdOutlineAddAPhoto, MdOutlineEmail } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { HiOutlineMail } from "react-icons/hi";
 import ModalComp from "../ModalComp/ModalComp";
@@ -131,6 +131,32 @@ const ProfileImageSection = ({ profileData }) => {
       });
   };
 
+  const handleCreateChat = (id, userData) => {
+    var data = {
+      members: [id],
+    };
+    var config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}chat`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        onClose();
+        // *** From here redirect to message page
+        navigate(`/message/${response.data._id}`);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <Box className='profile_image_section'>
       {/* Profile image upload modal */}
@@ -210,11 +236,36 @@ const ProfileImageSection = ({ profileData }) => {
               <AiOutlineEdit />
             </Button>
           ) : (
-            <Button
-              className='edit_btn'
-              onClick={() => handleFollowUser(profileData._id)}>
-              {followed ? <BiUserCheck className='flwed' /> : <BiUserPlus />}
-            </Button>
+            <React.Fragment>
+              {profileData.msgPrivacy === "all" ? (
+                <Button
+                  className='edit_btn message_btn'
+                  onClick={() => handleCreateChat(profileData._id)}>
+                  <MdOutlineEmail />
+                </Button>
+              ) : (
+                <>
+                  {profileData.msgPrivacy === "flwrs" ? (
+                    <>
+                      {profileData.flwr.includes(
+                        JSON.parse(localStorage.getItem("user"))._id
+                      ) ? (
+                        <Button
+                          className='edit_btn message_btn'
+                          onClick={() => handleCreateChat(profileData._id)}>
+                          <MdOutlineEmail />
+                        </Button>
+                      ) : null}
+                    </>
+                  ) : null}
+                </>
+              )}
+              <Button
+                className='edit_btn'
+                onClick={() => handleFollowUser(profileData._id)}>
+                {followed ? <BiUserCheck className='flwed' /> : <BiUserPlus />}
+              </Button>
+            </React.Fragment>
           )}
         </Box>
 
