@@ -22,11 +22,24 @@ const ChatCard = ({ chatData }) => {
   const navigate = useNavigate();
   return (
     <Box className='chat_card_container'>
-      <Avatar
-        src={chatData.image}
-        className='chat_card_avatar'
-        onClick={() => navigate(`/message/${chatData._id}`)}
-      />
+      {chatData.isGroup ? (
+        <Avatar
+          src={chatData.image}
+          className='chat_card_avatar'
+          onClick={() => navigate(`/message/${chatData._id}`)}
+        />
+      ) : (
+        <Avatar
+          src={
+            selectChatName(
+              chatData.members,
+              JSON.parse(localStorage.getItem("user"))._id
+            ).profilePic
+          }
+          className='chat_card_avatar'
+          onClick={() => navigate(`/message/${chatData._id}`)}
+        />
+      )}
       <Box className='chat_card_info_section'>
         <Box className='chat_card_info_box'>
           <Box
@@ -36,10 +49,12 @@ const ChatCard = ({ chatData }) => {
               <span className='chat_name'>{chatData.name}</span>
             ) : (
               <span className='chat_name'>
-                {selectChatName(
-                  chatData.members,
-                  JSON.parse(localStorage.getItem("user"))._id
-                )}
+                {
+                  selectChatName(
+                    chatData.members,
+                    JSON.parse(localStorage.getItem("user"))._id
+                  ).name
+                }
               </span>
             )}
             {chatData.admin === JSON.parse(localStorage.getItem("user"))._id ? (
@@ -54,8 +69,15 @@ const ChatCard = ({ chatData }) => {
               </MenuButton>
               <MenuList>
                 <MenuItem className='menu_item'>Bookmark</MenuItem>
-                <MenuItem className='menu_item'>Settings</MenuItem>
-                <MenuItem className='menu_item delete'>Delete</MenuItem>
+                {JSON.parse(localStorage.getItem("user"))._id ===
+                  chatData.admin && (
+                  <MenuItem className='menu_item'>Settings</MenuItem>
+                )}
+
+                {JSON.parse(localStorage.getItem("user"))._id ===
+                  chatData.admin && (
+                  <MenuItem className='menu_item delete'>Delete</MenuItem>
+                )}
               </MenuList>
             </Menu>
           )}

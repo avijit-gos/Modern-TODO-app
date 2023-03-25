@@ -206,10 +206,6 @@ const Chat = () => {
     alert("This functionality should be added");
   };
 
-  const handleRedirect = () => {
-    navigate(`/chat/search`);
-  };
-
   return (
     <Layout title={"Message"}>
       {/* Create single chat modal */}
@@ -381,13 +377,11 @@ const Chat = () => {
         <Box className='chat_box_app_header'>
           <span className='chat_box_app_header_text'>Chats</span>
           <br />
-          <Box
-            className='chat_box_app_header_search_section'
-            onClick={handleRedirect}>
+          <Box className='chat_box_app_header_search_section'>
             <TbUserSearch className='search_chat_icon' />
             <InputComp
               type='search'
-              placaeholder='Search'
+              placaeholder='Search...'
               className={"chat_search_input"}
             />
           </Box>

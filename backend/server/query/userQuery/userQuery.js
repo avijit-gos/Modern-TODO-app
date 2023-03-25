@@ -77,7 +77,7 @@ class UserQuery {
   }
 
   async FetchUserById(id) {
-    const user = await User.findById(id).select("-password");
+    const user = await User.findById(id);
     return user;
   }
 
@@ -96,7 +96,6 @@ class UserQuery {
 
   async followedUser(user, loggedUserId) {
     const isFollower = user.flwr && user.flwr.includes(loggedUserId);
-    console.log("Is afollower ", isFollower);
     const option = isFollower ? "$pull" : "$addToSet";
     const follower = await User.findByIdAndUpdate(
       user._id,

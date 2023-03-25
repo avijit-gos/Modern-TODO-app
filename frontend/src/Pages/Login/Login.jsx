@@ -47,7 +47,7 @@ const Login = () => {
       });
       var config = {
         method: "post",
-        url: "http://localhost:5001/api/login",
+        url: `${process.env.REACT_APP_LINK}login`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -92,6 +92,7 @@ const Login = () => {
         })
         .catch(function (error) {
           console.log(error);
+          setErr(error.response.data.error.message);
         });
     }
   };

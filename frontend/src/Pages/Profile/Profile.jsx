@@ -8,6 +8,7 @@ import "./Profile.css";
 import ProfileImageSection from "../../Component/ProfileComp/ProfileImageSection";
 import { useParams, NavLink, Outlet, useLocation } from "react-router-dom";
 import ProfileLoader from "../../Component/SkeletonLoader/ProfileLoader";
+import ProfileMain from "./ProfileMain";
 
 const Profile = () => {
   const { id } = useParams();
@@ -86,56 +87,53 @@ const Profile = () => {
           onScroll={handleScroll}>
           <ProfileImageSection profileData={profile} />
 
-          {JSON.parse(localStorage.getItem("user"))._id === id && (
+          {JSON.parse(localStorage.getItem("user"))._id === id ? (
+            <ProfileMain
+              profile={profile}
+              id={id}
+              isPath={isPath}
+              windowSize={windowSize}
+              scroll={scroll}
+            />
+          ) : (
             <React.Fragment>
-              {/* Nested routes */}
-              <Box className='nested_route_container'>
-                {/* Notes */}
-                <NavLink
-                  to={`/profile/${id}`}
-                  className={
-                    isPath === "profile"
-                      ? "profile_navlink active_profile_navlink"
-                      : "profile_navlink"
-                  }>
-                  Notes
-                </NavLink>
-
-                {/* Task */}
-                <NavLink
-                  to={`/profile/${id}/task`}
-                  className={
-                    isPath === "task"
-                      ? "profile_navlink active_profile_navlink"
-                      : "profile_navlink"
-                  }>
-                  Task
-                </NavLink>
-
-                {/* Analytics */}
-                <NavLink
-                  to={`/profile/${id}/analytics`}
-                  className={
-                    isPath === "analytics"
-                      ? "profile_navlink active_profile_navlink"
-                      : "profile_navlink"
-                  }>
-                  Analytics
-                </NavLink>
-              </Box>
+              {profile.profilePrivacy === "all" ? (
+                <ProfileMain
+                  profile={profile}
+                  id={id}
+                  isPath={isPath}
+                  windowSize={windowSize}
+                  scroll={scroll}
+                />
+              ) : (
+                <React.Fragment>
+                  {profile.profilePrivacy === "flwrs" ? (
+                    <React.Fragment>
+                      {profile.flwr.includes(
+                        JSON.parse(localStorage.getItem("user"))._id
+                      ) ? (
+                        <ProfileMain
+                          profile={profile}
+                          id={id}
+                          isPath={isPath}
+                          windowSize={windowSize}
+                          scroll={scroll}
+                        />
+                      ) : (
+                        <Box className='private_account'>
+                          This is a private account
+                        </Box>
+                      )}
+                    </React.Fragment>
+                  ) : (
+                    <Box className='private_account'>
+                      This is a private account
+                    </Box>
+                  )}
+                </React.Fragment>
+              )}
             </React.Fragment>
           )}
-
-          <Box
-            className={
-              windowSize <= 699
-                ? scroll >= 256
-                  ? "task_route_container scroll_task_route_container"
-                  : "task_route_container"
-                : ""
-            }>
-            <Outlet />
-          </Box>
         </Box>
       ) : (
         <ProfileLoader />

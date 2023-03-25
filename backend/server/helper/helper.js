@@ -75,7 +75,6 @@ class HelperFunction {
   // Validate user password
   async validateUserPassword(value) {
     const result = await validatePassword.validateAsync(value);
-    console.log(result);
     return result;
   }
 

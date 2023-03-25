@@ -160,6 +160,32 @@ class UserController {
     }
   }
 
+  // *** Update profile username
+  async updateProfileUsername(req, res, next) {
+    try {
+      const { username } = req.body;
+      if (!username.trim()) {
+        throw createError.Conflict("Cannot set an invalid username");
+      } else {
+        const user = await findUserByEmailorUsername(username);
+        if (user) {
+          throw createError.Conflict("Username has already been taken");
+        } else {
+          const user = await updateUserInfo(req.user._id, "username", username);
+          if (!user) {
+            throw createError.InternalServerError("Something sent wrong");
+          } else {
+            return res
+              .status(200)
+              .json({ msg: "Username has been updated", user });
+          }
+        }
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // *** Search user
   async searchUser(req, res, next) {
     try {
@@ -190,6 +216,7 @@ class UserController {
   }
 
   async resetPassword(req, res, next) {
+    console.log(req.body);
     try {
       if (!req.body.password.trim() || !req.body.newPassword.trim()) {
         throw createError.BadRequest("You cannot proceed with empty password");
@@ -203,7 +230,6 @@ class UserController {
             req.body.password,
             user.password
           );
-          // console.log(result)
           if (!result) {
             throw createError.Forbidden("Old password is not correct");
           } else {
@@ -211,6 +237,7 @@ class UserController {
             if (!hash) {
               throw createError.Conflict("Password is not secure");
             } else {
+              console.log(req.user._id, hash);
               const result = await UpdatePassword(req.user._id, hash);
               if (!result) {
                 throw createError.InternalServerError("Something went wrong");
