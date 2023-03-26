@@ -62,6 +62,13 @@ app.use(
   require("./server/routes/chatRoute/chatRoute")
 );
 
+// importing message route
+app.use(
+  "/api/message",
+  authentication,
+  require("./server/routes/messageRoute/messageRoute")
+);
+
 // Public routes
 app.use("/api/public", require("./server/publicRoutes/publicRoutes"));
 
