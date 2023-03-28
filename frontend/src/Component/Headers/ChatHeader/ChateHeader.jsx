@@ -26,6 +26,7 @@ import ChatCreateModal from "../../ModalComp/ChatCreateModal";
 import { TbUserSearch } from "react-icons/tb";
 import InputComp from "../../InputComp/InputComp";
 import UserListLoader from "../../SkeletonLoader/UserListLoader";
+import { selectChatName } from "../../../Utils/selectChatName";
 import axios from "axios";
 
 const ChateHeader = () => {
@@ -330,6 +331,11 @@ const ChateHeader = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  // Handle redirect to profile
+  const handleRedirect = (id) => {
+    navigate(`/profile/${id}`);
   };
 
   return (
@@ -733,7 +739,29 @@ const ChateHeader = () => {
               <IoArrowBack />
             </Button>
             {!selectChat.isGroup ? (
-              <Box className='message_info_section'>Single</Box>
+              <Box
+                className='message_info_section'
+                onClick={handleOpenGroupModal}>
+                <Avatar
+                  src={
+                    selectChatName(
+                      selectChat.members,
+                      JSON.parse(localStorage.getItem("user"))._id
+                    ).profilePic
+                  }
+                  className='message_header_avatar'
+                />
+                <Box className='group_info_section'>
+                  <span className='message_header_name'>
+                    {
+                      selectChatName(
+                        selectChat.members,
+                        JSON.parse(localStorage.getItem("user"))._id
+                      ).name
+                    }
+                  </span>
+                </Box>
+              </Box>
             ) : (
               <Box
                 className='message_info_section'
@@ -830,9 +858,22 @@ const ChateHeader = () => {
                   <CgMoreO className='header_menu_icon' />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem className='header_menu_item'>View profile</MenuItem>
+                  <MenuItem
+                    className='header_menu_item'
+                    onClick={() =>
+                      handleRedirect(
+                        selectChatName(
+                          selectChat.members,
+                          JSON.parse(localStorage.getItem("user"))._id
+                        )._id
+                      )
+                    }>
+                    View profile
+                  </MenuItem>
                   <MenuItem className='header_menu_item'>Block user</MenuItem>
-                  <MenuItem className='header_menu_item delete'>
+                  <MenuItem
+                    className='header_menu_item delete'
+                    onClick={handleDeleteModal}>
                     Delete chat
                   </MenuItem>
                 </MenuList>

@@ -95,10 +95,11 @@ class MessageQuery {
         path: "sender",
         select: { _id: 1, name: 1, profilePic: 1 },
       })
+      .sort({ createdAt: -1 })
       .limit(limit)
       .skip(limit * page);
     try {
-      return messages;
+      return messages.reverse();
     } catch (error) {
       return false;
     }

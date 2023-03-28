@@ -49,7 +49,7 @@ class ChatQuery {
 
   // get all chats
   async getAllChats(value) {
-    const data = await Chat.find({ members: { $elemMatch: { $eq: value } } })
+    const data = await Chat.find({ members: value })
       .populate("lastMsg")
       .populate({
         path: "members",

@@ -18,6 +18,8 @@ function StateContextProvider({ children }) {
   const [updateTask, setUpdateTask] = React.useState(null);
   const [updateNote, setUpdateNote] = React.useState(null);
   const [updateChat, setUpdateChat] = React.useState(null);
+
+  const [messages, setMessages] = React.useState([]);
   return (
     <StateContext.Provider
       value={{
@@ -47,6 +49,8 @@ function StateContextProvider({ children }) {
         setUpdateNote,
         updateChat,
         setUpdateChat,
+        messages,
+        setMessages,
       }}>
       {children}
     </StateContext.Provider>

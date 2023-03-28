@@ -58,7 +58,7 @@ const Chat = () => {
 
     axios(config)
       .then(function (response) {
-        // console.log(response.data);
+        console.log(response.data);
         setChats(response.data);
       })
       .catch(function (error) {
