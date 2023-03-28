@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 
 const ChatCard = ({ chatData }) => {
   const navigate = useNavigate();
+
   return (
     <Box className='chat_card_container'>
       {chatData.isGroup ? (
@@ -85,7 +86,7 @@ const ChatCard = ({ chatData }) => {
         <Box
           className='latest_msg_container'
           onClick={() => navigate(`/message/${chatData._id}`)}>
-          Latest message
+          {chatData.lastMsg.content}
         </Box>
       </Box>
     </Box>

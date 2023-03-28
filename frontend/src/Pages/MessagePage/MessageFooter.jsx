@@ -21,8 +21,12 @@ import {
 import { GrSend } from "react-icons/gr";
 import { FiMoreVertical } from "react-icons/fi";
 import EmojiPicker from "emoji-picker-react";
+import { GlobalContext } from "../../Context/Context";
+import { useParams } from "react-router";
 
 const MessageFooter = () => {
+  const { id } = useParams();
+  const { setMessages } = GlobalContext();
   const [isFocus, setIsFocus] = React.useState(false);
   const [image, setImage] = React.useState(null);
   const [prevImage, setPrevImage] = React.useState("");
@@ -79,6 +83,35 @@ const MessageFooter = () => {
       }
     }
   }, [text, image]);
+
+  // *** Handle submit message
+  const handleSubmitMessage = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", localStorage.getItem("token"));
+
+    var formdata = new FormData();
+    formdata.append("content", text);
+    formdata.append("image", image);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(`${process.env.REACT_APP_LINK}message/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        setText("");
+        setImage("");
+        setPrevImage("");
+        setIsDisable(true);
+        setMessages((prev) => [...prev, result]);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   return (
     <Box className='message_footer_box'>
@@ -185,7 +218,9 @@ const MessageFooter = () => {
 
           {/* send button */}
           {isDisable ? null : (
-            <Button className='emoji_btn send_btn'>
+            <Button
+              className='emoji_btn send_btn'
+              onClick={handleSubmitMessage}>
               <GrSend className='message_footer_send_icon' />
             </Button>
           )}

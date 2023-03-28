@@ -9,11 +9,20 @@ import { useParams } from "react-router";
 import axios from "axios";
 import MessagePageHeader from "./MessagePageHeader";
 import MessageFooter from "./MessageFooter";
+import MessageCard from "../../Component/MessageCard/MessageCard";
 
 const MessagePage = () => {
   const { id } = useParams();
-  const { setPageType, setSelectChat, selectChat, updateChat } =
-    GlobalContext();
+  const {
+    setPageType,
+    setSelectChat,
+    selectChat,
+    updateChat,
+    messages,
+    setMessages,
+  } = GlobalContext();
+  const [page, setPage] = React.useState(0);
+  const [limit, setLimit] = React.useState(10);
 
   React.useLayoutEffect(() => {
     setPageType("message");
@@ -40,6 +49,71 @@ const MessagePage = () => {
       });
   }, [id, updateChat]);
 
+  // Fetch messages related to the chat
+  const fetchMessage = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", localStorage.getItem("token"));
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      `${process.env.REACT_APP_LINK}message/${id}?page=${page}&limit=${limit}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (page === 0) {
+          setMessages(result);
+        } else {
+          setMessages((prev) => [...result, ...prev]);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  React.useEffect(() => {
+    fetchMessage();
+  }, [page, limit, id]);
+
+  const scrollHandler = (e) => {
+    let cl = e.currentTarget.clientHeight;
+    let sy = Math.round(e.currentTarget.scrollTop);
+
+    // let sh = e.currentTarget.scrollHeight;
+    // if (cl + sy + 1 >= sh) {
+    //   setPage((page) => page + 1);
+    // }
+    if (sy === 0) {
+      setPage((page) => page + 1);
+    }
+  };
+
+  const messageRef = React.useRef(null);
+
+  React.useEffect(() => {
+    console.log(messageRef.current);
+  }, []);
+
+  const messagesEndRef = React.useRef(null);
+
+  const scrollToBottom = () => {
+    if (page === 0) {
+      messagesEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }
+  };
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <React.Fragment>
       {selectChat && (
@@ -47,7 +121,23 @@ const MessagePage = () => {
           <Box className='message_page_container'>
             <MessagePageHeader />
 
-            <Box className='message_body'>Body</Box>
+            <Box>
+              {(messages || []).length > 0 ? (
+                <Box
+                  className='message_body'
+                  onScroll={(e) => scrollHandler(e)}>
+                  {messages.map((data) => (
+                    <>
+                      <MessageCard key={data._id} data={data} />
+                      <div className='ref_div' ref={messagesEndRef} />
+                    </>
+                  ))}
+                </Box>
+              ) : (
+                <Box className='empty_message'>Start chatting</Box>
+              )}
+            </Box>
+            <div className='ref_div' ref={messagesEndRef} />
 
             <Box className='message_footer'>
               <MessageFooter />
