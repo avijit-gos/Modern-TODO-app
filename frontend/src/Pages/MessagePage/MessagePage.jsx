@@ -41,7 +41,6 @@ const MessagePage = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
         setSelectChat(response.data);
       })
       .catch(function (error) {
@@ -66,6 +65,7 @@ const MessagePage = () => {
     )
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         if (page === 0) {
           setMessages(result);
         } else {
@@ -83,11 +83,9 @@ const MessagePage = () => {
     let cl = e.currentTarget.clientHeight;
     let sy = Math.round(e.currentTarget.scrollTop);
 
-    // let sh = e.currentTarget.scrollHeight;
-    // if (cl + sy + 1 >= sh) {
-    //   setPage((page) => page + 1);
-    // }
-    if (sy === 0) {
+    // console.log(cl);
+
+    if (sy <= 30) {
       setPage((page) => page + 1);
     }
   };
@@ -111,6 +109,12 @@ const MessagePage = () => {
   };
 
   React.useEffect(() => {
+    if (messageRef.current) {
+      messageRef.current.scrollTop = messageRef.current.scrollHeight;
+    }
+  }, []);
+
+  React.useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
@@ -127,17 +131,17 @@ const MessagePage = () => {
                   className='message_body'
                   onScroll={(e) => scrollHandler(e)}>
                   {messages.map((data) => (
-                    <>
-                      <MessageCard key={data._id} data={data} />
-                      <div className='ref_div' ref={messagesEndRef} />
-                    </>
+                    <Box key={data._id}>
+                      <MessageCard data={data} />
+                      <Box ref={messagesEndRef} />
+                    </Box>
                   ))}
                 </Box>
               ) : (
                 <Box className='empty_message'>Start chatting</Box>
               )}
             </Box>
-            <div className='ref_div' ref={messagesEndRef} />
+            <div className='ref_div' />
 
             <Box className='message_footer'>
               <MessageFooter />

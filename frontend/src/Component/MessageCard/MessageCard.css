@@ -1,90 +1,92 @@
 /** @format */
 
 .message_card {
-  margin: 5px 0;
-  max-width: 380px;
-  width: 100%;
   padding: 5px;
-  border-radius: 5px;
+  width: 100%;
+}
+.my_message_card {
+  border-radius: 7px;
+  padding: 7px;
+  max-width: 350px;
+  width: 100%;
+  background-color: #ebeff1;
+  color: #2c3e50;
+}
+.my_main_message_card {
   display: flex;
-  align-items: flex-start;
+  justify-content: flex-end;
 }
-
-.message_card_avatar {
-  width: 32px !important;
-  height: 32px !important;
-  margin-right: 7px;
-}
-.message_card_body {
-  width: 100%;
-  line-height: 20px;
-  border-radius: 5px;
-}
-.message_content_section {
-  padding: 5px;
-  background-color: #3f497f;
-  border-radius: 5px;
-}
-.message_sender_name {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(240, 248, 255, 0.605);
-}
+.my_message_content,
 .message_content {
-  font-size: 0.825rem;
-  font-weight: 400;
-  color: aliceblue;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
 .message_card_time {
   font-size: 0.6rem;
   font-weight: 400;
 }
-
-.my_message_card_content {
-  color: #2c3333;
-}
-.my_message_card_sender {
-  color: #2c3333;
-}
-.my_main_message_card {
-  display: flex;
-  justify-content: flex-end;
-  /* margin: 3px; */
-}
-.my_message_card {
-  margin: 5px 0;
-  max-width: 380px;
-  width: 100%;
-  border-radius: 12px;
+.other_message_card {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
+  max-width: 350px;
+  width: 100%;
 }
-.my_message_card_avatar {
-  width: 32px !important;
-  height: 32px !important;
-  margin-left: 5px;
-  margin-top: 5px;
+.message_card_avatar {
+  width: 28px !important;
+  height: 28px !important;
   margin-right: 7px;
 }
-.my_message_card_body {
+.message_card_body {
   width: 100%;
-  padding: 7px;
-  color: #2c3333;
-  background-color: #f7f1e5;
+  border-radius: 7px;
+  padding: 5px 7px;
+  line-height: 20px;
+  background-color: #00affe;
+  position: relative;
 }
-.my_message_content {
-  border-radius: 5px;
-  color: #2c3333;
-  font-size: 0.825rem;
+.message_sender_name {
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: rgba(240, 248, 255, 0.627);
+}
+.message_content {
+  color: aliceblue;
+}
+.other_message_card_time {
   font-weight: 400;
+  font-size: 0.6rem;
+  color: rgba(240, 248, 255, 0.286);
 }
-.my_message_image_section {
-  margin: 0px 5px;
-  border-radius: 5px;
+.message_image_section {
+  border-radius: 7px;
 }
-.my_message_image {
-  border-radius: 5px;
-  max-width: 300px;
-  max-height: 220px;
+.message_image_section {
+  border-radius: 7px;
+}
+.message_image {
+  border-radius: 7px;
+  width: 100%;
+  margin-bottom: 7px;
+}
+.message_sender_name {
+  width: 100%;
+  margin-bottom: 7px;
+}
+.message_like_btn {
+  position: absolute !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  margin: 5px 0;
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+.message_like_heart {
+  color: crimson;
+}
+.message_like_count {
+  color: #2c3e50;
+  font-size: 0.7rem;
+  font-weight: 400;
 }
