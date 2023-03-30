@@ -90,3 +90,45 @@
   font-size: 0.7rem;
   font-weight: 400;
 }
+.textarea_input {
+  resize: none !important;
+  font-size: 0.8rem !important;
+  font-weight: 400;
+}
+.message_image_container {
+  margin: 7px 0;
+  border-radius: 7px;
+  position: relative;
+}
+.modal_image {
+  border-radius: 7px;
+  height: 170px;
+  width: 100%;
+}
+.modal_image_close_btn {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  background-color: rgba(240, 248, 255, 0.415) !important;
+  color: #2c3e50;
+}
+.msg_image_upload {
+  border: 1px dotted #39444f;
+  border-radius: 7px;
+  margin: 7px 0;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.msg_label_input {
+  width: fit-content;
+  height: fit-content;
+  font-size: 3rem;
+  color: #39444f;
+  cursor: pointer !important;
+}
+.message_image_container {
+  width: 100%;
+  height: 170px;
+}

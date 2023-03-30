@@ -3,6 +3,7 @@
 const Note = require("../../model/notesModal/notesModal");
 const Comment = require("../../model/notesModal/notesComment");
 const mongoose = require("mongoose");
+const User = require("../../model/userModel/userSchema");
 
 class NoteQuery {
   // constructor() {
@@ -411,6 +412,33 @@ class NoteQuery {
     } catch (error) {
       return false;
     }
+  }
+
+  async followersNote(userId, page, limit) {
+    const user = await User.findById(userId).select("flwr");
+    const temp = user.flwr;
+    const data = [];
+    for (let i = 0; i < temp.length; i++) {
+      const result = await Note.find({ user: { $eq: temp[i] } })
+        .populate({
+          path: "user",
+          select: { _id: 1, name: 1, username: 1, profilePic: 1 },
+        })
+        .populate({
+          path: "comment",
+          populate: {
+            path: "user",
+            select: { _id: 1, name: 1, username: 1, profilePic: 1, flwr: 1 },
+          },
+          options: { limit: 1 },
+        })
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .skip(limit * page);
+
+      data.push(result);
+    }
+    return data;
   }
 }
 

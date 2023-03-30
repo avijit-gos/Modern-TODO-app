@@ -382,6 +382,9 @@
   padding: 2px;
 }
 .delete_btn {
+  color: aliceblue !important;
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
   background-color: crimson !important;
 }
 .header_men_btn {
