@@ -105,12 +105,23 @@ class MessageQuery {
     }
   }
 
-  async updateMessage(messageId, key, value) {
-    const data = await Message.findByIdAndUpdate(
-      messageId,
-      { $set: { [key]: value } },
-      { new: true }
-    );
+  async updateMessage(messageId, key, value, result) {
+    console.log("Call");
+    var data;
+    if (result) {
+      data = await Message.findByIdAndUpdate(
+        messageId,
+        { $set: { content: value, image: result.url } },
+        { new: true }
+      );
+      console.log(data);
+    } else {
+      data = await Message.findByIdAndUpdate(
+        messageId,
+        { $set: { [key]: value } },
+        { new: true }
+      );
+    }
     try {
       return data;
     } catch (error) {

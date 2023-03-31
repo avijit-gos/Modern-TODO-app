@@ -1,6 +1,7 @@
 /** @format */
 
 const createError = require("http-errors");
+const { uploadImage } = require("../../helper/helper");
 const {
   createNewMessage,
   getMessages,
@@ -67,8 +68,27 @@ class MessageController {
       if (!messageId) {
         throw createError.Conflict("Message id is not present");
       } else {
-        if (!req.body.content.trim()) {
-          throw createError.Conflict("Cannot set empty string as content");
+        // if (!req.body.content.trim()) {
+        //   throw createError.Conflict("Cannot set empty string as content");
+        // } else {
+
+        // }
+
+        if (req.files) {
+          const result = await uploadImage(req.files.image);
+          const data = await updateMessage(
+            messageId,
+            "content",
+            req.body.content,
+            result
+          );
+          try {
+            return res
+              .status(200)
+              .json({ msg: "Message has been updated", message: data });
+          } catch (error) {
+            throw createError.InternalServerError("Something went wrong");
+          }
         } else {
           const data = await updateMessage(
             messageId,
