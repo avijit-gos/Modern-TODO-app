@@ -449,3 +449,30 @@
     overflow: scroll;
   }
 }
+.cmnt_like_icon {
+  color: #2ed573 !important;
+}
+.cmnt_dislike_icon {
+  color: crimson !important;
+}
+.modal_body_link {
+  display: flex;
+  align-items: center;
+}
+.ur_link_section {
+  font-size: 0.7rem;
+  font-weight: 400;
+  border: 1px solid rgb(231, 229, 229);
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  word-break: break-all;
+}
+.copy_btn {
+  height: 45px !important;
+  background-color: transparent !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+  color: #2f3542 !important;
+}

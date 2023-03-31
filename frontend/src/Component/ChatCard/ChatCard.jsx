@@ -86,7 +86,7 @@ const ChatCard = ({ chatData }) => {
         <Box
           className='latest_msg_container'
           onClick={() => navigate(`/message/${chatData._id}`)}>
-          {chatData.lastMsg.content}
+          {chatData.lastMsg ? chatData.lastMsg.content : ""}
         </Box>
       </Box>
     </Box>

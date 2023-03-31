@@ -10,6 +10,7 @@ import "./SettingsPage.css";
 import ProfileSettings from "../../Component/Settings/ProfileSettings";
 import SecuritySettings from "../../Component/Settings/SecuritySettings";
 import PrivacySettings from "../../Component/Settings/PrivacySettings";
+import SettingsSkeletonLoader from "../../Component/SkeletonLoader/SettingsSkeletonLoader";
 
 const SettingsPage = () => {
   const { setPageType } = GlobalContext();
@@ -60,9 +61,9 @@ const SettingsPage = () => {
   }, []);
 
   return (
-    <Layout title={"settings"}>
+    <Layout title={"Settings"}>
       {isLoading ? (
-        <>Loading</>
+        <SettingsSkeletonLoader />
       ) : (
         <>
           {profile ? (

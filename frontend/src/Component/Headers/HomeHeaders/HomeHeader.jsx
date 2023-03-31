@@ -65,7 +65,7 @@ const HomeHeader = () => {
           </Button>
         )}
         <Avatar
-          src=''
+          src={`${JSON.parse(localStorage.getItem("user")).profilePic}`}
           className='user_avatar'
           onClick={() =>
             navigate(`/profile/${JSON.parse(localStorage.getItem("user"))._id}`)

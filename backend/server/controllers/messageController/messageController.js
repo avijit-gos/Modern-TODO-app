@@ -1,7 +1,7 @@
 /** @format */
 
 const createError = require("http-errors");
-const { uploadImage } = require("../../helper/helper");
+const { uploadImage, encryptText } = require("../../helper/helper");
 const {
   createNewMessage,
   getMessages,
@@ -22,7 +22,8 @@ class MessageController {
       if (!chatId) {
         throw createError.Conflict("Chat id is not present");
       } else {
-        console.log(req.files);
+        // const encryptedText = await encryptText(req.body.content);
+        // console.log(encryptedText);
         const result = await createNewMessage(
           req.body.content,
           req.files,
@@ -123,7 +124,7 @@ class MessageController {
             .status(200)
             .json({ msg: "Message has been deleted", data });
         } catch (error) {
-          throw createError.InternalServerError("Something went wrong");
+          throw createError.InternalServerError(error.message);
         }
       }
     } catch (error) {

@@ -9,6 +9,7 @@ const User = require("../model/userModel/userSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary").v2;
+var CryptoJS = require("crypto-js");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -91,6 +92,11 @@ class HelperFunction {
   async validateTaskCreate(value) {
     const result = await validateTaskCreate.validateAsync(value);
     return result;
+  }
+
+  async encryptText(value) {
+    var ciphertext = CryptoJS.AES.encrypt(value, "secret key 123").toString();
+    return ciphertext;
   }
 }
 

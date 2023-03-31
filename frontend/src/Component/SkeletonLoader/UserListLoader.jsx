@@ -34,6 +34,26 @@ const UserListLoader = () => {
         <Box className='user_loader_list_img skeleton'></Box>
         <Box className='user_loader_list_name skeleton'></Box>
       </Box>
+
+      <Box className='user_loader_list_card'>
+        <Box className='user_loader_list_img skeleton'></Box>
+        <Box className='user_loader_list_name skeleton'></Box>
+      </Box>
+
+      <Box className='user_loader_list_card'>
+        <Box className='user_loader_list_img skeleton'></Box>
+        <Box className='user_loader_list_name skeleton'></Box>
+      </Box>
+
+      <Box className='user_loader_list_card'>
+        <Box className='user_loader_list_img skeleton'></Box>
+        <Box className='user_loader_list_name skeleton'></Box>
+      </Box>
+
+      <Box className='user_loader_list_card'>
+        <Box className='user_loader_list_img skeleton'></Box>
+        <Box className='user_loader_list_name skeleton'></Box>
+      </Box>
     </React.Fragment>
   );
 };

@@ -27,9 +27,9 @@ const CommentCard = ({ data, setComments, comments, setCommentsCount }) => {
   const toast = useToast();
   const [comment, setComment] = React.useState(data.comment);
   const [likes, setLikes] = React.useState(data.likes);
-  const [likeCount, setLikeCount] = React.useState(data.likes.length);
-  const [dislikes, setDisikes] = React.useState(data.dislikes);
-  const [dislikeCount, setDislikeCount] = React.useState(data.dislikes.length);
+  const [likeCount, setLikesCount] = React.useState(data.likes.length);
+  const [dislikes, setDislikes] = React.useState(data.dislikes);
+  const [dislikeCount, setDislikesCount] = React.useState(data.dislikes.length);
 
   const [openEditModal, setOpenEditModal] = React.useState(false);
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
@@ -132,6 +132,110 @@ const CommentCard = ({ data, setComments, comments, setCommentsCount }) => {
       .catch((error) => console.log("error", error));
   };
 
+  // *** Handle comment like
+  const handleCommentLike = (id) => {
+    if (dislikes.includes(JSON.parse(localStorage.getItem("user"))._id)) {
+      console.log("Dislike first");
+      const dislikeArr = dislikes;
+      const index = dislikeArr.indexOf(
+        JSON.parse(localStorage.getItem("user"))._id
+      );
+      // console.log(index);
+      dislikeArr.splice(index, 1);
+      setDislikes(dislikeArr);
+      setDislikesCount((p) => p - 1);
+      setLikes((prev) => [
+        ...prev,
+        JSON.parse(localStorage.getItem("user"))._id,
+      ]);
+      setLikesCount((p) => p + 1);
+    } else {
+      if (!likes.includes(JSON.parse(localStorage.getItem("user"))._id)) {
+        setLikes((prev) => [
+          ...prev,
+          JSON.parse(localStorage.getItem("user"))._id,
+        ]);
+        setLikesCount((p) => p + 1);
+      } else {
+        const likeArr = likes;
+        const index = likeArr.indexOf(
+          JSON.parse(localStorage.getItem("user"))._id
+        );
+        likeArr.splice(index, 1);
+        setLikes(likeArr);
+        setLikesCount((p) => p - 1);
+      }
+    }
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}note/comment/like/${id}`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        // console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleDislikeComment = (id) => {
+    if (likes.includes(JSON.parse(localStorage.getItem("user"))._id)) {
+      const likesArr = likes;
+      const index = likesArr.indexOf(
+        JSON.parse(localStorage.getItem("user"))._id
+      );
+      // console.log(index);
+      likesArr.splice(index, 1);
+      setLikes(likesArr);
+      setLikesCount((p) => p - 1);
+      setDislikes((prev) => [
+        ...prev,
+        JSON.parse(localStorage.getItem("user"))._id,
+      ]);
+      setDislikesCount((p) => p + 1);
+    } else {
+      if (!dislikes.includes(JSON.parse(localStorage.getItem("user"))._id)) {
+        setDislikes((prev) => [
+          ...prev,
+          JSON.parse(localStorage.getItem("user"))._id,
+        ]);
+        setDislikesCount((p) => p + 1);
+      } else {
+        const dislikesArr = dislikes;
+        const index = dislikesArr.indexOf(
+          JSON.parse(localStorage.getItem("user"))._id
+        );
+        dislikesArr.splice(index, 1);
+        setDislikes(dislikesArr);
+        setDislikesCount((p) => p - 1);
+      }
+    }
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}note/comment/dislike/${id}`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        // console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Box className='comment_card'>
       {/* Edit modal */}
@@ -229,17 +333,20 @@ const CommentCard = ({ data, setComments, comments, setCommentsCount }) => {
             likes.includes(JSON.parse(localStorage.getItem("user"))._id)
               ? "cmnt_card_footer_btn active_cmnt_like"
               : "cmnt_card_footer_btn cmnt_like"
-          }>
+          }
+          onClick={() => handleCommentLike(data._id)}>
           {likes.includes(JSON.parse(localStorage.getItem("user"))._id) ? (
-            <AiFillLike />
+            <AiFillLike className='cmnt_like_icon' />
           ) : (
             <AiOutlineLike />
           )}
           <span className='cmnt_like_count'>{likeCount}</span>
         </Button>
-        <Button className='cmnt_card_footer_btn'>
+        <Button
+          className='cmnt_card_footer_btn'
+          onClick={() => handleDislikeComment(data._id)}>
           {dislikes.includes(JSON.parse(localStorage.getItem("user"))._id) ? (
-            <AiFillDislike />
+            <AiFillDislike className='cmnt_dislike_icon' />
           ) : (
             <AiOutlineDislike />
           )}

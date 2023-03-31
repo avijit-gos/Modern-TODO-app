@@ -152,12 +152,15 @@ class MessageQuery {
   }
 
   async deleteSavedMessage(messageId) {
-    const data = await Message.findByIdAndDelete(messageId);
-    try {
-      return data;
-    } catch (error) {
-      return false;
-    }
+    const data = await Message.findByIdAndRemove(messageId);
+    return data;
+    // const removeLastMessage = await Chat.findByIdAndUpdate(
+    //   data.chatId,
+    //   { $set: { lastMsg: messageId } },
+    //   { new: true }
+    // );
+    // const chatData = await Chat.findById(data.chatId);
+    // console.log(chatData);
   }
 }
 

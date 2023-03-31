@@ -207,3 +207,61 @@
   height: 12px;
   border-radius: 10px;
 }
+.skeleton_settings_page {
+  width: 100%;
+  height: 92.5vh;
+}
+.skeleton_profile_image_section {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skeleton_profile_image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.skeleton_profile_section {
+  width: 100%;
+  padding: 12px;
+}
+.skeleton_settings_box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.settings_skeleton_inner_box {
+  border-radius: 10px;
+  width: 100%;
+  height: 13px;
+  margin-right: 7px;
+}
+.settings_skeleton_inner_box2 {
+  border-radius: 10px;
+  width: 20px;
+  height: 13px;
+  margin-right: 7px;
+}
+.seleton_seetings_tab {
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.seleton_seetings_tab_one {
+  width: 100%;
+  border-radius: 5px;
+  height: 30px;
+}
+.seleton_seetings_tab_two {
+  width: 30px;
+  border-radius: 5px;
+  height: 30px;
+  margin-left: 5px;
+}
