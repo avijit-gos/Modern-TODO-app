@@ -70,13 +70,14 @@ const FullNote = ({ data }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isDelete, setIsDelete] = React.useState(false);
   const [comments, setComments] = React.useState([]);
-  const [isVisble, setIsVisble] = React.useState(false);
+  const [isVisble, setIsVisble] = React.useState(true);
   const [openCmntDrawer, setOpenCmntDrawer] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(5);
   const [value, setValue] = React.useState(`${data.title} ${data.description}`);
   const [isSpeak, setIsSpeak] = React.useState(false);
   const [isPause, setIsPause] = React.useState(false);
+  const [openShareModal, setOpenShareModal] = React.useState(false);
 
   const handlePinModal = (id) => {
     setOpenPinModal(true);
@@ -272,6 +273,7 @@ const FullNote = ({ data }) => {
     setOpenPrivacyModal(false);
     setOpenDeleteModal(false);
     setPostId("");
+    setOpenShareModal(false);
   };
 
   // *** Handle like
@@ -386,9 +388,9 @@ const FullNote = ({ data }) => {
   const handleScroll = (event) => {
     const position = event.currentTarget.scrollTop;
     if (position >= 80) {
-      setIsVisble(true);
-    } else {
       setIsVisble(false);
+    } else {
+      setIsVisble(true);
     }
   };
 
@@ -471,6 +473,11 @@ const FullNote = ({ data }) => {
     handleCancelSpeech();
   }, []);
 
+  const handleSharePostModal = (id) => {
+    setPostId(id);
+    setOpenShareModal(true);
+  };
+
   return (
     <Box className='full_note_section' onScroll={handleScroll}>
       {
@@ -485,6 +492,30 @@ const FullNote = ({ data }) => {
           limit={limit}
         />
       }
+      {/* Share post modal */}
+      {openShareModal && (
+        <ModalComp
+          isOpen={openShareModal}
+          onClose={handleCloseModal}
+          title={<>Share post</>}
+          body={
+            <Box className='modal_body_link'>
+              <Box className='ur_link_section'>
+                http://localhost:3000/full/note/{postId}
+              </Box>
+              <Button
+                className='copy_btn'
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `http://localhost:3000/full/note/${postId}`
+                  )
+                }>
+                Copy
+              </Button>
+            </Box>
+          }
+        />
+      )}
       {/* Pinn post modal */}
       {openPinModal && (
         <ModalComp
@@ -826,9 +857,11 @@ const FullNote = ({ data }) => {
               </Button>
 
               {/* Share */}
-              <Button className='post_card_footer_btn'>
+              {/* Share */}
+              <Button
+                className='post_card_footer_btn'
+                onClick={() => handleSharePostModal(data._id)}>
                 <IoIosShareAlt />
-                <span className='like_count'>{dislikesCount}</span>
               </Button>
             </Box>
           )}

@@ -400,6 +400,43 @@
   position: relative;
   overflow: scroll;
 }
+.drawer_header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+}
+.drawr_profile_section {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 7px;
+  margin-right: 3px;
+}
+.drawer_profile_avatar {
+  width: 33px !important;
+  height: 33px !important;
+  margin-right: 5px;
+}
+.drawer_profile_info_section {
+  width: 100%;
+  line-height: 13px;
+}
+.drawer_name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2f3542;
+}
+.drawer_profile_username {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #8c8e93;
+}
+.drawer_close_btn {
+  /* background-color: transparent !important; */
+  font-size: 1.2rem !important;
+  padding: 7px !important;
+}
 @media only screen and (max-width: 900px) and (min-width: 700px) {
   .container {
     width: 80vw;
@@ -461,6 +498,12 @@
     display: block;
     border-bottom: 1px solid rgba(218, 216, 216, 0.263);
     border-right: 1px solid rgba(218, 216, 216, 0.263);
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+  }
+  .header_box_secion {
     width: 100%;
     height: 7vh;
     display: flex;

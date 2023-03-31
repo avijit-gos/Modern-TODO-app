@@ -5,6 +5,7 @@ import React from "react";
 import InputComp from "../InputComp/InputComp";
 import { BiSearchAlt2 } from "react-icons/bi";
 import UserList from "../UserList/UserList";
+import UserListLoader from "../SkeletonLoader/UserListLoader";
 
 const SearchForm = () => {
   const [key, setKey] = React.useState("");
@@ -64,7 +65,7 @@ const SearchForm = () => {
         ) : (
           <Box className='search_result'>
             {isLoading ? (
-              <>Loading</>
+              <UserListLoader />
             ) : (
               <React.Fragment>
                 {(userList || []).length > 0 ? (

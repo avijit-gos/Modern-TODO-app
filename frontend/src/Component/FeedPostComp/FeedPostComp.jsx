@@ -70,6 +70,7 @@ const FeedPostComp = ({ data }) => {
   const [comments, setComments] = React.useState(data.comment);
   const [page, setPage] = React.useState(0);
   const [limit, setLimit] = React.useState(5);
+  const [openShareModal, setOpenShareModal] = React.useState(false);
 
   // *** Handle pin modal
   const handlePinModal = (id) => {
@@ -266,6 +267,7 @@ const FeedPostComp = ({ data }) => {
     setOpenPrivacyModal(false);
     setOpenDeleteModal(false);
     setPostId("");
+    setOpenShareModal(false);
   };
 
   // *** Handle like
@@ -383,11 +385,40 @@ const FeedPostComp = ({ data }) => {
     setOpenCommentSection((prev) => !prev);
   };
 
+  const handleSharePostModal = (id) => {
+    setPostId(id);
+    setOpenShareModal(true);
+  };
+
   return (
     <React.Fragment>
       {!isDelete && (
         <React.Fragment>
           <Box className='feed_post_container'>
+            {/* Share post modal */}
+            {openShareModal && (
+              <ModalComp
+                isOpen={openShareModal}
+                onClose={handleCloseModal}
+                title={<>Share post</>}
+                body={
+                  <Box className='modal_body_link'>
+                    <Box className='ur_link_section'>
+                      http://localhost:3000/full/note/{postId}
+                    </Box>
+                    <Button
+                      className='copy_btn'
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          `http://localhost:3000/full/note/${postId}`
+                        )
+                      }>
+                      Copy
+                    </Button>
+                  </Box>
+                }
+              />
+            )}
             {/* Pinn post modal */}
             {openPinModal && (
               <ModalComp
@@ -696,9 +727,10 @@ const FeedPostComp = ({ data }) => {
               </Button>
 
               {/* Share */}
-              <Button className='post_card_footer_btn'>
+              <Button
+                className='post_card_footer_btn'
+                onClick={() => handleSharePostModal(data._id)}>
                 <IoIosShareAlt />
-                <span className='like_count'>{dislikesCount}</span>
               </Button>
             </Box>
           </Box>
