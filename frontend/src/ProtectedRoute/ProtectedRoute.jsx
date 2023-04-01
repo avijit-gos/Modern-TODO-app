@@ -1,24 +1,14 @@
 /** @format */
 
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-  // console.log(Component());
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        localStorage.getItem("token") ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  );
+const ProtectedRoute = ({ children, ...rest }) => {
+  if (localStorage.getItem("token")) {
+    return children;
+  } else {
+    return <Navigate to='/login' />;
+  }
 };
 
 export default ProtectedRoute;

@@ -25,6 +25,7 @@ import Chat from "./Pages/Chat/Chat";
 import MessagePage from "./Pages/MessagePage/MessagePage";
 import SearchChatPage from "./Pages/SearchChatPage/SearchChatPage";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 
 function App() {
   const { user, setUser, setToken, token } = GlobalContext();
@@ -43,34 +44,148 @@ function App() {
         <Route path='/login' exact element={<Login />} />
         {/* Protected routes */}
         {/* Home */}
-        <Route path='/' exact element={<Home />} />
+        <Route
+          path='/'
+          exact
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
         {/* Search */}
-        <Route path='/search' exact element={<Search />} />
+        <Route
+          path='/search'
+          exact
+          element={
+            <ProtectedRoute>
+              <Search />
+            </ProtectedRoute>
+          }
+        />
         {/* Notes */}
-        <Route path='/notes' exact element={<NotesHome />}>
-          <Route path='' exact element={<Feed />} />
-          <Route path='notes_following' exact element={<FollowersFeed />} />
+        <Route
+          path='/notes'
+          exact
+          element={
+            <ProtectedRoute>
+              <NotesHome />
+            </ProtectedRoute>
+          }>
+          <Route
+            path=''
+            exact
+            element={
+              <ProtectedRoute>
+                <Feed />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='notes_following'
+            exact
+            element={
+              <ProtectedRoute>
+                <FollowersFeed />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         {/* Profile */}
-        <Route path='/profile/:id' element={<Profile />}>
-          <Route path='' element={<Notes />} />
-          <Route path='task' element={<Tasks />} />
-          <Route path='analytics' element={<Analytics />} />
+        <Route
+          path='/profile/:id'
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }>
+          <Route
+            path=''
+            element={
+              <ProtectedRoute>
+                <Notes />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='task'
+            element={
+              <ProtectedRoute>
+                <Tasks />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='analytics'
+            element={
+              <ProtectedRoute>
+                <Analytics />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         {/* Settings */}
-        <Route path='/settings/:id' exact element={<Settings />} />
+        <Route
+          path='/settings/:id'
+          exact
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
         {/* Note analytics page */}
-        <Route path='/analytics/note/:id' exact element={<NoteAnalytics />} />
+        <Route
+          path='/analytics/note/:id'
+          exact
+          element={
+            <ProtectedRoute>
+              <NoteAnalytics />
+            </ProtectedRoute>
+          }
+        />
         {/* Full note view page */}
         <Route path='/full/note/:id' exact element={<ViewFullNote />} />
         {/* Full note view page */}
-        <Route path='/message' exact element={<Chat />} />
+        <Route
+          path='/message'
+          exact
+          element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          }
+        />
         {/* Message */}
-        <Route path='/message/:id' exact element={<MessagePage />} />
+        <Route
+          path='/message/:id'
+          exact
+          element={
+            <ProtectedRoute>
+              <MessagePage />
+            </ProtectedRoute>
+          }
+        />
         {/* Chat search page */}
-        <Route path='/chat/search' exact element={<SearchChatPage />} />
+        <Route
+          path='/chat/search'
+          exact
+          element={
+            <ProtectedRoute>
+              <SearchChatPage />
+            </ProtectedRoute>
+          }
+        />
         {/* Settings page */}
-        <Route path='/settings' exact element={<SettingsPage />} />
+        <Route
+          path='/settings'
+          exact
+          element={
+            <ProtectedRoute>
+              <SettingsPage />
+            </ProtectedRoute>
+          }
+        />
         {/* Not found link page */}
         <Route path='/*' exact element={<NotFound />} />
       </Routes>
