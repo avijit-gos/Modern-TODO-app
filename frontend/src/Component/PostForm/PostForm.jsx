@@ -233,7 +233,7 @@ const PostForm = () => {
         />
       )}
       <Button
-        className='action_button'
+        className='notes_form_button'
         onClick={() => setOpenTaskForm((prev) => !prev)}>
         <HiOutlinePencilAlt className='post_icon' />
       </Button>

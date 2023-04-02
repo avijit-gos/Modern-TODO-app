@@ -4,27 +4,50 @@ import { Avatar, Box, Button, Img } from "@chakra-ui/react";
 import Logo from "../../../Assests/Images/writing.png";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
+import { BsBell } from "react-icons/bs";
 import { GlobalContext } from "../../../Context/Context";
 import { BiMenuAltRight, BiSearch } from "react-icons/bi";
 import SearchDrawer from "../../DrawerComp/SearchDrawer";
 import SideDrawer from "../../DrawerComp/SideDrawer";
 import SearchForm from "../../SearchComp/SearchForm";
+import axios from "axios";
 
 const HomeHeader = () => {
-  const { mode, setMode } = GlobalContext();
+  const { setNotifications, page, limit } = GlobalContext();
   const [openSearch, setOpenSearch] = React.useState(false);
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [notificationsCount, setNotificationsCount] = React.useState(0);
   const navigate = useNavigate();
 
-  const handleDayMode = () => {
-    localStorage.setItem("mode", "day");
-    setMode("day");
-  };
+  React.useEffect(() => {
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}notification?page=${page}&limit=${limit}`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
 
-  const handleNightMode = () => {
-    localStorage.setItem("mode", "night");
-    setMode("night");
+    axios
+      .request(config)
+      .then((response) => {
+        const arr = response.data.filter((data) => data.view !== true);
+        setNotificationsCount(arr.length);
+        if (page > 0) {
+          setNotifications((prev) => [...prev, ...response.data]);
+        } else {
+          setNotifications(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleNotification = () => {
+    navigate("/notification");
+    setNotificationsCount(0);
   };
 
   return (
@@ -55,15 +78,16 @@ const HomeHeader = () => {
             }
           />
         </Button>
-        {localStorage.getItem("mode") === "night" ? (
-          <Button className='mode_changer_btn' onClick={handleDayMode}>
-            <BsMoonFill className='moon' />
-          </Button>
-        ) : (
-          <Button className='mode_changer_btn' onClick={handleNightMode}>
-            <BsFillSunFill className='sun' />
-          </Button>
-        )}
+
+        <Button className='notification_container' onClick={handleNotification}>
+          <BsBell />
+          {notificationsCount > 0 && (
+            <span className='header_notification_count'>
+              {notificationsCount}
+            </span>
+          )}
+        </Button>
+
         <Avatar
           src={`${JSON.parse(localStorage.getItem("user")).profilePic}`}
           className='user_avatar'
@@ -71,7 +95,6 @@ const HomeHeader = () => {
             navigate(`/profile/${JSON.parse(localStorage.getItem("user"))._id}`)
           }
         />
-        {/* /profile/${JSON.parse(localStorage.getItem("user"))._id */}
 
         <Button className='menu_btn' onClick={() => setOpenDrawer((p) => !p)}>
           <BiMenuAltRight

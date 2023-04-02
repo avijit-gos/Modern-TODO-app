@@ -1,13 +1,14 @@
 /** @format */
 
-import { Box, Img, Tooltip } from "@chakra-ui/react";
+import { Box, Img } from "@chakra-ui/react";
 import React from "react";
 import { BiHome } from "react-icons/bi";
 import { AiOutlineUser, AiOutlineSetting } from "react-icons/ai";
 import { TbNotes, TbMessages } from "react-icons/tb";
 import { FiLogOut } from "react-icons/fi";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { Link, NavLink } from "react-router-dom";
+import { BsBell } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
 import Logo from "../../Assests/Images/pencil.png";
 import "./Navbar.css";
 
@@ -48,6 +49,17 @@ const LeftNavbar = () => {
             navData.isActive ? "nav_item active_nav_item" : "nav_item"
           }>
           <TbNotes />
+        </NavLink>
+      </Box>
+
+      <Box className='nav_link notification_bell'>
+        <NavLink
+          to='/notes'
+          className={(navData) =>
+            navData.isActive ? "nav_item active_nav_item" : "nav_item"
+          }>
+          <BsBell />
+          <span className='notification_count'>1</span>
         </NavLink>
       </Box>
 

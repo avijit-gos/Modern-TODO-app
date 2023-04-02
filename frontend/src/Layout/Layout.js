@@ -39,12 +39,7 @@ const Layout = ({ children, title }) => {
   });
 
   return (
-    <Box
-      className={
-        localStorage.getItem("mode") === "day"
-          ? "container"
-          : "container night_mode"
-      }>
+    <Box className='container'>
       <Header pageType={pageType} title={title} />
 
       <Box className='app_container'>

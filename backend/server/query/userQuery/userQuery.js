@@ -108,7 +108,13 @@ class UserQuery {
       { new: true }
     );
     try {
-      return followed;
+      // return followed;
+      // Create & Save the notification in database
+      if (!isFollower) {
+        console.log("Other user");
+        const data = await createNotification(user._id, loggedUserId, "5");
+        return followed;
+      }
     } catch (error) {
       return false;
     }
