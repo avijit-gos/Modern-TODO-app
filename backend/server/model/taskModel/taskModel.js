@@ -13,7 +13,7 @@ const TaskSchema = mongoose.Schema(
     status: { type: String, default: "active" },
     pinn: { type: Boolean, default: false },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Task", TaskSchema);

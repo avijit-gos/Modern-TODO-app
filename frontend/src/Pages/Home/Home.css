@@ -15,8 +15,9 @@
   font-size: 1rem !important;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   transition: all 0.2s linear;
-  position: absolute !important;
+  position: sticky !important;
   right: 0px !important;
+  bottom: 0 !important;
 }
 .action_button:hover {
   transform: translateY(-1px);

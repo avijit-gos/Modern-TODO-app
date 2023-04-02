@@ -4,6 +4,9 @@ const Note = require("../../model/notesModal/notesModal");
 const Comment = require("../../model/notesModal/notesComment");
 const mongoose = require("mongoose");
 const User = require("../../model/userModel/userSchema");
+const {
+  createNotification,
+} = require("../notificationQuery/notificationQuery");
 
 class NoteQuery {
   // constructor() {
@@ -171,7 +174,22 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return updatedResult;
+          // Create & Save the notification in database
+          if (note.user.toString() === userId) {
+            console.log("Same user");
+            return updatedResult;
+          } else {
+            if (!islike) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                note.user,
+                "0",
+                note._id
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -182,7 +200,22 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return updatedResult;
+          // Create & Save the notification in database
+          if (note.user.toString() === userId) {
+            console.log("Same user");
+            return updatedResult;
+          } else {
+            if (!islike) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                note.user,
+                "0",
+                note._id
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -203,7 +236,22 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return updatedResult;
+          // Create & Save the notification in database
+          if (note.user.toString() === userId) {
+            console.log("Same user");
+            return updatedResult;
+          } else {
+            if (!isDislike) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                note.user,
+                "1",
+                note._id
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -214,7 +262,22 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return updatedResult;
+          // Create & Save the notification in database
+          if (note.user.toString() === userId) {
+            console.log("Same user");
+            return updatedResult;
+          } else {
+            if (!isDislike) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                note.user,
+                "1",
+                note._id
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -237,7 +300,16 @@ class NoteQuery {
         $inc: { cmnt_count: 1 },
       });
       console.log(note);
-      return result;
+      // return result;
+      // Create & Save the notification in database
+      if (note.user.toString() === userId) {
+        console.log("Same user");
+        return result;
+      } else {
+        console.log("Other user");
+        const data = await createNotification(userId, note.user, "2", note._id);
+        return result;
+      }
     } catch (error) {
       return false;
     }
@@ -314,7 +386,23 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return result;
+          // return result;
+          // Create & Save the notification in database
+          if (comment.user.toString() === userId) {
+            console.log("Same user");
+            return result;
+          } else {
+            if (!isLiked) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                comment.user,
+                "3",
+                comment.postId
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -325,7 +413,23 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return result;
+          // return result;
+          // Create & Save the notification in database
+          if (comment.user.toString() === userId) {
+            console.log("Same user");
+            return result;
+          } else {
+            if (!isLiked) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                comment.user,
+                "3",
+                comment.postId
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -344,7 +448,22 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return result;
+          // Create & Save the notification in database
+          if (comment.user.toString() === userId) {
+            console.log("Same user");
+            return result;
+          } else {
+            if (!isDislike) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                comment.user,
+                "4",
+                comment.postId
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }
@@ -355,7 +474,22 @@ class NoteQuery {
           { new: true }
         );
         try {
-          return result;
+          // Create & Save the notification in database
+          if (comment.user.toString() === userId) {
+            console.log("Same user");
+            return result;
+          } else {
+            if (!isDislike) {
+              console.log("Other user");
+              const data = await createNotification(
+                userId,
+                comment.user,
+                "4",
+                comment.postId
+              );
+              return updatedResult;
+            }
+          }
         } catch (error) {
           return false;
         }

@@ -69,6 +69,13 @@ app.use(
   require("./server/routes/messageRoute/messageRoute")
 );
 
+// importing notification route
+app.use(
+  "/api/notification",
+  authentication,
+  require("./server/routes/notifuicationRoutes/notificationRoute")
+);
+
 // Public routes
 app.use("/api/public", require("./server/publicRoutes/publicRoutes"));
 

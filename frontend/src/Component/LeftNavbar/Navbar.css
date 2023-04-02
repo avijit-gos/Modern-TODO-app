@@ -32,3 +32,17 @@
 .active_nav_item {
   color: #1e90ff !important;
 }
+.notification_bell {
+  position: relative;
+}
+.notification_count {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-size: 0.6rem;
+  border: 1px solid red;
+  padding: 0.7px 5px;
+  border-radius: 50px;
+  color: aliceblue;
+  background-color: crimson;
+}

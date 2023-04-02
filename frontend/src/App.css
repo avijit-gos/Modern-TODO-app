@@ -173,10 +173,7 @@
   width: 70vw;
   height: 100vh;
 }
-.night_mode {
-  background-color: #2f3542 !important;
-  color: #ced6e0 !important;
-}
+
 .header_container {
   height: 7vh;
   width: 100%;
@@ -222,7 +219,17 @@
   background-color: transparent !important;
   width: fit-content !important;
   height: fit-content !important;
-  padding: 5px 0px !important;
+  padding: 0px 0px !important;
+  padding: 0 !important;
+  margin: 0px !important;
+}
+.notification_container {
+  background-color: transparent !important;
+  width: fit-content !important;
+  height: fit-content !important;
+  padding: 0 !important;
+  position: relative;
+  margin-right: 5px;
 }
 .mode_changer_btn {
   background-color: transparent !important;
@@ -233,6 +240,18 @@
   padding: 7px;
   border-radius: 50% !important;
   padding: 5px 0px !important;
+}
+.header_notification_count {
+  border: 1px solid red !important;
+  padding: 2px 3px !important;
+  border-radius: 50px;
+  color: aliceblue;
+  background-color: crimson;
+  font-size: 0.5rem;
+  font-weight: 400;
+  position: absolute;
+  top: -10px;
+  right: 4px;
 }
 .sun {
   color: orange;

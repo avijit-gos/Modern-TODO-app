@@ -21,6 +21,10 @@ function StateContextProvider({ children }) {
 
   const [messages, setMessages] = React.useState([]);
   const [updateMessage, setUpdateMessage] = React.useState(null);
+  const [notifications, setNotifications] = React.useState([]);
+
+  const [page, setPage] = React.useState(0);
+  const [limit, setLimit] = React.useState(15);
   return (
     <StateContext.Provider
       value={{
@@ -54,6 +58,12 @@ function StateContextProvider({ children }) {
         setMessages,
         updateMessage,
         setUpdateMessage,
+        notifications,
+        setNotifications,
+        page,
+        setPage,
+        limit,
+        setLimit,
       }}>
       {children}
     </StateContext.Provider>
