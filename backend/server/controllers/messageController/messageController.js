@@ -12,7 +12,7 @@ const {
 
 class MessageController {
   constructor() {
-    console.log("Message controller running!");
+    // console.log("Message controller running!");
   }
 
   // 1. Create message

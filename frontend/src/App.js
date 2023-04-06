@@ -28,6 +28,10 @@ import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Notification from "./Pages/Notification/Notification";
 
+// ***** Socket connection ****** //
+import { io } from "socket.io-client";
+export const socket = io("http://localhost:5001/");
+
 function App() {
   return (
     <Box className='App'>

@@ -10,7 +10,7 @@ const {
 
 class NoteCommentController {
   constructor() {
-    console.log(`Note Comment Controller init`);
+    // console.log(`Note Comment Controller init`);
   }
 
   // 1. Create comment

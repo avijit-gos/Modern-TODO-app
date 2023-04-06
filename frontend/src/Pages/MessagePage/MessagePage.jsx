@@ -10,6 +10,7 @@ import axios from "axios";
 import MessagePageHeader from "./MessagePageHeader";
 import MessageFooter from "./MessageFooter";
 import MessageCard from "../../Component/MessageCard/MessageCard";
+import { socket } from "../../App";
 
 const MessagePage = () => {
   const { id } = useParams();
@@ -42,6 +43,8 @@ const MessagePage = () => {
     axios(config)
       .then(function (response) {
         setSelectChat(response.data);
+        // *** Join chat event
+        socket.emit("join_chat", id);
       })
       .catch(function (error) {
         console.log(error);
@@ -71,6 +74,9 @@ const MessagePage = () => {
         } else {
           setMessages((prev) => [...result, ...prev]);
         }
+        socket.off("message receive").on("message receive", (result) => {
+          setMessages((prev) => [...prev, result]);
+        });
       })
       .catch((error) => console.log("error", error));
   };

@@ -27,7 +27,7 @@ var createError = require("http-errors");
 
 class UserController {
   constructor() {
-    console.log("User controller running");
+    // console.log("User controller running");
   }
 
   // *** Register new user

@@ -29,6 +29,7 @@ import UserListLoader from "../../Component/SkeletonLoader/UserListLoader";
 
 import { selectChatName } from "../../Utils/selectChatName";
 import axios from "axios";
+import { socket } from "../../App";
 
 const MessagePageHeader = () => {
   const toast = useToast();

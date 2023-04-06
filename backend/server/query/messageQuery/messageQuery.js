@@ -7,7 +7,7 @@ const { uploadImage } = require("../../helper/helper");
 
 class MessageQuery {
   constructor() {
-    console.log("Message query init!!");
+    // console.log("Message query init!!");
   }
 
   // ** 1. Save message in DB

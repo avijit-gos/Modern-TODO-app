@@ -20,7 +20,7 @@ cloudinary.config({
 
 class HelperFunction {
   constructor() {
-    console.log("Helper function init!!");
+    // console.log("Helper function init!!");
   }
 
   // Validating incoming data from frontend

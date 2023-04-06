@@ -6,7 +6,7 @@ const User = require("../../model/userModel/userSchema");
 
 class ChatQuery {
   constructor() {
-    console.log("ChatQuery init");
+    // console.log("ChatQuery init");
   }
 
   // Create single chat

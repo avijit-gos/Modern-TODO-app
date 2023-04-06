@@ -17,7 +17,7 @@ var createError = require("http-errors");
 
 class TaskController {
   constructor() {
-    console.log("Task controller init!");
+    // console.log("Task controller init!");
   }
 
   // *** Create new task

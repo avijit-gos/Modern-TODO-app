@@ -7,7 +7,7 @@ const {
 
 class NotificationController {
   constructor() {
-    console.log("Notification controller");
+    // console.log("Notification controller");
   }
   async fetchNotification(req, res, next) {
     try {

@@ -6,7 +6,7 @@ const Task = require("../../model/taskModel/taskModel");
 
 class TaskQuery {
   constructor() {
-    console.log("Task query init!!");
+    // console.log("Task query init!!");
   }
   async saveTask(value, id) {
     const task = Task({

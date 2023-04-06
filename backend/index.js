@@ -95,6 +95,37 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App listening on port: ${port}`);
+});
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("*** Socket connected ***");
+
+  socket.on("join_chat", (chatId) => {
+    // ## Join chat room
+    socket.join(chatId);
+    // console.log("Chat room joined: ", chatId);
+  });
+
+  // send message
+  socket.on("new message", (data) => {
+    socket.broadcast.emit("message receive", data);
+  });
+
+  // like event
+  // remove like event
+  // dislike event
+  // remove dislike event
+  // comment event
+  // comment like event
+  // comment remove like event
+  // comment dislike event
+  // comment dislike remove event
 });

@@ -16,7 +16,7 @@ const {
 
 class ChatController {
   constructor() {
-    console.log("ChatController init!!");
+    // console.log("ChatController init!!");
   }
   // 1. Create single chat
   async createSingleChat(req, res, next) {

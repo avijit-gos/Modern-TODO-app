@@ -5,7 +5,7 @@ const User = require("../../model/userModel/userSchema");
 
 class UserQuery {
   constructor() {
-    console.log("User query init!!");
+    // console.log("User query init!!");
   }
 
   async findUserByEmailorUsername(email, username) {

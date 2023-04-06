@@ -18,7 +18,7 @@ const { uploadImage } = require("../../helper/helper");
 
 class NoteController {
   constructor() {
-    console.log("Note controller runnings!!");
+    // console.log("Note controller runnings!!");
   }
 
   // 1. Create note

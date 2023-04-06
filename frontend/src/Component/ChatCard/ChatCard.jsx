@@ -21,13 +21,17 @@ import { useNavigate } from "react-router-dom";
 const ChatCard = ({ chatData }) => {
   const navigate = useNavigate();
 
+  const handleRedirect = () => {
+    navigate(`/message/${chatData._id}`);
+  };
+
   return (
     <Box className='chat_card_container'>
       {chatData.isGroup ? (
         <Avatar
           src={chatData.image}
           className='chat_card_avatar'
-          onClick={() => navigate(`/message/${chatData._id}`)}
+          onClick={() => handleRedirect()}
         />
       ) : (
         <Avatar
@@ -38,14 +42,12 @@ const ChatCard = ({ chatData }) => {
             ).profilePic
           }
           className='chat_card_avatar'
-          onClick={() => navigate(`/message/${chatData._id}`)}
+          onClick={() => handleRedirect()}
         />
       )}
       <Box className='chat_card_info_section'>
         <Box className='chat_card_info_box'>
-          <Box
-            className='card_chat_details'
-            onClick={() => navigate(`/message/${chatData._id}`)}>
+          <Box className='card_chat_details' onClick={() => handleRedirect()}>
             {chatData.isGroup ? (
               <span className='chat_name'>{chatData.name}</span>
             ) : (
@@ -83,9 +85,7 @@ const ChatCard = ({ chatData }) => {
             </Menu>
           )}
         </Box>
-        <Box
-          className='latest_msg_container'
-          onClick={() => navigate(`/message/${chatData._id}`)}>
+        <Box className='latest_msg_container' onClick={() => handleRedirect()}>
           {chatData.lastMsg ? chatData.lastMsg.content : ""}
         </Box>
       </Box>

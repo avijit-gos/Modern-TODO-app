@@ -5,7 +5,7 @@ const Notification = require("../../model/notificationModel/notification");
 
 class NotificationQuery {
   constructor() {
-    console.log("Notification query init!!!");
+    // console.log("Notification query init!!!");
   }
 
   // *** Save notification in DB
