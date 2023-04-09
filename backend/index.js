@@ -95,6 +95,55 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App listening on port: ${port}`);
+});
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("** Socket is now connected **");
+
+  socket.on("setup", (user) => {
+    socket.join(user._id);
+    console.log("User join room: ", user._id);
+    socket.emit("connected", user);
+  });
+
+  // ****  Notes feed  ****
+  socket.on("feed_post", (data) => {
+    socket.broadcast.emit("feed", data);
+    socket.broadcast.emit("liked", data);
+  });
+
+  // **** Join chat room ****
+  socket.on("join chat room", (chat) => {
+    console.log("join chat room: ", chat._id);
+    socket.join(chat._id);
+
+    // **** Receiving new message receive event **** //
+    socket.on("new message receive", (newMessage) => {
+      // **** Transmitt new message **** //
+      chat.members.forEach((user) => {
+        if (newMessage.sender._id === user._id) return;
+        socket.in(user._id).emit("transmit new message", newMessage);
+      });
+    });
+  });
+
+  // **** Notification
+  socket.on("notification receive", (data) => {
+    console.log("Notification: ", data.result.receiver);
+    socket
+      .in(data.result.receiver)
+      .emit("new notification receive", data.result);
+  });
+
+  socket.on("comment notification receive", (data) => {
+    socket.in(data.receiver).emit("new notification receive", data);
+  });
 });

@@ -19,6 +19,8 @@
   right: 0px !important;
   bottom: 0 !important;
 }
+.tasks_section {
+}
 .action_button:hover {
   transform: translateY(-1px);
 }

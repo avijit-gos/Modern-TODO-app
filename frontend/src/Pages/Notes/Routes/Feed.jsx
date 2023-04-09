@@ -5,6 +5,7 @@ import React from "react";
 import FeedPostComp from "../../../Component/FeedPostComp/FeedPostComp";
 import NoteSkeletonLoader from "../../../Component/SkeletonLoader/NoteSkeletonLoader";
 import { GlobalContext } from "../../../Context/Context";
+import { socket } from "../../../App";
 
 const Feed = () => {
   const { selectType, setFeedPosts, feedPosts, updateNote } = GlobalContext();
@@ -55,6 +56,12 @@ const Feed = () => {
       })
       .catch((error) => console.log("error", error));
   }, [page, selectType, updateNote]);
+
+  socket.off("feed").on("feed", (data) => {
+    setFeedPosts((prev) => [data.note, ...prev]);
+    setNotes(data.note);
+    console.log(data);
+  });
 
   return (
     <Box className='feed_container'>

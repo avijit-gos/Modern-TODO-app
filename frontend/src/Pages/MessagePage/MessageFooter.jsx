@@ -23,6 +23,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import EmojiPicker from "emoji-picker-react";
 import { GlobalContext } from "../../Context/Context";
 import { useParams } from "react-router";
+import { socket } from "../../App";
 
 const MessageFooter = () => {
   const { id } = useParams();
@@ -108,6 +109,7 @@ const MessageFooter = () => {
         setImage("");
         setPrevImage("");
         setIsDisable(true);
+        socket.emit("new message receive", result);
         setMessages((prev) => [...prev, result]);
       })
       .catch((error) => console.log("error", error));

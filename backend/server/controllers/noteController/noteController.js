@@ -185,7 +185,7 @@ class NoteController {
       } else {
         const result = await updateNoteLikeDislike(id, "like", req.user._id);
         try {
-          return res.status(200).json({ msg: "You like this post" });
+          return res.status(200).json({ msg: "You like this post", result });
         } catch (error) {
           throw createError.InternalServerError(error.message);
         }
@@ -204,7 +204,7 @@ class NoteController {
       } else {
         const result = await updateNoteLikeDislike(id, "dislike", req.user._id);
         try {
-          return res.status(200).json({ msg: "You dislike this post" });
+          return res.status(200).json({ msg: "You dislike this post", result });
         } catch (error) {
           throw createError.InternalServerError(error.message);
         }

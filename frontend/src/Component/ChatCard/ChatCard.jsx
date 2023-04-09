@@ -17,9 +17,16 @@ import React from "react";
 import { FiMoreVertical } from "react-icons/fi";
 import { selectChatName } from "../../Utils/selectChatName";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../../Context/Context";
 
 const ChatCard = ({ chatData }) => {
   const navigate = useNavigate();
+  const { setSelectChat } = GlobalContext();
+
+  const handleRedirect = (chatData) => {
+    navigate(`/message/${chatData._id}`);
+    setSelectChat(chatData);
+  };
 
   return (
     <Box className='chat_card_container'>
@@ -27,7 +34,7 @@ const ChatCard = ({ chatData }) => {
         <Avatar
           src={chatData.image}
           className='chat_card_avatar'
-          onClick={() => navigate(`/message/${chatData._id}`)}
+          onClick={() => handleRedirect(chatData)}
         />
       ) : (
         <Avatar
@@ -38,14 +45,14 @@ const ChatCard = ({ chatData }) => {
             ).profilePic
           }
           className='chat_card_avatar'
-          onClick={() => navigate(`/message/${chatData._id}`)}
+          onClick={() => handleRedirect(chatData)}
         />
       )}
       <Box className='chat_card_info_section'>
         <Box className='chat_card_info_box'>
           <Box
             className='card_chat_details'
-            onClick={() => navigate(`/message/${chatData._id}`)}>
+            onClick={() => handleRedirect(chatData)}>
             {chatData.isGroup ? (
               <span className='chat_name'>{chatData.name}</span>
             ) : (
@@ -85,7 +92,7 @@ const ChatCard = ({ chatData }) => {
         </Box>
         <Box
           className='latest_msg_container'
-          onClick={() => navigate(`/message/${chatData._id}`)}>
+          onClick={() => handleRedirect(chatData)}>
           {chatData.lastMsg ? chatData.lastMsg.content : ""}
         </Box>
       </Box>

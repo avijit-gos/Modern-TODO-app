@@ -25,8 +25,21 @@ class NoteQuery {
       image: image || "",
     });
     const note = await newNote.save();
+    const data = await Note.findById(note._id)
+      .populate({
+        path: "user",
+        select: { _id: 1, name: 1, username: 1, profilePic: 1 },
+      })
+      .populate({
+        path: "comment",
+        populate: {
+          path: "user",
+          select: { _id: 1, name: 1, username: 1, profilePic: 1, flwr: 1 },
+        },
+        options: { limit: 1 },
+      });
     try {
-      return note;
+      return data;
     } catch (error) {
       return false;
     }
@@ -180,14 +193,18 @@ class NoteQuery {
             return updatedResult;
           } else {
             if (!islike) {
-              console.log("Other user");
               const data = await createNotification(
                 userId,
                 note.user,
                 "0",
                 note._id
               );
-              return updatedResult;
+              try {
+                console.log("Notification: ", data);
+                return data;
+              } catch (error) {
+                return false;
+              }
             }
           }
         } catch (error) {
@@ -213,7 +230,11 @@ class NoteQuery {
                 "0",
                 note._id
               );
-              return updatedResult;
+              try {
+                return data;
+              } catch (error) {
+                return false;
+              }
             }
           }
         } catch (error) {
@@ -249,7 +270,8 @@ class NoteQuery {
                 "1",
                 note._id
               );
-              return updatedResult;
+              console.log("Notification: ", data);
+              return data;
             }
           }
         } catch (error) {
@@ -275,7 +297,8 @@ class NoteQuery {
                 "1",
                 note._id
               );
-              return updatedResult;
+              console.log("Notification: ", data);
+              return data;
             }
           }
         } catch (error) {
@@ -308,7 +331,8 @@ class NoteQuery {
       } else {
         console.log("Other user");
         const data = await createNotification(userId, note.user, "2", note._id);
-        return result;
+        console.log("Notification: ", data);
+        return { result, data };
       }
     } catch (error) {
       return false;
@@ -400,7 +424,8 @@ class NoteQuery {
                 "3",
                 comment.postId
               );
-              return updatedResult;
+              console.log(data);
+              return data;
             }
           }
         } catch (error) {
@@ -427,7 +452,7 @@ class NoteQuery {
                 "3",
                 comment.postId
               );
-              return updatedResult;
+              return data;
             }
           }
         } catch (error) {
@@ -461,7 +486,7 @@ class NoteQuery {
                 "4",
                 comment.postId
               );
-              return updatedResult;
+              return data;
             }
           }
         } catch (error) {
@@ -487,7 +512,7 @@ class NoteQuery {
                 "4",
                 comment.postId
               );
-              return updatedResult;
+              return data;
             }
           }
         } catch (error) {

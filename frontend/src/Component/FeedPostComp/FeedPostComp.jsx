@@ -35,6 +35,7 @@ import { GlobalContext } from "../../Context/Context";
 import CommentForm from "../Comments/CommentForm";
 import CommentCard from "../CommentCard/CommentCard";
 import getTime from "../../Utils/getTime";
+import { socket } from "../../App";
 
 const tags = ["Educations", "Financial", "Medical", "Technology", "Others"];
 
@@ -289,6 +290,10 @@ const FeedPostComp = ({ data }) => {
       setLikesCount((p) => p + 1);
     } else {
       if (!likes.includes(JSON.parse(localStorage.getItem("user"))._id)) {
+        socket.emit("add_like", {
+          postId: id,
+          userId: JSON.parse(localStorage.getItem("user"))._id,
+        });
         setLikes((prev) => [
           ...prev,
           JSON.parse(localStorage.getItem("user"))._id,
@@ -315,7 +320,12 @@ const FeedPostComp = ({ data }) => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(response.data);
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -366,7 +376,11 @@ const FeedPostComp = ({ data }) => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch(function (error) {
         console.log(error);

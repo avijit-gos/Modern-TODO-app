@@ -16,11 +16,12 @@ import SuccessGif from "../../Assests/Images/success.gif";
 import InputComp from "../InputComp/InputComp";
 import { AiOutlineCloudUpload, AiOutlineClose } from "react-icons/ai";
 import { GlobalContext } from "../../Context/Context";
+import { socket } from "../../App";
 
 const tags = ["Educations", "Financial", "Medical", "Technology", "Others"];
 
 const NotesForm = () => {
-  const { setUpdateNote } = GlobalContext();
+  const { setFeedPosts } = GlobalContext();
   const toast = useToast();
   const [openNoteForm, setOpenNoteForm] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -152,7 +153,7 @@ const NotesForm = () => {
     fetch(`${process.env.REACT_APP_LINK}note/create`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setUpdateNote(result);
+        // setUpdateNote(result);
         closeModal();
         setIsDisable(true);
         setTitle("");
@@ -164,6 +165,8 @@ const NotesForm = () => {
         setLink2("");
         setLink3("");
         setSuccess(true);
+        setFeedPosts((prev) => [...prev, result.note]);
+        socket.emit("feed_post", result);
         toast({
           title: "created.",
           description: `${result.msg}`,

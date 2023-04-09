@@ -11,6 +11,7 @@ const {
   updateProfileEmail,
   updateProfilePrivacy,
   updateProfileUsername,
+  fetchFollowerFollowingList,
 } = require("../../controllers/userController/userController");
 
 router.put("/update/profile/image", updateProfileImage);
@@ -22,5 +23,6 @@ router.get("/find/user", searchUser);
 router.get("/fetch/user/:id", fetchUser);
 router.put("/reset/password", resetPassword);
 router.put("/follow/:id", followUser);
+router.get("/fetch/follower/:id", fetchFollowerFollowingList);
 
 module.exports = router;

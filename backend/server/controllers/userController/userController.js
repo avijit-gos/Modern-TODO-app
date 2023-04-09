@@ -21,6 +21,7 @@ const {
   followedUser,
   updateUserInfo,
   updateUserPrivacy,
+  findAllFollowerFollowingUser,
 } = require("../../query/userQuery/userQuery");
 
 var createError = require("http-errors");
@@ -294,6 +295,32 @@ class UserController {
         return res
           .status(200)
           .json({ msg: "Profile privacy has been updated", user });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async fetchFollowerFollowingList(req, res, next) {
+    try {
+      const { id } = req.params;
+      const queryValue = req.query.queryValue || "flwr";
+      const page = req.query.page || 0;
+      const limit = req.query.limit || 10;
+      if (!id) {
+        throw createError.Conflict("Request parameter is not present");
+      } else {
+        const result = await findAllFollowerFollowingUser(
+          id,
+          queryValue,
+          page,
+          limit
+        );
+        try {
+          return res.status(200).json(result);
+        } catch (error) {
+          throw createError.ServiceUnavailable("Something went wrong");
+        }
       }
     } catch (error) {
       next(error);

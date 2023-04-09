@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Register from "./Pages/Register/Register";
 import Login from "./Pages/Login/Login";
 import "./App.css";
@@ -27,8 +27,36 @@ import SearchChatPage from "./Pages/SearchChatPage/SearchChatPage";
 import SettingsPage from "./Pages/SettingsPage/SettingsPage";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import Notification from "./Pages/Notification/Notification";
+import { io } from "socket.io-client";
+import FollowerFollowing from "./Pages/FollowerFollowing/FollowerFollowing";
+
+export const socket = io("http://localhost:5001");
 
 function App() {
+  const { setNotifications, setNotificationsCount } = GlobalContext();
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user"))) {
+      socket.emit("setup", JSON.parse(localStorage.getItem("user")));
+      socket.on("connected", (userData) => {
+        if (userData) {
+          console.log("User connected");
+        }
+      });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    socket
+      .off("new notification receive")
+      .on("new notification receive", (data) => {
+        console.log("new notification receive: ", data);
+        setNotifications((prev) => [data, ...prev]);
+        if (!data.view) {
+          setNotificationsCount((prev) => prev + 1);
+        }
+      });
+  });
+
   return (
     <Box className='App'>
       <Routes>
@@ -118,6 +146,14 @@ function App() {
             }
           />
         </Route>
+        <Route
+          path='/follower_following/:id'
+          element={
+            <ProtectedRoute>
+              <FollowerFollowing />
+            </ProtectedRoute>
+          }
+        />
         {/* Settings */}
         <Route
           path='/settings/:id'
