@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 import { FiMoreHorizontal } from "react-icons/fi";
 import ModalComp from "../ModalComp/ModalComp";
 import axios from "axios";
+import { socket } from "../../App";
 
 const CommentCard = ({ data, setComments, comments, setCommentsCount }) => {
   const toast = useToast();
@@ -178,13 +179,19 @@ const CommentCard = ({ data, setComments, comments, setCommentsCount }) => {
     axios
       .request(config)
       .then((response) => {
-        // console.log(JSON.stringify(response.data));
+        console.log(response.data);
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  // *** Handle dislike comment
   const handleDislikeComment = (id) => {
     if (likes.includes(JSON.parse(localStorage.getItem("user"))._id)) {
       const likesArr = likes;
@@ -229,7 +236,12 @@ const CommentCard = ({ data, setComments, comments, setCommentsCount }) => {
     axios
       .request(config)
       .then((response) => {
-        // console.log(JSON.stringify(response.data));
+        console.log(response.data);
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch((error) => {
         console.log(error);

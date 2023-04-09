@@ -38,6 +38,7 @@ import { IoIosShareAlt } from "react-icons/io";
 import CommentDrawer from "../CommentCard/CommentDrawer";
 import { Link } from "react-router-dom";
 import { RxResume } from "react-icons/rx";
+import { socket } from "../../App";
 
 const tags = ["Educations", "Financial", "Medical", "Technology", "Others"];
 
@@ -321,7 +322,12 @@ const FullNote = ({ data }) => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -372,7 +378,12 @@ const FullNote = ({ data }) => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch(function (error) {
         console.log(error);

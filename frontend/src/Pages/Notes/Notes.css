@@ -57,7 +57,7 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   transition: all 0.2s linear;
   position: absolute !important;
-  bottom: 10px !important;
+  bottom: 3px !important;
   right: 10px !important;
 }
 .note_form_body {
@@ -252,11 +252,15 @@
 }
 .post_card_footer_btn {
   width: 25%;
-  margin: 0px 5px;
+  margin: 0px 0px;
   display: flex !important;
   align-items: center !important;
   background-color: transparent !important;
   transition: all 0.2s linear;
+  font-size: 1rem !important;
+}
+.like_count {
+  font-size: 0.85rem !important;
 }
 .like_count {
   margin-left: 2px;
@@ -276,7 +280,7 @@
 .dislike_fill {
   color: rgba(47, 53, 66, 1) !important;
 }
-/* rgba(46, 213, 115,1.0) */
+
 .cmnt_btn:hover {
   background-color: rgba(46, 213, 115, 0.162) !important;
   color: rgba(46, 213, 115, 1);

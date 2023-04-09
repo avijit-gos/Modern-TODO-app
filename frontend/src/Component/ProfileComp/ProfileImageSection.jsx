@@ -19,6 +19,7 @@ import { GlobalContext } from "../../Context/Context";
 import { BiUserCheck, BiUserPlus } from "react-icons/bi";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { socket } from "../../App";
 
 const ProfileImageSection = ({ profileData }) => {
   const toast = useToast();
@@ -111,8 +112,8 @@ const ProfileImageSection = ({ profileData }) => {
       });
   };
 
+  // *** Handle follow user
   const handleFollowUser = (id) => {
-    console.log(id);
     var config = {
       method: "put",
       url: `${process.env.REACT_APP_LINK}user/follow/${id}`,
@@ -125,12 +126,18 @@ const ProfileImageSection = ({ profileData }) => {
       .then(function (response) {
         setFollowed((p) => !p);
         console.log(response.data);
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
+  // *** Handle start chating with the user
   const handleCreateChat = (id, userData) => {
     var data = {
       members: [id],
@@ -278,13 +285,17 @@ const ProfileImageSection = ({ profileData }) => {
         </Box>
 
         {/* follwer-following */}
-        <Box className='email_container'>
+        <Box
+          className='email_container'
+          onClick={() => navigate(`/follower_following/${profileData._id}`)}>
           <Button className='followers_btn'>
             <span className='flwr_text'>Follower: </span>
             <span className='flwr_count'>{profileData.flwr.length || "0"}</span>
           </Button>
 
-          <Button className='followers_btn'>
+          <Button
+            className='followers_btn'
+            onClick={() => navigate(`/follower_following/${profileData._id}`)}>
             <span className='flwr_text'>Following: </span>
             <span className='flwr_count'>{profileData.flw.length || "0"}</span>
           </Button>

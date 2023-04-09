@@ -2,6 +2,9 @@
 
 const mongoose = require("mongoose");
 const User = require("../../model/userModel/userSchema");
+const {
+  createNotification,
+} = require("../../query/notificationQuery/notificationQuery");
 
 class UserQuery {
   constructor() {
@@ -96,6 +99,7 @@ class UserQuery {
 
   async followedUser(user, loggedUserId) {
     const isFollower = user.flwr && user.flwr.includes(loggedUserId);
+    console.log("isFollower: ", isFollower);
     const option = isFollower ? "$pull" : "$addToSet";
     const follower = await User.findByIdAndUpdate(
       user._id,
@@ -111,8 +115,10 @@ class UserQuery {
       // return followed;
       // Create & Save the notification in database
       if (!isFollower) {
-        console.log("Other user");
-        const data = await createNotification(user._id, loggedUserId, "5");
+        console.log("## CAME HERE ##");
+        const data = await createNotification(loggedUserId, user._id, "5");
+        return data;
+      } else {
         return followed;
       }
     } catch (error) {
@@ -171,6 +177,31 @@ class UserQuery {
       },
       { new: true }
     );
+    try {
+      return user;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async findAllFollowerFollowingUser(id, queryValue, page, limit) {
+    const user = await User.findById(id)
+      .select([queryValue])
+      .populate({
+        path: queryValue,
+        select: {
+          _id: 1,
+          name: 1,
+          profilePic: 1,
+          username: 1,
+          flw: 1,
+          flwr: 1,
+        },
+        // options: {
+        //   skip: page,
+        //   limit: limit,
+        // },
+      });
     try {
       return user;
     } catch (error) {

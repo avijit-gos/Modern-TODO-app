@@ -47,7 +47,7 @@ router.put("/like/:id", likeNote);
 // 10. dislike note
 router.put("/dislike/:id", dislikeNote);
 
-// 11. comment note
+// 11. Fetch single note
 router.get("/:id", fetchSingleNote);
 
 // 12. Fetch single note

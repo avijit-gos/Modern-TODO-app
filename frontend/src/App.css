@@ -343,7 +343,6 @@
   width: 100%;
   height: 99.5vh;
   position: relative;
-  overflow: scroll;
 }
 ::-webkit-scrollbar {
   display: none;
@@ -500,7 +499,8 @@
   .message_conatiner {
     width: 100%;
     height: 92.5vh;
-    overflow: scroll;
+    overflow: hidden;
+    position: relative;
   }
 
   .profile_container {

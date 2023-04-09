@@ -4,6 +4,7 @@ import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 import InputComp from "../InputComp/InputComp";
 import axios from "axios";
+import { socket } from "../../App";
 
 const CommentForm = ({ postId, setCommentsCount, setComments }) => {
   const [text, setText] = React.useState("");
@@ -38,10 +39,10 @@ const CommentForm = ({ postId, setCommentsCount, setComments }) => {
     axios(config)
       .then(function (response) {
         setText("");
-        console.log(response.data);
+        console.log(response.data.comment.data);
         setCommentsCount((prev) => prev + 1);
-        // setOpenCommentSection(false);
-        setComments((prev) => [response.data.comment, ...prev]);
+        setComments((prev) => [response.data.comment.result, ...prev]);
+        socket.emit("comment notification receive", response.data.comment.data);
       })
       .catch(function (error) {
         console.log(error);

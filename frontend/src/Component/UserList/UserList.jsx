@@ -6,6 +6,7 @@ import { BiUserCheck, BiUserPlus } from "react-icons/bi";
 import { MdMarkEmailRead } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { socket } from "../../App";
 import "./UserCard.css";
 
 const UserList = ({ userData }) => {
@@ -30,7 +31,11 @@ const UserList = ({ userData }) => {
     axios(config)
       .then(function (response) {
         setFollowed((p) => !p);
-        console.log(response.data);
+        if (response.data.result) {
+          socket.emit("notification receive", response.data);
+        } else {
+          console.log("Remove");
+        }
       })
       .catch(function (error) {
         console.log(error);

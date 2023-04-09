@@ -10,6 +10,7 @@ import axios from "axios";
 import MessagePageHeader from "./MessagePageHeader";
 import MessageFooter from "./MessageFooter";
 import MessageCard from "../../Component/MessageCard/MessageCard";
+import { socket } from "../../App";
 
 const MessagePage = () => {
   const { id } = useParams();
@@ -42,6 +43,7 @@ const MessagePage = () => {
     axios(config)
       .then(function (response) {
         setSelectChat(response.data);
+        socket.emit("join chat room", response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -74,6 +76,18 @@ const MessagePage = () => {
       })
       .catch((error) => console.log("error", error));
   };
+
+  React.useEffect(() => {
+    socket.off("transmit new message").on("transmit new message", (data) => {
+      if (!selectChat || selectChat._id !== data.chatId) {
+        // send notification
+        console.log("Notification send to user: ", data);
+      } else {
+        setMessages((prev) => [...prev, data]);
+        scrollToBottom();
+      }
+    });
+  });
 
   React.useEffect(() => {
     fetchMessage();

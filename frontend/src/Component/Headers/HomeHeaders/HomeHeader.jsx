@@ -13,12 +13,18 @@ import SearchForm from "../../SearchComp/SearchForm";
 import axios from "axios";
 
 const HomeHeader = () => {
-  const { setNotifications, page, limit } = GlobalContext();
+  const {
+    setNotifications,
+    page,
+    limit,
+    notificationsCount,
+    setNotificationsCount,
+  } = GlobalContext();
   const [openSearch, setOpenSearch] = React.useState(false);
   const [openDrawer, setOpenDrawer] = React.useState(false);
-  const [notificationsCount, setNotificationsCount] = React.useState(0);
   const navigate = useNavigate();
 
+  // *** Fetch all notification
   React.useEffect(() => {
     let config = {
       method: "get",
@@ -32,6 +38,7 @@ const HomeHeader = () => {
     axios
       .request(config)
       .then((response) => {
+        console.log(response.data);
         const arr = response.data.filter((data) => data.view !== true);
         setNotificationsCount(arr.length);
         if (page > 0) {
@@ -45,9 +52,27 @@ const HomeHeader = () => {
       });
   }, []);
 
+  // *** View notification
   const handleNotification = () => {
     navigate("/notification");
-    setNotificationsCount(0);
+
+    // Call the api for updating notification view
+    let config = {
+      method: "put",
+      maxBodyLength: Infinity,
+      url: `${process.env.REACT_APP_LINK}notification/update`,
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
