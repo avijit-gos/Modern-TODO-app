@@ -16,12 +16,12 @@ const Feed = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isBtnLoading, setIsBtnLoading] = React.useState(false);
 
-  React.useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, [selectType]);
+  // React.useEffect(() => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1000);
+  // }, [selectType]);
 
   const handleIncrementPage = () => {
     setPrevPage(page);
@@ -34,6 +34,9 @@ const Feed = () => {
     setIsBtnLoading(false);
     if (prevPage === page) {
       setFeedPosts([]);
+    }
+    if (page === 0) {
+      setIsLoading(true);
     }
     var myHeaders = new Headers();
     myHeaders.append("x-access-token", localStorage.getItem("token"));
@@ -53,6 +56,7 @@ const Feed = () => {
         console.log(result);
         setNotes(result);
         setFeedPosts((prev) => [...prev, ...result]);
+        setIsLoading(false);
       })
       .catch((error) => console.log("error", error));
   }, [page, selectType, updateNote]);

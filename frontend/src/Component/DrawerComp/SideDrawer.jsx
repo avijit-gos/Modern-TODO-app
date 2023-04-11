@@ -29,6 +29,13 @@ const SideDrawer = ({ isOpen, onClose }) => {
   const navigateToProfile = () => {
     navigate(`/profile/${JSON.parse(localStorage.getItem("user"))._id}`);
   };
+
+  // *** Handle logout
+  const handleLogout = () => {
+    navigate("/login");
+    localStorage.clear();
+  };
+
   return (
     <React.Fragment>
       <Drawer placement='right' isOpen={isOpen} onClose={onClose}>
@@ -125,10 +132,11 @@ const SideDrawer = ({ isOpen, onClose }) => {
             {/* Logout */}
             <Box className='nav_link'>
               <NavLink
-                to='/logout'
+                to='/login'
                 className={(navData) =>
                   navData.isActive ? "nav_item active_nav_item" : "nav_item"
-                }>
+                }
+                onClick={handleLogout}>
                 <FiLogOut />
               </NavLink>
             </Box>

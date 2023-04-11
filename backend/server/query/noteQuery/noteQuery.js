@@ -573,12 +573,12 @@ class NoteQuery {
     }
   }
 
-  async followersNote(userId, page, limit) {
-    const user = await User.findById(userId).select("flwr");
-    const temp = user.flwr;
+  async followingNote(userId, page, limit) {
+    const user = await User.findById(userId).select("flw");
+    const temp = user.flw;
     const data = [];
     for (let i = 0; i < temp.length; i++) {
-      const result = await Note.find({ user: { $eq: temp[i] } })
+      const result = await Note.findOne({ user: { $eq: temp[i] } })
         .populate({
           path: "user",
           select: { _id: 1, name: 1, username: 1, profilePic: 1 },
@@ -595,7 +595,9 @@ class NoteQuery {
         .limit(limit)
         .skip(limit * page);
 
-      data.push(result);
+      if (result) {
+        data.push(result);
+      }
     }
     return data;
   }

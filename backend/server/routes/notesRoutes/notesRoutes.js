@@ -13,7 +13,7 @@ const {
   fetchSingleNote,
   fetchComments,
   fetchUserNote,
-  followerFeed,
+  followingFeed,
 } = require("../../controllers/noteController/noteController");
 
 const router = require("express").Router();
@@ -55,7 +55,7 @@ router.get("/:id", fetchSingleNote);
 // 13. Fetch comments for notes
 router.get("/comment/:id", fetchComments);
 
-// 14. Fetch follower feed
-router.get("/follower/feed", followerFeed);
+// 14. fetch following feed
+router.get("/following/feed", followingFeed);
 
 module.exports = router;

@@ -21,6 +21,13 @@ const FollowersFeed = () => {
     setIsBtnLoading(true);
   };
 
+  // React.useEffect(() => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     // setIsLoading(false);
+  //   }, 1000);
+  // }, [selectType]);
+
   // Fetch user notes feed
   React.useEffect(() => {
     setIsBtnLoading(false);
@@ -30,27 +37,36 @@ const FollowersFeed = () => {
   }, [page, selectType, updateNote]);
 
   // Fetch user notes feed
-  const fetchNotes = () => {
-    const axios = require("axios");
+  React.useEffect(() => {
+    setIsBtnLoading(false);
+    if (prevPage === page) {
+      setFeedPosts([]);
+    }
+    if (page === 0) {
+      setIsLoading(true);
+    }
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", localStorage.getItem("token"));
 
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: `${process.env.REACT_APP_LINK}note/follower/feed`,
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
     };
 
-    axios
-      .request(config)
-      .then((response) => {
-        console.log(response.data);
+    fetch(
+      `${process.env.REACT_APP_LINK}note/following/feed?page=${page}&limit=${limit}&type=${selectType}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setIsLoading(false);
+        console.log(result);
+        setNotes(result);
+        setFeedPosts((prev) => [...prev, ...result]);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      .catch((error) => console.log("error", error));
+  }, [page, selectType, updateNote]);
 
   return (
     <Box className='feed_container'>

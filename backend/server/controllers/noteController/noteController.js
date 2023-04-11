@@ -12,7 +12,7 @@ const {
   getComments,
   fetchNotById,
   fetchNotes,
-  followersNote,
+  followingNote,
 } = require("../../query/noteQuery/noteQuery");
 const { uploadImage } = require("../../helper/helper");
 
@@ -292,15 +292,21 @@ class NoteController {
     }
   }
 
-  async followerFeed(req, res, next) {
+  async followerFeed(req, res, next) {}
+
+  async followingFeed(req, res, next) {
     try {
-      const page = req.query.page || 0;
-      const limit = req.query.limit || 1;
-      const data = await followersNote(req.user._id, page, limit);
       try {
-        return res.status(200).json(data);
+        const page = req.query.page || 0;
+        const limit = req.query.limit || 1;
+        const data = await followingNote(req.user._id, page, limit);
+        try {
+          return res.status(200).json(data);
+        } catch (error) {
+          throw createError.ServiceUnavailable("Something went wrong");
+        }
       } catch (error) {
-        throw createError.ServiceUnavailable("Something went wrong");
+        next(error);
       }
     } catch (error) {
       next(error);
