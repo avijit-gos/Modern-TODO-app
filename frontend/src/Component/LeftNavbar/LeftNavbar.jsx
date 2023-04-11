@@ -75,6 +75,12 @@ const LeftNavbar = () => {
       });
   };
 
+  // *** Handle logout
+  const handleLogout = () => {
+    // navigate("/login");
+    localStorage.clear();
+  };
+
   return (
     <Box className='left_navbar_container'>
       {/* Logo container */}
@@ -163,10 +169,11 @@ const LeftNavbar = () => {
       {/* Logout */}
       <Box className='nav_link'>
         <NavLink
-          to='/logout'
+          to='/login'
           className={(navData) =>
             navData.isActive ? "nav_item active_nav_item" : "nav_item"
-          }>
+          }
+          onClick={handleLogout}>
           <FiLogOut />
         </NavLink>
       </Box>
